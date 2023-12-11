@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-employee-position-table
+      author: "Alexandr_Petrovich"
+      changes:
+        - createTable:
+            schemaName: tool
+            tableName: employee_position
+            columns:
+              - column:
+                  name: created_at
+                  type: timestamp(6)
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: updated_at
+                  type: timestamp(6)
+              - column:
+                  name: position
+                  type: varchar(20)

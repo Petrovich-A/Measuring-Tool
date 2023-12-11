@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-employee-table
+      author: "Alexandr_Petrovich"
+      changes:
+        - createTable:
+            schemaName: tool
+            tableName: employee
+            columns:
+              - column:
+                  name: personnel_number
+                  type: varchar(5)
+              - column:
+                  name: created_at
+                  type: timestamp(6)
+              - column:
+                  name: employee_position_id
+                  type: bigint
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: updated_at
+                  type: timestamp(6)
+              - column:
+                  name: name
+                  type: varchar(15)
+              - column:
+                  name: patronymic
+                  type: varchar(15)
+              - column:
+                  name: surname
+                  type: varchar(15)
+              - column:
+                  name: email
+                  type: varchar(50)
+        - addForeignKeyConstraint:
+            baseTableSchemaName: tool
+            baseColumnNames: employee_position_id
+            baseTableName: employee
+            constraintName: fk_employee_employee_position
+            referencedTableSchemaName: tool
+            referencedColumnNames: id
+            referencedTableName: employee_position
+            validate: false
