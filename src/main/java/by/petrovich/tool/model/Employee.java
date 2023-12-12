@@ -21,25 +21,35 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(columnDefinition = "serial")
     private Long id;
+
     @Size(min = 5, max = 5)
-    @Column(length = 5)
+    @Column(length = 5, nullable = false)
     private String personnelNumber;
+
     @Size(min = 3, max = 15)
-    @Column(length = 15)
+    @Column(length = 15, nullable = false)
     private String name;
-    @Column(length = 15)
+
+    @Column(length = 15, nullable = false)
     @Size(min = 2, max = 15)
     private String surname;
-    @Column(length = 15)
+
+    @Column(length = 15, nullable = false)
     @Size(min = 5, max = 15)
     private String patronymic;
+
     @Email
-    @Column(length = 50)
+    @Column(length = 50, nullable = false)
     private String email;
+
     @JsonFormat(pattern = "YYYY-MM-DD")
+    @Column(nullable = false)
     private LocalDateTime createdAt;
+
     @JsonFormat(pattern = "YYYY-MM-DD")
+    @Column(nullable = false)
     private LocalDateTime updatedAt;
+
     @ManyToOne
     @JoinColumn(name = "employee_position_id", nullable = false)
     private EmployeePosition employeePosition;

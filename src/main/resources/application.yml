@@ -19,5 +19,8 @@ spring:
 
   logging:
     level:
-      root: DEBUG
+      root: INFO
 
+server:
+  error:
+    include-stacktrace: never

@@ -23,17 +23,16 @@ public class EmployeePosition {
     private Long id;
 
     @Size(min = 3, max = 20)
-    @Column(length = 20)
+    @Column(unique = true, length = 20)
     private String position;
 
-    @NotNull
+    @Column(nullable = false)
     private Timestamp createdAt;
 
-    @NotNull
+    @Column(nullable = false)
     private Timestamp updatedAt;
 
     @OneToMany(mappedBy = "employeePosition", cascade = CascadeType.ALL)
     private Set<Employee> employees;
-
 
 }

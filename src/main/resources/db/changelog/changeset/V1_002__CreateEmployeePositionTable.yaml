@@ -10,14 +10,23 @@ databaseChangeLog:
               - column:
                   name: created_at
                   type: timestamp(6)
+                  constraints:
+                    nullable: false
               - column:
                   name: id
                   type: bigserial
                   constraints:
                     primaryKey: true
+                    nullable: false
               - column:
                   name: updated_at
                   type: timestamp(6)
+                  constraints:
+                    nullable: false
               - column:
                   name: position
                   type: varchar(20)
+                  constraints:
+                    unique: true
+                    validateUnique: true
+                    nullable: false
