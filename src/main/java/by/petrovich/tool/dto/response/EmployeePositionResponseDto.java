@@ -1,4 +1,4 @@
-package by.petrovich.tool.dto.request;
+package by.petrovich.tool.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;

@@ -1,7 +1,7 @@
 package by.petrovich.tool.service;
 
 import by.petrovich.tool.dto.request.EmployeePositionRequestDto;
-import by.petrovich.tool.dto.request.EmployeePositionResponseDto;
+import by.petrovich.tool.dto.response.EmployeePositionResponseDto;
 
 import java.util.List;
 

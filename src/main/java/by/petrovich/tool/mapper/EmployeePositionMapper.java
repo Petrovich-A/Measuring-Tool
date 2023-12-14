@@ -1,7 +1,7 @@
 package by.petrovich.tool.mapper;
 
 import by.petrovich.tool.dto.request.EmployeePositionRequestDto;
-import by.petrovich.tool.dto.request.EmployeePositionResponseDto;
+import by.petrovich.tool.dto.response.EmployeePositionResponseDto;
 import by.petrovich.tool.model.EmployeePosition;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;

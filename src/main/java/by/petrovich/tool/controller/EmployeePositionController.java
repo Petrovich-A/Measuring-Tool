@@ -1,7 +1,7 @@
 package by.petrovich.tool.controller;
 
 import by.petrovich.tool.dto.request.EmployeePositionRequestDto;
-import by.petrovich.tool.dto.request.EmployeePositionResponseDto;
+import by.petrovich.tool.dto.response.EmployeePositionResponseDto;
 import by.petrovich.tool.service.impl.EmployeePositionServiceImpl;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

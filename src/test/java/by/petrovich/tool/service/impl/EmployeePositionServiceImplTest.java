@@ -1,7 +1,7 @@
 package by.petrovich.tool.service.impl;
 
 import by.petrovich.tool.dto.request.EmployeePositionRequestDto;
-import by.petrovich.tool.dto.request.EmployeePositionResponseDto;
+import by.petrovich.tool.dto.response.EmployeePositionResponseDto;
 import by.petrovich.tool.exception.ResourceNotFoundException;
 import by.petrovich.tool.mapper.EmployeePositionMapper;
 import by.petrovich.tool.model.EmployeePosition;
