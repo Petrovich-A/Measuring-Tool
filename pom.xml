@@ -11,8 +11,15 @@
 	<groupId>by.petrovich</groupId>
 	<artifactId>tool</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>tool</name>
+	<packaging>jar</packaging>
+	<name>Measuring tool</name>
 	<description>Measuring tool REST API project with applying Spring Boot</description>
+	<developers>
+		<developer>
+			<name>Alexandr Petrovich</name>
+			<email>a.piatrovich@gmail.com</email>
+		</developer>
+	</developers>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -114,6 +121,25 @@
 						</path>
 					</annotationProcessorPaths>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.11</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

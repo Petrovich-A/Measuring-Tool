@@ -7,14 +7,22 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotNull;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class EmployeePosition {
     @Id
@@ -26,11 +34,15 @@ public class EmployeePosition {
     @Column(unique = true, length = 20)
     private String position;
 
-    @Column(nullable = false)
-    private Timestamp createdAt;
+    @Column(updatable = false, nullable = false)
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createdAt;
 
     @Column(nullable = false)
-    private Timestamp updatedAt;
+    @Temporal(TemporalType.TIMESTAMP)
+    @DateTimeFormat(style = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "employeePosition", cascade = CascadeType.ALL)
     private Set<Employee> employees;

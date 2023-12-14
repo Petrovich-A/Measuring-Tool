@@ -42,11 +42,11 @@ public class Employee {
     @Column(length = 50, nullable = false)
     private String email;
 
-    @JsonFormat(pattern = "YYYY-MM-DD")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
-    @JsonFormat(pattern = "YYYY-MM-DD")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
