@@ -1,7 +1,7 @@
 <div align="center">
-  <h1>Measuring-Tool for YLab University</h1>
+  <h1>Measuring Tool</h1>
   <p>
-    An Measuring-Tool app! 
+    A Measuring Tool App! 
   </p>
 
 ![image](https://github.com/Petrovich-A/Measuring-Tool/assets/75426047/9d903ddf-791b-4682-a858-70f6d4bca5e3)
