@@ -34,7 +34,7 @@ public class EmployeePositionControllerTest {
     @DisplayName("Test find Success")
     @Test
     void find() {
-        Long id = 1L;
+        long id = 1;
         String position = "technologist";
         LocalDateTime createdAt = LocalDateTime.now().withNano(0);
         LocalDateTime updatedAt = LocalDateTime.now().withNano(0);
@@ -55,7 +55,7 @@ public class EmployeePositionControllerTest {
         assertEquals(expected.getUpdatedAt(), actualBody.getUpdatedAt());
     }
 
-    private EmployeePositionResponseDto createEmployeePositionResponseDto(Long id, String position, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    private EmployeePositionResponseDto createEmployeePositionResponseDto(long id, String position, LocalDateTime createdAt, LocalDateTime updatedAt) {
         return EmployeePositionResponseDto.builder()
                 .id(id)
                 .position(position)
@@ -67,7 +67,7 @@ public class EmployeePositionControllerTest {
     @DisplayName("Test findAll Success")
     @Test
     void findAll() {
-        long id1 = 1L;
+        long id1 = 1;
         String position1 = "technologist";
         long id2 = 2L;
         String position2 = "manager";
@@ -124,7 +124,7 @@ public class EmployeePositionControllerTest {
     @DisplayName("Test update Success")
     @Test
     void update() {
-        Long id = 1L;
+        long id = 1;
         EmployeePositionRequestDto requestDto = EmployeePositionRequestDto.builder()
                 .position("technologist")
                 .build();
@@ -148,7 +148,7 @@ public class EmployeePositionControllerTest {
     @DisplayName("Test delete Success")
     @Test
     void delete() {
-        Long id = 1L;
+        long id = 1;
 
         ResponseEntity<String> responseEntity = employeePositionController.delete(id);
         verify(employeePositionService, times(1)).delete(id);
