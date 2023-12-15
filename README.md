@@ -1,22 +1,25 @@
 <div align="center">
-  <h1>Measuring Tool</h1>
-  <p>
-    A Measuring Tool App! 
-  </p>
+
+[//]: # (  <h1>Measuring Tool</h1>)
+
+[//]: # (  <p>)
+
+[//]: # (    A Measuring Tool App! )
+
+[//]: # (  </p>)
 
 ![image](https://github.com/Petrovich-A/Measuring-Tool/assets/75426047/9d903ddf-791b-4682-a858-70f6d4bca5e3)
 
 <!-- Badges -->
 <p>
-<a>
 <img alt="GitHub last commit (branch)" src="https://img.shields.io/github/last-commit/Petrovich-A/Measuring-Tool/develop?style=for-the-badge">
-</a>
-<a>
 <img alt="GitHub commit activity (branch)" src="https://img.shields.io/github/commit-activity/m/Petrovich-A/Measuring-Tool/develop?style=for-the-badge">
-</a>
-<a>
 <img alt="GitHub pull requests" src="https://img.shields.io/github/issues-pr/Petrovich-A/Measuring-Tool?style=for-the-badge">
-</a>
+<img alt="GitHub License" src="https://img.shields.io/github/license/Petrovich-A/Measuring-Tool?style=for-the-badge">
+<img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/Petrovich-A/Measuring-Tool?style=for-the-badge">
+<img alt="GitHub watchers" src="https://img.shields.io/github/watchers/Petrovich-A/Measuring-Tool?style=for-the-badge">
+<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/Petrovich-A/Measuring-Tool?style=for-the-badge">
+
 </p>
 
 <h4>
@@ -37,7 +40,6 @@
 - [Getting Started](#toolbox-getting-started)
     * [Run Locally](#running-run-locally)
     * [Running Tests](#test_tube-running-tests)
-- [License](#warning-license)
 - [Contact](#handshake-contact)
 - [Acknowledgements](#gem-acknowledgements)
 
@@ -90,13 +92,6 @@ Clone the project
 ```bash
   git clone --branch <develope> https://github.com/Petrovich-A/Measuring-Tool
 ```
-
-<!-- License -->
-
-## :warning: License
-
-Distributed under the no License. See LICENSE.txt[LICENSE.txt](https://www.linkedin.com/in/alexandr-petrovich/) for more
-information.
 
 <!-- Contact -->
 
