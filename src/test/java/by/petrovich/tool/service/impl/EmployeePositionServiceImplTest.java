@@ -19,7 +19,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static java.util.Optional.ofNullable;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -43,10 +42,10 @@ public class EmployeePositionServiceImplTest {
     @DisplayName("test findAll method")
     @Test
     void whenFindAll_thenReturnListOfEmployeePositionResponseDto() {
-        long id1 = 1L;
+        long id1 = 1;
         String position1 = "technologist";
-        LocalDateTime createdAt = LocalDateTime.now().withNano(0);
-        LocalDateTime updatedAt = LocalDateTime.now().withNano(0);
+        LocalDateTime createdAt = LocalDateTime.of(2023, 12, 14, 20, 15, 45);
+        LocalDateTime updatedAt = LocalDateTime.of(2023, 12, 15, 14, 35, 55);
         EmployeePosition employeePosition1 = createEmployeePosition(id1, position1, createdAt, updatedAt);
         long id2 = 2L;
         String position2 = "warehouseman";
@@ -75,15 +74,15 @@ public class EmployeePositionServiceImplTest {
     @DisplayName("test find method")
     @Test
     void givenEmployeePositionId_whenFind_thenReturnEmployeePositionResponseDto() {
-        Long id = 1L;
+        long id = 1;
         String position = "technologist";
-        LocalDateTime createdAt = LocalDateTime.now().withNano(0);
-        LocalDateTime updatedAt = LocalDateTime.now().withNano(0);
+        LocalDateTime createdAt = LocalDateTime.of(2023, 12, 14, 20, 15, 45);
+        LocalDateTime updatedAt = LocalDateTime.of(2023, 12, 15, 14, 35, 55);
         EmployeePosition employeePosition = createEmployeePosition(id, position, createdAt, updatedAt);
         Optional<EmployeePosition> employeePositionOptional = ofNullable(employeePosition);
-        EmployeePositionResponseDto employeePositionResponseDto = createEmployeePositionResponseDto(1L, position, createdAt, updatedAt);
+        EmployeePositionResponseDto employeePositionResponseDto = createEmployeePositionResponseDto(1, position, createdAt, updatedAt);
 
-        EmployeePositionResponseDto expected = createEmployeePositionResponseDto(1L, position, createdAt, updatedAt);
+        EmployeePositionResponseDto expected = createEmployeePositionResponseDto(1, position, createdAt, updatedAt);
 
         when(employeePositionMapper.toResponseDto(employeePosition)).thenReturn(employeePositionResponseDto);
         when(employeePositionRepository.findById(id)).thenReturn(employeePositionOptional);
@@ -99,7 +98,7 @@ public class EmployeePositionServiceImplTest {
     @DisplayName("test find method with throwing exception")
     @Test
     void givenInvalidEmployeePositionId_whenFind_thenThrowResourceNotFoundException() {
-        Long id = 1L;
+        long id = 1;
 
         when(employeePositionRepository.findById(id)).thenReturn(Optional.empty());
 
@@ -111,7 +110,7 @@ public class EmployeePositionServiceImplTest {
     @DisplayName("test create method")
     @Test
     void givenEmployeePositionIdAndEmployeePositionRequestDto_whenCreate_thenReturnEmployeePositionResponseDto() {
-        Long id = 1L;
+        long id = 1;
         String position = "CNC programmer";
         LocalDateTime localDateTime = LocalDateTime.now().withNano(0);
 
@@ -144,9 +143,9 @@ public class EmployeePositionServiceImplTest {
     @DisplayName("test update method")
     @Test
     void givenEmployeePositionIdAndEmployeePositionRequestDto_whenUpdate_thenReturnEmployeePositionResponseDto() {
-        Long id = 1L;
+        long id = 1;
         String position = "CNC programmer";
-        LocalDateTime createdAt = LocalDateTime.now().withNano(0);
+        LocalDateTime createdAt = LocalDateTime.of(2023, 12, 14, 20, 15, 45);
         LocalDateTime updatedAt = LocalDateTime.now().withNano(0);
         LocalDateTime currentUpdatedAt = LocalDateTime.now().withNano(0);
 
@@ -181,7 +180,7 @@ public class EmployeePositionServiceImplTest {
     @DisplayName("test update method with throwing exception")
     @Test
     void givenInvalidEmployeePositionIdAndEmployeePositionRequestDto_whenUpdate_thenThrowResourceNotFoundException() {
-        Long id = 1L;
+        long id = 1;
 
         when(employeePositionRepository.findById(id)).thenReturn(Optional.empty());
 
@@ -192,9 +191,10 @@ public class EmployeePositionServiceImplTest {
     @DisplayName("test delete method")
     @Test
     void givenEmployeePositionId_whenDelete_shouldDeleteEmployeePosition() {
-        Long id = 1L;
-        EmployeePosition employeePosition = createEmployeePosition(1L, "technologist",
-                LocalDateTime.now().withNano(0), LocalDateTime.now().withNano(0));
+        long id = 1;
+        LocalDateTime createdAt = LocalDateTime.of(2023, 12, 14, 20, 15, 45);
+        LocalDateTime updatedAt = LocalDateTime.of(2023, 12, 15, 14, 35, 55);
+        EmployeePosition employeePosition = createEmployeePosition(1, "technologist", createdAt, updatedAt);
 
         when(employeePositionRepository.findById(id)).thenReturn(Optional.of(employeePosition));
 
@@ -207,7 +207,7 @@ public class EmployeePositionServiceImplTest {
     @DisplayName("test delete method with throwing exception")
     @Test
     void givenInvalidEmployeePositionId_whenDelete_thanThrowResourceNotFoundException() {
-        Long id = 1L;
+        long id = 1;
 
         when(employeePositionRepository.findById(id)).thenReturn(Optional.empty());
 
