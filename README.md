@@ -1,14 +1,6 @@
 <div align="center">
 
-[//]: # (  <h1>Measuring Tool</h1>)
-
-[//]: # (  <p>)
-
-[//]: # (    A Measuring Tool App! )
-
-[//]: # (  </p>)
-
-![image](https://github.com/Petrovich-A/Measuring-Tool/assets/75426047/9d903ddf-791b-4682-a858-70f6d4bca5e3)
+![logo1](https://github.com/Petrovich-A/Measuring-Tool/assets/75426047/e72c1e7f-85a2-4f67-aed1-8ff5636ebde6)
 
 <!-- Badges -->
 <p>
@@ -39,7 +31,6 @@
     * [Tech Stack](#space_invader-tech-stack)
 - [Getting Started](#toolbox-getting-started)
     * [Run Locally](#running-run-locally)
-    * [Running Tests](#test_tube-running-tests)
 - [Contact](#handshake-contact)
 - [Acknowledgements](#gem-acknowledgements)
 
@@ -90,7 +81,7 @@ The project aims to streamline and enhance the management and periodic maintenan
 Clone the project
 
 ```bash
-  git clone --branch <develope> https://github.com/Petrovich-A/Measuring-Tool
+  git clone --branch <develop> https://github.com/Petrovich-A/Measuring-Tool
 ```
 
 <!-- Contact -->
