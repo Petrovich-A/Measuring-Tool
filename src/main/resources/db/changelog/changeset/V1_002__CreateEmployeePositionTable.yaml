@@ -3,6 +3,10 @@ databaseChangeLog:
       id: create-employee-position-table
       author: "Alexandr_Petrovich"
       changes:
+        - createSequence:
+            schemaName: tool
+            sequenceName: employee_position_id_seq
+            incrementBy: 50
         - createTable:
             schemaName: tool
             tableName: employee_position

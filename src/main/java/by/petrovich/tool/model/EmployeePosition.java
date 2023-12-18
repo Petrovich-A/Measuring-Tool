@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Size;
@@ -27,7 +28,8 @@ import java.util.Set;
 @Entity
 public class EmployeePosition {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_position_seq")
+    @SequenceGenerator(name = "employee_position_seq", sequenceName = "employee_position_id_seq")
     @Column(columnDefinition = "bigserial")
     private Long id;
 
