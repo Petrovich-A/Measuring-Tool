@@ -18,8 +18,8 @@ import java.time.LocalDateTime;
 @Entity
 public class Employee {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "serial")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(columnDefinition = "bigserial")
     private Long id;
 
     @Size(min = 5, max = 5)

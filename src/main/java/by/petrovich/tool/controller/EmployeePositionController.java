@@ -18,10 +18,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+import static by.petrovich.tool.controller.EmployeePositionController.EMPLOYEE_POSITION_BASE_URL;
+
 @RestController
-@RequestMapping("/api/v1/positions")
+@RequestMapping(EMPLOYEE_POSITION_BASE_URL)
 @RequiredArgsConstructor
 public class EmployeePositionController {
+    public static final String EMPLOYEE_POSITION_BASE_URL = "/api/v1/positions";
+    public static final String ID = "/{id}";
+    public static final String SLASH = "/";
+
     private final EmployeePositionServiceImpl employeePositionServiceImpl;
 
     @GetMapping
@@ -29,27 +35,27 @@ public class EmployeePositionController {
         return ResponseEntity.status(HttpStatus.OK).body(employeePositionServiceImpl.findAll());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(ID)
     public ResponseEntity<EmployeePositionResponseDto> find(@PathVariable("id") Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(employeePositionServiceImpl.find(id));
     }
 
-    @PostMapping("/")
+    @PostMapping(SLASH)
     public ResponseEntity<EmployeePositionResponseDto> create(
             @Valid @RequestBody EmployeePositionRequestDto employeePositionRequestDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(employeePositionServiceImpl.create(employeePositionRequestDto));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(ID)
     public ResponseEntity<EmployeePositionResponseDto> update(@PathVariable("id") Long id,
                                                               @Valid @RequestBody EmployeePositionRequestDto employeePositionRequestDto) {
         return ResponseEntity.status(HttpStatus.OK).body(employeePositionServiceImpl.update(id, employeePositionRequestDto));
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable("id") Long id) {
+    @DeleteMapping(ID)
+    public ResponseEntity<Long> delete(@PathVariable("id") Long id) {
         employeePositionServiceImpl.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).body("Employee position deleted successfully");
+        return ResponseEntity.status(HttpStatus.OK).body(id);
     }
 
 }

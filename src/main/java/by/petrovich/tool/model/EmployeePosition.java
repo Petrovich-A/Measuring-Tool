@@ -3,6 +3,7 @@ package by.petrovich.tool.model;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,8 +27,8 @@ import java.util.Set;
 @Entity
 public class EmployeePosition {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "serial")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(columnDefinition = "bigserial")
     private Long id;
 
     @Size(min = 3, max = 20)
@@ -44,7 +45,7 @@ public class EmployeePosition {
     @DateTimeFormat(style = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "employeePosition", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "employeePosition", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Employee> employees;
 
 }

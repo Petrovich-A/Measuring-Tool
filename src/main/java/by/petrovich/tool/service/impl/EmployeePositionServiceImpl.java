@@ -52,9 +52,11 @@ public class EmployeePositionServiceImpl implements EmployeePositionService {
 
     @Override
     public void delete(Long id) {
-        Optional<EmployeePosition> employeePosition = positionRepository.findById(id);
-        employeePosition.orElseThrow(() -> new ResourceNotFoundException("Position not found with id: " + id));
-        positionRepository.deleteById(id);
+        if (positionRepository.existsById(id)) {
+            positionRepository.deleteById(id);
+        } else {
+            throw new ResourceNotFoundException("Position not found with id: " + id);
+        }
     }
 
 }

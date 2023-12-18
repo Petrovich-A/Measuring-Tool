@@ -19,6 +19,7 @@ import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -150,9 +151,14 @@ public class EmployeePositionControllerTest {
     void delete() {
         long id = 1;
 
-        ResponseEntity<String> responseEntity = employeePositionController.delete(id);
+        doNothing().when(employeePositionService).delete(id);
+
+        ResponseEntity<Long> responseEntity = employeePositionController.delete(id);
+
         verify(employeePositionService, times(1)).delete(id);
         assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        assertNotNull(responseEntity.getBody());
+        assertEquals(id, responseEntity.getBody().longValue());
     }
 
 }
