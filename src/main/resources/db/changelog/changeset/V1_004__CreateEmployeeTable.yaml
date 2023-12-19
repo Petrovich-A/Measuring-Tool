@@ -7,23 +7,11 @@ databaseChangeLog:
               schemaName: tool
               sequenceName: employee_id_seq
               incrementBy: 50
+              ifNotExists: true
         - createTable:
             schemaName: tool
             tableName: employee
             columns:
-              - column:
-                  name: personnel_number
-                  type: varchar(5)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: created_at
-                  type: timestamp(6)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: employee_position_id
-                  type: bigint
               - column:
                   name: id
                   type: bigserial
@@ -31,17 +19,13 @@ databaseChangeLog:
                     nullable: false
                     primaryKey: true
               - column:
-                  name: updated_at
-                  type: timestamp(6)
+                  name: personnel_number
+                  type: varchar(5)
                   constraints:
                     nullable: false
+                    unique: true
               - column:
                   name: name
-                  type: varchar(15)
-                  constraints:
-                    nullable: false
-              - column:
-                  name: patronymic
                   type: varchar(15)
                   constraints:
                     nullable: false
@@ -51,8 +35,28 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: patronymic
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+              - column:
                   name: email
                   type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: employee_position_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp(6)
                   constraints:
                     nullable: false
         - addForeignKeyConstraint:

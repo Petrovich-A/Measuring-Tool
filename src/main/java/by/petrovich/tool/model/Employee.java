@@ -20,12 +20,12 @@ import java.time.LocalDateTime;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_seq")
-    @SequenceGenerator(name = "employee_seq", sequenceName = "employee_id_seq")
+    @SequenceGenerator(name = "employee_seq", sequenceName = "employee_id_seq", initialValue = 50)
     @Column(columnDefinition = "bigserial")
     private Long id;
 
     @Size(min = 5, max = 5)
-    @Column(length = 5, nullable = false)
+    @Column(length = 5, nullable = false, unique = true)
     private String personnelNumber;
 
     @Size(min = 3, max = 15)
@@ -53,7 +53,7 @@ public class Employee {
     private LocalDateTime updatedAt;
 
     @ManyToOne
-    @JoinColumn(name = "employee_position_id", nullable = false)
+    @JoinColumn(name = "employee_position_id", nullable = false, columnDefinition = "bigserial")
     private EmployeePosition employeePosition;
 
 }

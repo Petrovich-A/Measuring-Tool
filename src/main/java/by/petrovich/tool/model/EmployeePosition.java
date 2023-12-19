@@ -29,7 +29,7 @@ import java.util.Set;
 public class EmployeePosition {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_position_seq")
-    @SequenceGenerator(name = "employee_position_seq", sequenceName = "employee_position_id_seq")
+    @SequenceGenerator(name = "employee_position_seq", sequenceName = "employee_position_id_seq", initialValue = 50)
     @Column(columnDefinition = "bigserial")
     private Long id;
 
