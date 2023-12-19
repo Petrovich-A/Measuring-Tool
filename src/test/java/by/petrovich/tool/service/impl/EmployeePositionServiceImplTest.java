@@ -4,8 +4,11 @@ import by.petrovich.tool.dto.request.EmployeePositionRequestDto;
 import by.petrovich.tool.dto.response.EmployeePositionResponseDto;
 import by.petrovich.tool.exception.ResourceNotFoundException;
 import by.petrovich.tool.mapper.EmployeePositionMapper;
+import by.petrovich.tool.mapper.EmployeePositionMapperImpl;
 import by.petrovich.tool.model.EmployeePosition;
 import by.petrovich.tool.repository.EmployeePositionRepository;
+import lombok.RequiredArgsConstructor;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -23,12 +26,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.isA;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
+@RequiredArgsConstructor
 public class EmployeePositionServiceImplTest {
     @Mock
     private EmployeePositionMapper employeePositionMapper;
@@ -192,15 +198,13 @@ public class EmployeePositionServiceImplTest {
     @Test
     void givenEmployeePositionId_whenDelete_shouldDeleteEmployeePosition() {
         long id = 1;
-        LocalDateTime createdAt = LocalDateTime.of(2023, 12, 14, 20, 15, 45);
-        LocalDateTime updatedAt = LocalDateTime.of(2023, 12, 15, 14, 35, 55);
-        EmployeePosition employeePosition = createEmployeePosition(1, "technologist", createdAt, updatedAt);
 
-        when(employeePositionRepository.findById(id)).thenReturn(Optional.of(employeePosition));
+        when(employeePositionRepository.existsById(id)).thenReturn(true);
+        doNothing().when(employeePositionRepository).deleteById(isA(Long.class));
 
         employeePositionService.delete(id);
 
-        verify(employeePositionRepository, times(1)).findById(id);
+        verify(employeePositionRepository, times(1)).existsById(id);
         verify(employeePositionRepository, times(1)).deleteById(id);
     }
 
@@ -209,10 +213,11 @@ public class EmployeePositionServiceImplTest {
     void givenInvalidEmployeePositionId_whenDelete_thanThrowResourceNotFoundException() {
         long id = 1;
 
-        when(employeePositionRepository.findById(id)).thenReturn(Optional.empty());
+        when(employeePositionRepository.existsById(id)).thenReturn(false);
 
-        verify(employeePositionRepository, never()).deleteById(any());
         assertThrows(ResourceNotFoundException.class, () -> employeePositionService.delete(id));
+        verify(employeePositionRepository, times(1)).existsById(id);
+        verify(employeePositionRepository, never()).deleteById(any());
     }
 
 

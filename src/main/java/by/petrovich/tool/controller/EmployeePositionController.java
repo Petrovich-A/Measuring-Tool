@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import static by.petrovich.tool.controller.EmployeePositionController.EMPLOYEE_POSITION_BASE_URL;
+import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping(EMPLOYEE_POSITION_BASE_URL)
@@ -32,30 +34,30 @@ public class EmployeePositionController {
 
     @GetMapping
     public ResponseEntity<List<EmployeePositionResponseDto>> findAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(employeePositionServiceImpl.findAll());
+        return ResponseEntity.status(OK).body(employeePositionServiceImpl.findAll());
     }
 
     @GetMapping(ID)
     public ResponseEntity<EmployeePositionResponseDto> find(@PathVariable("id") Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(employeePositionServiceImpl.find(id));
+        return ResponseEntity.status(OK).body(employeePositionServiceImpl.find(id));
     }
 
     @PostMapping(SLASH)
     public ResponseEntity<EmployeePositionResponseDto> create(
             @Valid @RequestBody EmployeePositionRequestDto employeePositionRequestDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(employeePositionServiceImpl.create(employeePositionRequestDto));
+        return ResponseEntity.status(CREATED).body(employeePositionServiceImpl.create(employeePositionRequestDto));
     }
 
     @PutMapping(ID)
     public ResponseEntity<EmployeePositionResponseDto> update(@PathVariable("id") Long id,
                                                               @Valid @RequestBody EmployeePositionRequestDto employeePositionRequestDto) {
-        return ResponseEntity.status(HttpStatus.OK).body(employeePositionServiceImpl.update(id, employeePositionRequestDto));
+        return ResponseEntity.status(OK).body(employeePositionServiceImpl.update(id, employeePositionRequestDto));
     }
 
     @DeleteMapping(ID)
     public ResponseEntity<Long> delete(@PathVariable("id") Long id) {
         employeePositionServiceImpl.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).body(id);
+        return ResponseEntity.status(OK).body(id);
     }
 
 }

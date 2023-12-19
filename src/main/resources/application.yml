@@ -12,6 +12,7 @@ spring:
     properties:
       hibernate:
         default_schema: tool
+        format_sql: true
 
   liquibase:
     enabled: true
