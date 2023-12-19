@@ -1,0 +1,70 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-employee-table
+      author: "Alexandr_Petrovich"
+      changes:
+        - createSequence:
+              schemaName: tool
+              sequenceName: employee_id_seq
+              incrementBy: 50
+              ifNotExists: true
+        - createTable:
+            schemaName: tool
+            tableName: employee
+            columns:
+              - column:
+                  name: id
+                  type: bigserial
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: personnel_number
+                  type: varchar(5)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: name
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: surname
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: patronymic
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: employee_position_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp(6)
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableSchemaName: tool
+            baseColumnNames: employee_position_id
+            baseTableName: employee
+            constraintName: fk_employee_employee_position
+            referencedTableSchemaName: tool
+            referencedColumnNames: id
+            referencedTableName: employee_position
+            validate: false

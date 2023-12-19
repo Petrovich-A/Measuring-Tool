@@ -1,0 +1,91 @@
+databaseChangeLog:
+  - changeSet:
+      id: populate-employee-table
+      author: "Alexandr_Petrovich"
+      changes:
+        - insert:
+            schemaName: tool
+            tableName: employee
+            columns:
+              - column:
+                  name: personnel_number
+                  value: '11111'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: name
+                  value: 'Petr'
+              - column:
+                  name: patronymic
+                  value: 'Petrovich'
+              - column:
+                  name: surname
+                  value: 'Petrov'
+              - column:
+                  name: email
+                  value: 'petrovich@example.com'
+              - column:
+                  name: employee_position_id
+                  value: 1
+
+        - insert:
+            schemaName: tool
+            tableName: employee
+            columns:
+              - column:
+                  name: personnel_number
+                  value: '22222'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: name
+                  value: 'Sidor'
+              - column:
+                  name: patronymic
+                  value: 'Sidorovich'
+              - column:
+                  name: surname
+                  value: 'Sidorov'
+              - column:
+                  name: email
+                  value: 'sidorov@example.com'
+              - column:
+                  name: employee_position_id
+                  value: 2
+
+        - insert:
+            schemaName: tool
+            tableName: employee
+            columns:
+              - column:
+                  name: personnel_number
+                  value: '33333'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: name
+                  value: 'Ivan'
+              - column:
+                  name: patronymic
+                  value: 'Ivanovich'
+              - column:
+                  name: surname
+                  value: 'Ivanov'
+              - column:
+                  name: email
+                  value: 'ivanov@example.com'
+              - column:
+                  name: employee_position_id
+                  value: 3

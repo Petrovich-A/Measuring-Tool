@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-tool-schema
+      author: "Alexandr_Petrovich"
+      changes:
+        - sql:
+            splitStatements: false
+            endDelimiter: ;
+            dbms: 'postgresql'
+            sql: CREATE SCHEMA IF NOT EXISTS tool;
+

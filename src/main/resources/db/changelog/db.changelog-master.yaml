@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/V1_001__InitialSchema.yaml
+  - include:
+      file: db/changelog/changeset/V1_002__CreateEmployeePositionTable.yaml
+  - include:
+      file: db/changelog/changeset/V1_003__PopulateEmployeePositionTable.yaml
+  - include:
+      file: db/changelog/changeset/V1_004__CreateEmployeeTable.yaml
+  - include:
+      file: db/changelog/changeset/V1_005__PopulateEmployeeTable.yaml
