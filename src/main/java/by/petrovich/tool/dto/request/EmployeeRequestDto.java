@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class EmployeeRequestDto {
+    private Long id;
+
     private String personnelNumber;
 
     private String name;

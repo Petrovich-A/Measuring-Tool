@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 @Data
 @Builder
 public class EmployeeResponseDto {
+    private Long id;
+
     private String personnelNumber;
 
     private String name;
