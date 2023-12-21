@@ -13,6 +13,7 @@ spring:
       hibernate:
         default_schema: tool
         format_sql: true
+        show_sql: true
 
   liquibase:
     enabled: true
