@@ -154,7 +154,7 @@ public class EmployeePositionServiceImplTest {
         long id = 1;
         String position = "CNC programmer";
         LocalDateTime createdAt = LocalDateTime.of(2023, 12, 14, 20, 15, 45);
-        LocalDateTime updatedAt = LocalDateTime.now().withNano(0);
+        LocalDateTime updatedAt = LocalDateTime.of(2023, 12, 15, 14, 35, 55);
         LocalDateTime currentUpdatedAt = LocalDateTime.now().withNano(0);
 
         EmployeePositionRequestDto employeePositionRequestDto = EmployeePositionRequestDto.builder()

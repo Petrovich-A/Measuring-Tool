@@ -8,7 +8,6 @@ import by.petrovich.tool.model.Employee;
 import by.petrovich.tool.repository.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -58,27 +57,29 @@ class EmployeeServiceImplTest {
     @Test
     void whenFindAll_thenReturnListOfEmployeeResponseDto() {
         long id1 = 1;
+        String personnelNumber1 = "11111";
         String name1 = "Petr";
         String surname1 = "Petrov";
         String patronymic1 = "Petrovich";
         String email1 = "petrov@mail.com";
         LocalDateTime createdAt1 = LocalDateTime.of(2023, 12, 14, 20, 15, 45);
         LocalDateTime updatedAt1 = LocalDateTime.of(2023, 12, 15, 14, 35, 55);
-        Employee employee1 = createEmployee(id1, createdAt1, updatedAt1, name1, surname1, patronymic1, email1);
+        Employee employee1 = createEmployee(id1, personnelNumber1, createdAt1, updatedAt1, name1, surname1, patronymic1, email1);
 
         long id2 = 2L;
+        String personnelNumber2 = "22222";
         String name2 = "Ivan";
         String surname2 = "Ivanov";
         String patronymic2 = "Ivanovich";
         String email2 = "ivanov@mail.com";
         LocalDateTime createdAt2 = LocalDateTime.of(2023, 12, 14, 21, 30, 10);
         LocalDateTime updatedAt2 = LocalDateTime.of(2023, 12, 15, 15, 45, 30);
-        Employee employee2 = createEmployee(id2, createdAt2, updatedAt2, name2, surname2, patronymic2, email2);
+        Employee employee2 = createEmployee(id2, personnelNumber2, createdAt2, updatedAt2, name2, surname2, patronymic2, email2);
 
         List<Employee> employees = Arrays.asList(employee1, employee2);
 
-        EmployeeResponseDto employeeResponseDto1 = createEmployeeResponseDto(id1, createdAt1, updatedAt1, name1, surname1, patronymic1, email1);
-        EmployeeResponseDto employeeResponseDto2 = createEmployeeResponseDto(id2, createdAt2, updatedAt2, name2, surname2, patronymic2, email2);
+        EmployeeResponseDto employeeResponseDto1 = createEmployeeResponseDto(id1, personnelNumber1, createdAt1, updatedAt1, name1, surname1, patronymic1, email1);
+        EmployeeResponseDto employeeResponseDto2 = createEmployeeResponseDto(id2, personnelNumber2, createdAt2, updatedAt2, name2, surname2, patronymic2, email2);
         List<EmployeeResponseDto> expected = Arrays.asList(employeeResponseDto1, employeeResponseDto2);
 
         when(employeeRepository.findAll()).thenReturn(employees);
@@ -97,14 +98,15 @@ class EmployeeServiceImplTest {
     @Test
     void find() {
         long id = 1;
-        LocalDateTime createdAt = LocalDateTime.of(2023, 12, 14, 20, 15, 45);
-        LocalDateTime updatedAt = LocalDateTime.of(2023, 12, 15, 14, 35, 55);
+        String personnelNumber = "11111";
         String name = "Petr";
         String surname = "Petrov";
         String patronymic = "Petrovich";
         String email = "petrov@mail.com";
-        Employee employee = createEmployee(id, createdAt, updatedAt, name, surname, patronymic, email);
-        EmployeeResponseDto expected = createEmployeeResponseDto(id, createdAt, updatedAt, name, surname, patronymic, email);
+        LocalDateTime createdAt = LocalDateTime.of(2023, 12, 14, 20, 15, 45);
+        LocalDateTime updatedAt = LocalDateTime.of(2023, 12, 15, 14, 35, 55);
+        Employee employee = createEmployee(id, personnelNumber, createdAt, updatedAt, name, surname, patronymic, email);
+        EmployeeResponseDto expected = createEmployeeResponseDto(id, personnelNumber, createdAt, updatedAt, name, surname, patronymic, email);
 
         when(employeeRepository.findById(id)).thenReturn(Optional.ofNullable(employee));
 
@@ -132,20 +134,17 @@ class EmployeeServiceImplTest {
     @Test
     void givenEmployeeRequestDto_whenCreate_thenReturnEmployeeResponseDto() {
         long id = 1;
+        String personnelNumber = "11111";
         String name = "Petr";
         String surname = "Petrov";
         String patronymic = "Petrovich";
         String email = "petrov@mail.com";
         LocalDateTime localDateTime = LocalDateTime.now().withNano(0);
 
-        EmployeeRequestDto employeeRequestDto = EmployeeRequestDto.builder()
-                .name(name)
-                .surname(surname)
-                .patronymic(patronymic)
-                .email(email)
-                .build();
+        EmployeeRequestDto employeeRequestDto = createEmployeeRequestDto(personnelNumber, name, surname, patronymic, email);
 
         Employee employeeWithoutId = Employee.builder()
+                .personnelNumber(personnelNumber)
                 .name(name)
                 .surname(surname)
                 .patronymic(patronymic)
@@ -154,8 +153,8 @@ class EmployeeServiceImplTest {
                 .updatedAt(localDateTime)
                 .build();
 
-        Employee employee = createEmployee(id, localDateTime, localDateTime, name, surname, patronymic, email);
-        EmployeeResponseDto expected = createEmployeeResponseDto(id, localDateTime, localDateTime, name, surname, patronymic, email);
+        Employee employee = createEmployee(id, personnelNumber, localDateTime, localDateTime, name, surname, patronymic, email);
+        EmployeeResponseDto expected = createEmployeeResponseDto(id, personnelNumber, localDateTime, localDateTime, name, surname, patronymic, email);
 
         when(employeeRepository.save(employeeWithoutId)).thenReturn(employee);
 
@@ -172,6 +171,7 @@ class EmployeeServiceImplTest {
     @Test
     void givenEmployeeIdAndEmployeeRequestDto_whenUpdate_thenReturnEmployeeResponseDto() {
         long id = 1;
+        String personnelNumber = "11111";
         String name = "Petr";
         String surname = "Petrov";
         String patronymic = "Petrovich";
@@ -180,20 +180,12 @@ class EmployeeServiceImplTest {
         LocalDateTime updatedAt = LocalDateTime.now().withNano(0);
         LocalDateTime currentUpdatedAt = LocalDateTime.now().withNano(0);
 
-        EmployeeRequestDto employeeRequestDto = EmployeeRequestDto.builder()
-                .id(id)
-                .name(name)
-                .surname(surname)
-                .patronymic(patronymic)
-                .email(email)
-                .createdAt(createdAt)
-                .updatedAt(updatedAt)
-                .build();
+        EmployeeRequestDto employeeRequestDto = createEmployeeRequestDto(id, personnelNumber, name, surname, patronymic, email, createdAt, updatedAt);
 
-        Optional<Employee> employeeOptional = Optional.of(createEmployee(id, createdAt, updatedAt, name, surname, patronymic, email));
-        Employee employeeUpdated = createEmployee(id, createdAt, currentUpdatedAt, name, surname, patronymic, email);
-        Employee employeeSaved = createEmployee(id, createdAt, currentUpdatedAt, name, surname, patronymic, email);
-        EmployeeResponseDto expected = createEmployeeResponseDto(id, createdAt, currentUpdatedAt, name, surname, patronymic, email);
+        Optional<Employee> employeeOptional = Optional.of(createEmployee(id, personnelNumber, createdAt, updatedAt, name, surname, patronymic, email));
+        Employee employeeUpdated = createEmployee(id, personnelNumber, createdAt, currentUpdatedAt, name, surname, patronymic, email);
+        Employee employeeSaved = createEmployee(id, personnelNumber, createdAt, currentUpdatedAt, name, surname, patronymic, email);
+        EmployeeResponseDto expected = createEmployeeResponseDto(id, personnelNumber, createdAt, currentUpdatedAt, name, surname, patronymic, email);
 
         when(employeeRepository.findById(id)).thenReturn(employeeOptional);
         when(employeeRepository.save(employeeUpdated)).thenReturn(employeeSaved);
@@ -245,9 +237,10 @@ class EmployeeServiceImplTest {
         verify(employeeRepository, never()).deleteById(any());
     }
 
-    private Employee createEmployee(long id, LocalDateTime createdAt, LocalDateTime updatedAt, String name, String surname, String patronymic, String email) {
+    private Employee createEmployee(long id, String personnelNumber, LocalDateTime createdAt, LocalDateTime updatedAt, String name, String surname, String patronymic, String email) {
         return Employee.builder()
                 .id(id)
+                .personnelNumber(personnelNumber)
                 .name(name)
                 .surname(surname)
                 .patronymic(patronymic)
@@ -257,15 +250,39 @@ class EmployeeServiceImplTest {
                 .build();
     }
 
-    private EmployeeResponseDto createEmployeeResponseDto(long id, LocalDateTime createdAt, LocalDateTime updatedAt, String name, String surname, String patronymic, String email) {
-        return EmployeeResponseDto.builder()
+    private EmployeeRequestDto createEmployeeRequestDto(long id, String personnelNumber, String name, String surname, String patronymic, String email, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        return EmployeeRequestDto.builder()
                 .id(id)
+                .personnelNumber(personnelNumber)
                 .name(name)
                 .surname(surname)
                 .patronymic(patronymic)
                 .email(email)
                 .createdAt(createdAt)
                 .updatedAt(updatedAt)
+                .build();
+    }
+
+    private EmployeeResponseDto createEmployeeResponseDto(long id, String personnelNumber, LocalDateTime createdAt, LocalDateTime updatedAt, String name, String surname, String patronymic, String email) {
+        return EmployeeResponseDto.builder()
+                .id(id)
+                .personnelNumber(personnelNumber)
+                .name(name)
+                .surname(surname)
+                .patronymic(patronymic)
+                .email(email)
+                .createdAt(createdAt)
+                .updatedAt(updatedAt)
+                .build();
+    }
+
+    private EmployeeRequestDto createEmployeeRequestDto(String personnelNumber, String name, String surname, String patronymic, String email) {
+        return EmployeeRequestDto.builder()
+                .personnelNumber(personnelNumber)
+                .name(name)
+                .surname(surname)
+                .patronymic(patronymic)
+                .email(email)
                 .build();
     }
 }
