@@ -8,39 +8,39 @@ databaseChangeLog:
             tableName: employee_position
             columns:
               - column:
+                  name: position
+                  value: 'technologist'
+              - column:
                   name: created_at
                   value: '2023-12-08 11:38:49'
               - column:
                   name: updated_at
                   value: '2023-12-08 11:38:49'
-              - column:
-                  name: position
-                  value: 'technologist'
 
         - insert:
             schemaName: tool
             tableName: employee_position
             columns:
-              - column:
-                  name: created_at
-                  value: '2023-12-08 11:38:49'
-              - column:
-                  name: updated_at
-                  value: '2023-12-08 11:38:49'
               - column:
                   name: position
                   value: 'warehouseman'
-
-        - insert:
-            schemaName: tool
-            tableName: employee_position
-            columns:
               - column:
                   name: created_at
                   value: '2023-12-08 11:38:49'
               - column:
                   name: updated_at
                   value: '2023-12-08 11:38:49'
+
+        - insert:
+            schemaName: tool
+            tableName: employee_position
+            columns:
               - column:
                   name: position
                   value: 'CNC programmer'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
