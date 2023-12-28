@@ -11,12 +11,6 @@ databaseChangeLog:
                   name: personnel_number
                   value: '11111'
               - column:
-                  name: created_at
-                  value: '2023-12-08 11:38:49'
-              - column:
-                  name: updated_at
-                  value: '2023-12-08 11:38:49'
-              - column:
                   name: name
                   value: 'Petr'
               - column:
@@ -29,6 +23,12 @@ databaseChangeLog:
                   name: email
                   value: 'petrovich@example.com'
               - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
                   name: employee_position_id
                   value: 1
 
@@ -39,12 +39,6 @@ databaseChangeLog:
               - column:
                   name: personnel_number
                   value: '22222'
-              - column:
-                  name: created_at
-                  value: '2023-12-08 11:38:49'
-              - column:
-                  name: updated_at
-                  value: '2023-12-08 11:38:49'
               - column:
                   name: name
                   value: 'Sidor'
@@ -58,6 +52,12 @@ databaseChangeLog:
                   name: email
                   value: 'sidorov@example.com'
               - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
                   name: employee_position_id
                   value: 2
 
@@ -68,12 +68,6 @@ databaseChangeLog:
               - column:
                   name: personnel_number
                   value: '33333'
-              - column:
-                  name: created_at
-                  value: '2023-12-08 11:38:49'
-              - column:
-                  name: updated_at
-                  value: '2023-12-08 11:38:49'
               - column:
                   name: name
                   value: 'Ivan'
@@ -86,6 +80,12 @@ databaseChangeLog:
               - column:
                   name: email
                   value: 'ivanov@example.com'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
               - column:
                   name: employee_position_id
                   value: 3

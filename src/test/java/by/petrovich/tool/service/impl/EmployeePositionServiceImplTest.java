@@ -4,7 +4,6 @@ import by.petrovich.tool.dto.request.EmployeePositionRequestDto;
 import by.petrovich.tool.dto.response.EmployeePositionResponseDto;
 import by.petrovich.tool.exception.ResourceNotFoundException;
 import by.petrovich.tool.mapper.EmployeePositionMapper;
-import by.petrovich.tool.mapper.EmployeePositionMapperImpl;
 import by.petrovich.tool.model.EmployeePosition;
 import by.petrovich.tool.repository.EmployeePositionRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +11,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
+import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -28,22 +29,30 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
+@ExtendWith(SpringExtension.class)
+@SpringBootTest
 @RequiredArgsConstructor
 public class EmployeePositionServiceImplTest {
-    @Mock
+    @Autowired
+    @Spy
     private EmployeePositionMapper employeePositionMapper;
 
-    @Mock
     private EmployeePositionRepository employeePositionRepository;
 
-    @InjectMocks
     private EmployeePositionServiceImpl employeePositionService;
+
+    @BeforeEach
+    void setUp() {
+        employeePositionRepository = mock(EmployeePositionRepository.class);
+        employeePositionService = new EmployeePositionServiceImpl(employeePositionRepository, employeePositionMapper);
+    }
 
     @DisplayName("test findAll method")
     @Test
@@ -64,15 +73,13 @@ public class EmployeePositionServiceImplTest {
                 createdAt, updatedAt);
         List<EmployeePositionResponseDto> expected = Arrays.asList(employeePositionResponseDto1, employeePositionResponseDto2);
 
-        when(employeePositionMapper.toResponseDto(employeePosition1)).thenReturn(employeePositionResponseDto1);
-        when(employeePositionMapper.toResponseDto(employeePosition2)).thenReturn(employeePositionResponseDto2);
         when(employeePositionRepository.findAll()).thenReturn(positions);
 
         List<EmployeePositionResponseDto> actual = employeePositionService.findAll();
 
         assertNotNull(actual);
-        verify(employeePositionMapper, times(2)).toResponseDto(any());
         verify(employeePositionRepository, times(1)).findAll();
+        verify(employeePositionMapper, times(2)).toResponseDto(any());
         assertEquals(2, actual.size());
         assertEquals(expected, actual);
     }
@@ -86,18 +93,16 @@ public class EmployeePositionServiceImplTest {
         LocalDateTime updatedAt = LocalDateTime.of(2023, 12, 15, 14, 35, 55);
         EmployeePosition employeePosition = createEmployeePosition(id, position, createdAt, updatedAt);
         Optional<EmployeePosition> employeePositionOptional = ofNullable(employeePosition);
-        EmployeePositionResponseDto employeePositionResponseDto = createEmployeePositionResponseDto(1, position, createdAt, updatedAt);
 
         EmployeePositionResponseDto expected = createEmployeePositionResponseDto(1, position, createdAt, updatedAt);
 
-        when(employeePositionMapper.toResponseDto(employeePosition)).thenReturn(employeePositionResponseDto);
         when(employeePositionRepository.findById(id)).thenReturn(employeePositionOptional);
 
         EmployeePositionResponseDto actual = employeePositionService.find(id);
 
         assertNotNull(actual);
-        verify(employeePositionMapper, times(1)).toResponseDto(employeePosition);
         verify(employeePositionRepository, times(1)).findById(id);
+        verify(employeePositionMapper, times(1)).toResponseDto(any());
         assertEquals(expected, actual);
     }
 
@@ -129,13 +134,10 @@ public class EmployeePositionServiceImplTest {
                 .updatedAt(localDateTime)
                 .build();
         EmployeePosition employeePosition = createEmployeePosition(id, position, localDateTime, localDateTime);
-        EmployeePositionResponseDto employeePositionResponseDto = createEmployeePositionResponseDto(id, position, localDateTime, localDateTime);
 
         EmployeePositionResponseDto expected = createEmployeePositionResponseDto(id, position, localDateTime, localDateTime);
 
-        when(employeePositionMapper.toEntity(employeePositionRequestDto)).thenReturn(employeePositionWithoutId);
         when(employeePositionRepository.save(employeePositionWithoutId)).thenReturn(employeePosition);
-        when(employeePositionMapper.toResponseDto(employeePosition)).thenReturn(employeePositionResponseDto);
 
         EmployeePositionResponseDto actual = employeePositionService.create(employeePositionRequestDto);
 
@@ -152,7 +154,7 @@ public class EmployeePositionServiceImplTest {
         long id = 1;
         String position = "CNC programmer";
         LocalDateTime createdAt = LocalDateTime.of(2023, 12, 14, 20, 15, 45);
-        LocalDateTime updatedAt = LocalDateTime.now().withNano(0);
+        LocalDateTime updatedAt = LocalDateTime.of(2023, 12, 15, 14, 35, 55);
         LocalDateTime currentUpdatedAt = LocalDateTime.now().withNano(0);
 
         EmployeePositionRequestDto employeePositionRequestDto = EmployeePositionRequestDto.builder()
@@ -164,14 +166,10 @@ public class EmployeePositionServiceImplTest {
         Optional<EmployeePosition> employeePositionOptional = Optional.of(createEmployeePosition(id, position, createdAt, updatedAt));
         EmployeePosition employeePositionUpdated = createEmployeePosition(id, position, createdAt, currentUpdatedAt);
         EmployeePosition employeePositionSaved = createEmployeePosition(id, position, createdAt, currentUpdatedAt);
-        EmployeePositionResponseDto employeePositionResponseDto = createEmployeePositionResponseDto(id, position, createdAt, currentUpdatedAt);
         EmployeePositionResponseDto expected = createEmployeePositionResponseDto(id, position, createdAt, currentUpdatedAt);
 
         when(employeePositionRepository.findById(id)).thenReturn(employeePositionOptional);
-        when(employeePositionMapper.toEntityUpdate(employeePositionRequestDto, employeePositionOptional.get()))
-                .thenReturn(employeePositionUpdated);
         when(employeePositionRepository.saveAndFlush(employeePositionUpdated)).thenReturn(employeePositionSaved);
-        when(employeePositionMapper.toResponseDto(employeePositionSaved)).thenReturn(employeePositionResponseDto);
 
         EmployeePositionResponseDto actual = employeePositionService.update(id, employeePositionRequestDto);
 

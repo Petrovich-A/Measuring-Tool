@@ -56,15 +56,6 @@ public class EmployeePositionControllerTest {
         assertEquals(expected.getUpdatedAt(), actualBody.getUpdatedAt());
     }
 
-    private EmployeePositionResponseDto createEmployeePositionResponseDto(long id, String position, LocalDateTime createdAt, LocalDateTime updatedAt) {
-        return EmployeePositionResponseDto.builder()
-                .id(id)
-                .position(position)
-                .createdAt(createdAt)
-                .updatedAt(updatedAt)
-                .build();
-    }
-
     @DisplayName("Test findAll Success")
     @Test
     void findAll() {
@@ -161,4 +152,12 @@ public class EmployeePositionControllerTest {
         assertEquals(id, responseEntity.getBody().longValue());
     }
 
+    private EmployeePositionResponseDto createEmployeePositionResponseDto(long id, String position, LocalDateTime createdAt, LocalDateTime updatedAt) {
+        return EmployeePositionResponseDto.builder()
+                .id(id)
+                .position(position)
+                .createdAt(createdAt)
+                .updatedAt(updatedAt)
+                .build();
+    }
 }

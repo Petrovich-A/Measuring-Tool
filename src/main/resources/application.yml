@@ -8,20 +8,23 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: validate
+      ddl-auto: none
     properties:
       hibernate:
         default_schema: tool
         format_sql: true
+        show_sql: true
 
   liquibase:
     enabled: true
     change-log: classpath:/db/changelog/db.changelog-master.yaml
 
-  logging:
-    level:
-      root: INFO
-
 server:
   error:
     include-stacktrace: never
+
+appender: "com.p6spy.engine.spy.appender.FileLogger"
+logfile: "database.log"
+append: true
+logMessageFormat: "com.reports.hibernate.sql.formatter.SpyCustomFormatter"
+customLogMessageFormat: "%(currentTime)|%(executionTime)|%(category)|%(sqlSingleLine)"
