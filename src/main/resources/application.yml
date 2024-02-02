@@ -12,8 +12,8 @@ spring:
     properties:
       hibernate:
         default_schema: tool
-        format_sql: true
-        show_sql: true
+#        format_sql: true
+#        show_sql: true
 
   liquibase:
     enabled: true
@@ -23,8 +23,8 @@ server:
   error:
     include-stacktrace: never
 
-appender: "com.p6spy.engine.spy.appender.FileLogger"
-logfile: "database.log"
-append: true
-logMessageFormat: "com.reports.hibernate.sql.formatter.SpyCustomFormatter"
-customLogMessageFormat: "%(currentTime)|%(executionTime)|%(category)|%(sqlSingleLine)"
+#appender: "com.p6spy.engine.spy.appender.FileLogger"
+#logfile: "database.log"
+#append: true
+#logMessageFormat: "by.petrovich.tool.util.SpyCustomFormatter"
+##customLogMessageFormat: "%(currentTime)|%(executionTime)|%(category)|%(sqlSingleLine)"

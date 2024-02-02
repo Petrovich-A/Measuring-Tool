@@ -8,6 +8,9 @@ databaseChangeLog:
             tableName: employee_position
             columns:
               - column:
+                  name: id
+                  valueComputed: "nextval('tool.employee_position_id_seq')"
+              - column:
                   name: position
                   value: 'technologist'
               - column:
@@ -22,6 +25,9 @@ databaseChangeLog:
             tableName: employee_position
             columns:
               - column:
+                  name: id
+                  valueComputed: "nextval('tool.employee_position_id_seq')"
+              - column:
                   name: position
                   value: 'warehouseman'
               - column:
@@ -35,6 +41,9 @@ databaseChangeLog:
             schemaName: tool
             tableName: employee_position
             columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.employee_position_id_seq')"
               - column:
                   name: position
                   value: 'CNC programmer'

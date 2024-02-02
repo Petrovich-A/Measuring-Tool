@@ -3,9 +3,8 @@ package by.petrovich.tool.controller;
 import by.petrovich.tool.dto.request.EmployeePositionRequestDto;
 import by.petrovich.tool.dto.response.EmployeePositionResponseDto;
 import by.petrovich.tool.service.impl.EmployeePositionServiceImpl;
-import jakarta.validation.Valid;
+
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static by.petrovich.tool.controller.EmployeePositionController.EMPLOYEE_POSITION_BASE_URL;
