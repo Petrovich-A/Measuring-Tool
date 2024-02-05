@@ -22,7 +22,7 @@ public class EmployeePosition {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_position_seq")
     @SequenceGenerator(name = "employee_position_seq", sequenceName = "employee_position_id_seq", allocationSize = 10)
-    @Column(columnDefinition = "bigserial")
+    @Column(columnDefinition = "bigint")
     private Long id;
 
     @Size(min = 3, max = 20)
@@ -30,16 +30,16 @@ public class EmployeePosition {
     private String position;
 
     @Column(updatable = false, nullable = false)
-//    @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
-//    @Temporal(TemporalType.TIMESTAMP)
     @DateTimeFormat(style = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "employeePosition", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Employee> employees;
+
+
 
 }

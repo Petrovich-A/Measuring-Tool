@@ -1,22 +1,26 @@
 package by.petrovich.tool.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @Builder
@@ -27,7 +31,7 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_seq")
     @SequenceGenerator(name = "employee_seq", sequenceName = "employee_id_seq", allocationSize = 1)
-    @Column(columnDefinition = "bigserial")
+    @Column(columnDefinition = "bigint")
     private Long id;
 
     @Size(min = 5, max = 5)
@@ -59,7 +63,21 @@ public class Employee {
     private LocalDateTime updatedAt;
 
     @ManyToOne
-    @JoinColumn(name = "employee_position_id", nullable = false, columnDefinition = "bigserial")
+    @JoinColumn(name = "employee_position_id", nullable = false, columnDefinition = "bigint")
     private EmployeePosition employeePosition;
+
+    @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = false, columnDefinition = "bigint")
+    private Pantry pantry;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id", nullable = false, columnDefinition = "bigint")
+    private Department department;
+
+    @OneToMany(mappedBy = "receivingByEmployee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<ToolKit> receivingToolKits;
+
+    @OneToMany(mappedBy = "distributingByEmployee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<ToolKit> distributingToolKits;
 
 }

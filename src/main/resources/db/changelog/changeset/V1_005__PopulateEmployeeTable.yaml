@@ -8,6 +8,9 @@ databaseChangeLog:
             tableName: employee
             columns:
               - column:
+                  name: id
+                  valueComputed: "nextval('tool.employee_id_seq')"
+              - column:
                   name: personnel_number
                   value: '11111'
               - column:
@@ -37,6 +40,9 @@ databaseChangeLog:
             tableName: employee
             columns:
               - column:
+                  name: id
+                  valueComputed: "nextval('tool.employee_id_seq')"
+              - column:
                   name: personnel_number
                   value: '22222'
               - column:
@@ -59,12 +65,15 @@ databaseChangeLog:
                   value: '2023-12-08 11:38:49'
               - column:
                   name: employee_position_id
-                  value: 2
+                  value: 51
 
         - insert:
             schemaName: tool
             tableName: employee
             columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.employee_id_seq')"
               - column:
                   name: personnel_number
                   value: '33333'
@@ -88,4 +97,4 @@ databaseChangeLog:
                   value: '2023-12-08 11:38:49'
               - column:
                   name: employee_position_id
-                  value: 3
+                  value: 101

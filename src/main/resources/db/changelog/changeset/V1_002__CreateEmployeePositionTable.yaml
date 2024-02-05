@@ -16,7 +16,7 @@ databaseChangeLog:
             columns:
               - column:
                   name: id
-                  type: bigserial
+                  type: bigint
                   constraints:
                     primaryKey: true
                     nullable: false
