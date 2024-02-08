@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: populate-tool-status-table
+      author: "Alexandr_Petrovich"
+      changes:
+        - insert:
+            schemaName: tool
+            tableName: tool_status
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_status_id_seq')"
+              - column:
+                  name: name
+                  value: 'under precision check'
+              - column:
+                  name: start
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: finish
+                  value: '2023-12-08 11:38:49'
+
+        - insert:
+            schemaName: tool
+            tableName: tool_status
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_status_id_seq')"
+              - column:
+                  name: name
+                  value: 'in using'
+              - column:
+                  name: start
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: finish
+                  value: '2023-12-08 11:38:49'
+
+        - insert:
+            schemaName: tool
+            tableName: tool_status
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_status_id_seq')"
+              - column:
+                  name: name
+                  value: 'in the storage room'
+              - column:
+                  name: start
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: finish
+                  value: '2023-12-08 11:38:49'

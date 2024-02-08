@@ -30,7 +30,7 @@ import java.util.Set;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_seq")
-    @SequenceGenerator(name = "employee_seq", sequenceName = "employee_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "employee_seq", sequenceName = "employee_id_seq")
     @Column(columnDefinition = "bigint")
     private Long id;
 
@@ -67,17 +67,13 @@ public class Employee {
     private EmployeePosition employeePosition;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id", nullable = false, columnDefinition = "bigint")
-    private Pantry pantry;
-
-    @ManyToOne
     @JoinColumn(name = "department_id", nullable = false, columnDefinition = "bigint")
     private Department department;
 
     @OneToMany(mappedBy = "receivingByEmployee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<ToolKit> receivingToolKits;
+    private Set<ToolIssuance> receivingToolIssuances;
 
     @OneToMany(mappedBy = "distributingByEmployee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<ToolKit> distributingToolKits;
+    private Set<ToolIssuance> distributingToolIssuances;
 
 }

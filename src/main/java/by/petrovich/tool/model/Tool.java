@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 public class Tool {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tool_seq")
-    @SequenceGenerator(name = "tool_seq", sequenceName = "tool_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "tool_seq", sequenceName = "tool_id_seq", allocationSize = 50)
     @Column(columnDefinition = "bigint")
     private Long id;
 
@@ -58,7 +58,11 @@ public class Tool {
     private ToolStatus toolStatus;
 
     @ManyToOne
-    @JoinColumn(name = "tool_kit_id", nullable = false, columnDefinition = "bigint")
-    private ToolKit toolKit;
+    @JoinColumn(name = "tool_issuance_id", columnDefinition = "bigint")
+    private ToolIssuance toolIssuance;
+
+    @ManyToOne
+    @JoinColumn(name = "storage_room_id", nullable = false, columnDefinition = "bigint")
+    private StorageRoom storageRoom;
 
 }

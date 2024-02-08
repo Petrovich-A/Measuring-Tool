@@ -1,0 +1,109 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-tool-table
+      author: "Alexandr_Petrovich"
+      changes:
+        - createSequence:
+            schemaName: tool
+            sequenceName: tool_id_seq
+            incrementBy: 50
+            startValue: 1
+            minValue: 1
+            ifNotExists: true
+        - createTable:
+            schemaName: tool
+            tableName: tool
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: designation
+                  type: varchar(10)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: laboratory_number
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: measurable_size_range
+                  type: varchar(15)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tool_issuance_id
+                  type: bigint
+                  defaultValue: null
+                  constraints:
+                    nullable: true
+              - column:
+                  name: tool_type_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: tool_status_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: storage_room_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: tool
+            baseColumnNames: tool_issuance_id
+            baseTableName: tool
+            constraintName: fk_tool_tool_issuance
+            referencedTableSchemaName: tool
+            referencedColumnNames: id
+            referencedTableName: tool_issuance
+            validate: false
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: tool
+            baseColumnNames: tool_type_id
+            baseTableName: tool
+            constraintName: fk_tool_tool_type
+            referencedTableSchemaName: tool
+            referencedColumnNames: id
+            referencedTableName: tool_type
+            validate: false
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: tool
+            baseColumnNames: tool_status_id
+            baseTableName: tool
+            constraintName: fk_tool_tool_status
+            referencedTableSchemaName: tool
+            referencedColumnNames: id
+            referencedTableName: tool_status
+            validate: false
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: tool
+            baseColumnNames: storage_room_id
+            baseTableName: tool
+            constraintName: fk_tool_storage_room
+            referencedTableSchemaName: tool
+            referencedColumnNames: id
+            referencedTableName: storage_room
+            validate: false

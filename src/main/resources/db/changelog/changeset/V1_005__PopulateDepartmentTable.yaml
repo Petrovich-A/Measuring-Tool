@@ -1,0 +1,65 @@
+databaseChangeLog:
+  - changeSet:
+      id: populate-department-table
+      author: "Alexandr_Petrovich"
+      changes:
+        - insert:
+            schemaName: tool
+            tableName: department
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.department_id_seq')"
+              - column:
+                  name: name
+                  value: 'цех программных станков'
+              - column:
+                  name: code
+                  value: '150'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+
+        - insert:
+            schemaName: tool
+            tableName: department
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.department_id_seq')"
+              - column:
+                  name: name
+                  value: 'цех гидротрансмиссий'
+              - column:
+                  name: code
+                  value: '090'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+
+        - insert:
+            schemaName: tool
+            tableName: department
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.department_id_seq')"
+              - column:
+                  name: name
+                  value: 'управление главного технолога'
+              - column:
+                  name: code
+                  value: '610'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+

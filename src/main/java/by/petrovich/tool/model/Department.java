@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -28,7 +27,7 @@ public class Department {
     @Column(length = 6, nullable = false, unique = true)
     private String name;
 
-    @Column(length = 15, nullable = false)
+    @Column(length = 15, nullable = false, unique = true)
     @Size(min = 2, max = 15)
     private String code;
 
@@ -40,10 +39,10 @@ public class Department {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "employeePosition", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Employee> employees;
 
     @OneToOne(mappedBy = "department")
-    private Pantry pantry;
+    private StorageRoom storageRoom;
 
 }

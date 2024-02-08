@@ -47,11 +47,6 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
-                  name: employee_position_id
-                  type: bigint
-                  constraints:
-                    nullable: false
-              - column:
                   name: created_at
                   type: timestamp(6)
                   constraints:
@@ -61,6 +56,17 @@ databaseChangeLog:
                   type: timestamp(6)
                   constraints:
                     nullable: false
+              - column:
+                  name: employee_position_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: department_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
         - addForeignKeyConstraint:
             baseTableSchemaName: tool
             baseColumnNames: employee_position_id
@@ -69,4 +75,14 @@ databaseChangeLog:
             referencedTableSchemaName: tool
             referencedColumnNames: id
             referencedTableName: employee_position
+            validate: false
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: tool
+            baseColumnNames: department_id
+            baseTableName: employee
+            constraintName: fk_employee_department
+            referencedTableSchemaName: tool
+            referencedColumnNames: id
+            referencedTableName: department
             validate: false

@@ -34,6 +34,9 @@ databaseChangeLog:
               - column:
                   name: employee_position_id
                   value: 1
+              - column:
+                  name: department_id
+                  value: 1
 
         - insert:
             schemaName: tool
@@ -65,7 +68,10 @@ databaseChangeLog:
                   value: '2023-12-08 11:38:49'
               - column:
                   name: employee_position_id
-                  value: 51
+                  value: 2
+              - column:
+                  name: department_id
+                  value: 2
 
         - insert:
             schemaName: tool
@@ -97,4 +103,42 @@ databaseChangeLog:
                   value: '2023-12-08 11:38:49'
               - column:
                   name: employee_position_id
-                  value: 101
+                  value: 2
+              - column:
+                  name: department_id
+                  value: 3
+
+        - insert:
+            schemaName: tool
+            tableName: employee
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.employee_id_seq')"
+              - column:
+                  name: personnel_number
+                  value: '44444'
+              - column:
+                  name: name
+                  value: 'Sergey'
+              - column:
+                  name: patronymic
+                  value: 'Sergeevich'
+              - column:
+                  name: surname
+                  value: 'Sergeev'
+              - column:
+                  name: email
+                  value: 'sergeev@example.com'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: employee_position_id
+                  value: 3
+              - column:
+                  name: department_id
+                  value: 3

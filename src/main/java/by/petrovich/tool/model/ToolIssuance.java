@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -16,10 +15,10 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class ToolKit {
+public class ToolIssuance {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tool_kit_seq")
-    @SequenceGenerator(name = "tool_kit_seq", sequenceName = "tool_kit_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "tool_issuance_seq")
+    @SequenceGenerator(name = "tool_issuance_seq", sequenceName = "tool_issuance_id_seq", allocationSize = 1)
     @Column(columnDefinition = "bigint")
     private Long id;
 
@@ -31,7 +30,7 @@ public class ToolKit {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "toolKit", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "toolIssuance", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Tool> tools;
 
     @ManyToOne
@@ -41,5 +40,9 @@ public class ToolKit {
     @ManyToOne
     @JoinColumn(name = "receiving_by_employee_id", nullable = false, columnDefinition = "bigint")
     private Employee receivingByEmployee;
+
+    @ManyToOne
+    @JoinColumn(name = "storage_room_id", nullable = false, columnDefinition = "bigint")
+    private StorageRoom storageRoom;
 
 }

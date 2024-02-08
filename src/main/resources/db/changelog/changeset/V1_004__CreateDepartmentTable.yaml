@@ -1,18 +1,18 @@
 databaseChangeLog:
   - changeSet:
-      id: create-employee-position-table
+      id: create-department-table
       author: "Alexandr_Petrovich"
       changes:
         - createSequence:
             schemaName: tool
-            sequenceName: employee_position_id_seq
+            sequenceName: department_id_seq
             incrementBy: 1
             startValue: 1
             minValue: 1
             ifNotExists: true
         - createTable:
             schemaName: tool
-            tableName: employee_position
+            tableName: department
             columns:
               - column:
                   name: id
@@ -21,19 +21,25 @@ databaseChangeLog:
                     primaryKey: true
                     nullable: false
               - column:
-                  name: position
-                  type: varchar(20)
+                  name: name
+                  type: varchar(50)
                   constraints:
-                    unique: true
-                    validateUnique: true
                     nullable: false
+                    unique: true
+              - column:
+                  name: code
+                  type: varchar(4)
+                  constraints:
+                    nullable: false
+                    unique: true
               - column:
                   name: created_at
-                  type: timestamp(6)
+                  type: timestamp
                   constraints:
                     nullable: false
               - column:
                   name: updated_at
-                  type: timestamp(6)
+                  type: timestamp
                   constraints:
                     nullable: false
+

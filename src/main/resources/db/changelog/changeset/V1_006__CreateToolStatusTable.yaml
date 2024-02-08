@@ -1,39 +1,38 @@
 databaseChangeLog:
   - changeSet:
-      id: create-employee-position-table
+      id: create-tool-status-table
       author: "Alexandr_Petrovich"
       changes:
         - createSequence:
             schemaName: tool
-            sequenceName: employee_position_id_seq
+            sequenceName: tool_status_id_seq
             incrementBy: 1
             startValue: 1
             minValue: 1
             ifNotExists: true
         - createTable:
             schemaName: tool
-            tableName: employee_position
+            tableName: tool_status
             columns:
               - column:
                   name: id
                   type: bigint
                   constraints:
+                    nullable: false
                     primaryKey: true
-                    nullable: false
               - column:
-                  name: position
-                  type: varchar(20)
+                  name: name
+                  type: varchar(25)
                   constraints:
+                    nullable: false
                     unique: true
-                    validateUnique: true
-                    nullable: false
               - column:
-                  name: created_at
-                  type: timestamp(6)
+                  name: start
+                  type: timestamp
                   constraints:
                     nullable: false
               - column:
-                  name: updated_at
-                  type: timestamp(6)
+                  name: finish
+                  type: timestamp
                   constraints:
                     nullable: false

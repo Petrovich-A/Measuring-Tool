@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-storage-room-table
+      author: "Alexandr_Petrovich"
+      changes:
+        - createSequence:
+            schemaName: tool
+            sequenceName: storage_room_id_seq
+            incrementBy: 1
+            startValue: 1
+            minValue: 1
+            ifNotExists: true
+        - createTable:
+            schemaName: tool
+            tableName: storage_room
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: department_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: tool
+            baseColumnNames: department_id
+            baseTableName: storage_room
+            constraintName: fk_storage_room_department
+            referencedTableSchemaName: tool
+            referencedColumnNames: id
+            referencedTableName: department
+            validate: false
