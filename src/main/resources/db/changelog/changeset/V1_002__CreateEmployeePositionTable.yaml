@@ -3,6 +3,7 @@ databaseChangeLog:
       id: create-employee-position-table
       author: "Alexandr_Petrovich"
       changes:
+<<<<<<< HEAD
         - createSequence:
             schemaName: tool
             sequenceName: employee_position_id_seq
@@ -10,6 +11,8 @@ databaseChangeLog:
             startValue: 1
             minValue: 1
             ifNotExists: true
+=======
+>>>>>>> main
         - createTable:
             schemaName: tool
             tableName: employee_position

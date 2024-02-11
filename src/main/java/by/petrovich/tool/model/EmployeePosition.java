@@ -21,7 +21,11 @@ import javax.persistence.TemporalType;
 public class EmployeePosition {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_position_seq")
+<<<<<<< HEAD
     @SequenceGenerator(name = "employee_position_seq", sequenceName = "employee_position_id_seq", allocationSize = 10)
+=======
+    @SequenceGenerator(name = "employee_position_seq", sequenceName = "employee_position_id_seq", allocationSize = 1)
+>>>>>>> main
     @Column(columnDefinition = "bigserial")
     private Long id;
 
