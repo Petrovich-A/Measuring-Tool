@@ -1,5 +1,6 @@
 package by.petrovich.tool.dto.response;
 
+import by.petrovich.tool.model.Department;
 import by.petrovich.tool.model.EmployeePosition;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
@@ -31,5 +32,7 @@ public class EmployeeResponseDto {
     private LocalDateTime updatedAt;
 
     private EmployeePosition employeePosition;
+
+    private Department department;
 
 }

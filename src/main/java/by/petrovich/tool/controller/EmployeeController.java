@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-import static by.petrovich.tool.controller.EmployeeController.EMPLOYEE_BASE_URL;
+import static by.petrovich.tool.controller.EmployeeController.DEPARTMENT_BASE_URL;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping(EMPLOYEE_BASE_URL)
+@RequestMapping(DEPARTMENT_BASE_URL)
 @RequiredArgsConstructor
 public class EmployeeController {
-    public static final String EMPLOYEE_BASE_URL = "/api/v1/employees";
+    public static final String DEPARTMENT_BASE_URL = "/api/v1/employees";
     public static final String ID = "/{id}";
     public static final String SLASH = "/";
 

@@ -1,5 +1,6 @@
 package by.petrovich.tool.dto.request;
 
+import by.petrovich.tool.model.Department;
 import by.petrovich.tool.model.EmployeePosition;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
@@ -29,5 +30,7 @@ public class EmployeeRequestDto {
     private LocalDateTime updatedAt;
 
     private EmployeePosition employeePosition;
+
+    private Department department;
 
 }

@@ -1,5 +1,7 @@
 package by.petrovich.tool.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -35,14 +37,17 @@ public class EmployeePosition {
     @Column(unique = true, length = 20)
     private String position;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(updatable = false, nullable = false)
     @DateTimeFormat(style = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @Column(nullable = false)
     @DateTimeFormat(style = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updatedAt;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "employeePosition", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Employee> employees;
 
