@@ -1,6 +1,7 @@
 package by.petrovich.tool.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -48,9 +49,11 @@ public class Department {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Employee> employees;
 
+    @JsonIgnore
     @OneToOne(mappedBy = "department")
     private StorageRoom storageRoom;
 
