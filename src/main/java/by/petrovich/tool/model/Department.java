@@ -33,12 +33,12 @@ public class Department {
     @Column(columnDefinition = "bigint")
     private Long id;
 
-    @Size(min = 2, max = 6)
+    @Size(min = 3, max = 50)
     @Column(length = 6, nullable = false, unique = true)
     private String name;
 
     @Column(length = 15, nullable = false, unique = true)
-    @Size(min = 2, max = 15)
+    @Size(min = 3, max = 4)
     private String code;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -54,7 +54,7 @@ public class Department {
     private Set<Employee> employees;
 
     @JsonIgnore
-    @OneToOne(mappedBy = "department")
+    @OneToOne(mappedBy = "department", cascade = CascadeType.MERGE)
     private StorageRoom storageRoom;
 
 }

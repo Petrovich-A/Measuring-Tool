@@ -32,8 +32,7 @@ public class StorageRoom {
     private Long id;
 
     @OneToOne
-    @MapsId
-    @JoinColumn(name = "department_id", nullable = false, columnDefinition = "bigint")
+    @JoinColumn(name = "department_id", columnDefinition = "bigint", referencedColumnName = "id")
     private Department department;
 
     @OneToMany(mappedBy = "storageRoom", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
