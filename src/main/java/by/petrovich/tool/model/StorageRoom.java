@@ -1,5 +1,6 @@
 package by.petrovich.tool.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +14,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -35,9 +35,11 @@ public class StorageRoom {
     @JoinColumn(name = "department_id", columnDefinition = "bigint", referencedColumnName = "id")
     private Department department;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "storageRoom", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ToolIssuance> toolIssuances;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "storageRoom", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Tool> tools;
 

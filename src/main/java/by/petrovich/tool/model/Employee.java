@@ -1,6 +1,7 @@
 package by.petrovich.tool.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -70,9 +71,11 @@ public class Employee {
     @JoinColumn(name = "department_id", nullable = false, columnDefinition = "bigint")
     private Department department;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "receivingByEmployee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ToolIssuance> receivingToolIssuances;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "distributingByEmployee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ToolIssuance> distributingToolIssuances;
 

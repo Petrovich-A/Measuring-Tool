@@ -1,5 +1,6 @@
 package by.petrovich.tool.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -33,6 +34,7 @@ public class ToolType {
     @Column(length = 20, nullable = false, unique = true)
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "toolType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Tool> tools;
 

@@ -29,8 +29,8 @@ public class Tool {
     @Column(columnDefinition = "bigint")
     private Long id;
 
-    @Size(min = 5, max = 5)
-    @Column(length = 5, nullable = false, unique = true)
+    @Size(min = 3, max = 10)
+    @Column(length = 10, nullable = false, unique = true)
     private String designation;
 
     @Size(min = 3, max = 15)
