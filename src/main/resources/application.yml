@@ -16,12 +16,31 @@ spring:
 #        show_sql: true
 
   liquibase:
-    enabled: true
+    enabled: false
     change-log: classpath:/db/changelog/db.changelog-master.yaml
 
 server:
   error:
     include-stacktrace: never
+
+springdoc:
+  api-docs:
+#    enabled: false
+    path: /tool-api-docs
+  packages-to-scan: by.petrovich.tool.controller
+  swagger-ui:
+#    enabled: false
+    path: /tool-documentation
+    tryItOutEnabled: true
+    operationsSorter: method
+    tagsSorter: alpha
+    filter: true
+
+petrovich:
+  openapi:
+    dev-url: http://localhost:8080
+    prod-url: https://tool-api.com
+
 
 #appender: "com.p6spy.engine.spy.appender.FileLogger"
 #logfile: "database.log"

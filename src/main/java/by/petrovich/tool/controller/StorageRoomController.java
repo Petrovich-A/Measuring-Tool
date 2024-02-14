@@ -1,64 +1,91 @@
 package by.petrovich.tool.controller;
 
 import by.petrovich.tool.dto.request.StorageRoomRequestDto;
-import by.petrovich.tool.dto.request.ToolTypeRequestDto;
 import by.petrovich.tool.dto.response.StorageRoomResponseDto;
-import by.petrovich.tool.dto.response.ToolTypeResponseDto;
-import by.petrovich.tool.service.impl.StorageRoomServiceImpl;
-import lombok.RequiredArgsConstructor;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
 import java.util.List;
 
-import static by.petrovich.tool.controller.StorageRoomController.STORAGE_ROOM_BASE_URL;
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
+@Tags({@Tag(name = "Storage Room Controller", description = "APIs for managing storage rooms")})
+public interface StorageRoomController {
+    @Operation(
+            tags = {"Storage Room Controller"},
+            summary = "Retrieve all storage rooms",
+            description = "Get a list of all storage rooms available in the system."
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "Successfully retrieved list of storage rooms",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = StorageRoomResponseDto.class))
+    )
+    ResponseEntity<List<StorageRoomResponseDto>> findAll();
 
-@RestController
-@RequestMapping(STORAGE_ROOM_BASE_URL)
-@RequiredArgsConstructor
-public class StorageRoomController {
-    public static final String STORAGE_ROOM_BASE_URL = "/api/v1/storage-rooms";
-    public static final String ID = "/{id}";
-    public static final String SLASH = "/";
+    @Operation(
+            tags = {"Storage Room Controller"},
+            summary = "Retrieve a storage room by ID",
+            description = "Retrieve detailed information about a specific storage room identified by its unique ID."
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "Successfully retrieved storage room",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = StorageRoomResponseDto.class))
+    )
+    @ApiResponse(
+            responseCode = "404",
+            description = "Storage room not found"
+    )
+    ResponseEntity<StorageRoomResponseDto> find(Long id);
 
-    private final StorageRoomServiceImpl storageRoomService;
+    @Operation(
+            tags = {"Storage Room Controller"},
+            summary = "Create a new storage room",
+            description = "Add a new storage room to the system with the provided details."
+    )
+    @ApiResponse(
+            responseCode = "201",
+            description = "Successfully created storage room",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = StorageRoomResponseDto.class))
+    )
+    ResponseEntity<StorageRoomResponseDto> create(StorageRoomRequestDto storageRoomRequestDto);
 
-    @GetMapping
-    public ResponseEntity<List<StorageRoomResponseDto>> findAll() {
-        return ResponseEntity.status(OK).body(storageRoomService.findAll());
-    }
+    @Operation(
+            tags = {"Storage Room Controller"},
+            summary = "Update a storage room",
+            description = "Update details of an existing storage room identified by its unique ID."
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "Successfully updated storage room",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = StorageRoomResponseDto.class))
+    )
+    @ApiResponse(
+            responseCode = "404",
+            description = "Storage room not found"
+    )
+    ResponseEntity<StorageRoomResponseDto> update(Long id, StorageRoomRequestDto storageRoomRequestDto);
 
-    @GetMapping(ID)
-    public ResponseEntity<StorageRoomResponseDto> find(@PathVariable("id") Long id) {
-        return ResponseEntity.status(OK).body(storageRoomService.find(id));
-    }
-
-    @PostMapping(SLASH)
-    public ResponseEntity<StorageRoomResponseDto> create(@Valid @RequestBody StorageRoomRequestDto storageRoomRequestDto) {
-        return ResponseEntity.status(CREATED).body(storageRoomService.create(storageRoomRequestDto));
-
-    }
-
-    @PutMapping(ID)
-    public ResponseEntity<StorageRoomResponseDto> update(@PathVariable("id") Long id,
-                                                      @Valid @RequestBody StorageRoomRequestDto storageRoomRequestDto) {
-        return ResponseEntity.status(OK).body(storageRoomService.update(id, storageRoomRequestDto));
-    }
-
-    @DeleteMapping(ID)
-    public ResponseEntity<Long> delete(@PathVariable Long id) {
-        storageRoomService.delete(id);
-        return ResponseEntity.status(OK).body(id);
-    }
-
+    @Operation(
+            tags = {"Storage Room Controller"},
+            summary = "Delete a storage room",
+            description = "Remove a storage room from the system using its unique ID."
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "Successfully deleted storage room"
+    )
+    @ApiResponse(
+            responseCode = "404",
+            description = "Storage room not found"
+    )
+    ResponseEntity<Long> delete(Long id);
 }
