@@ -1,9 +1,5 @@
 package by.petrovich.tool.dto.request;
 
-import by.petrovich.tool.model.StorageRoom;
-import by.petrovich.tool.model.ToolIssuance;
-import by.petrovich.tool.model.ToolStatus;
-import by.petrovich.tool.model.ToolType;
 import lombok.Builder;
 import lombok.Data;
 
@@ -24,12 +20,12 @@ public class ToolRequestDto {
 
     private LocalDateTime updatedAt;
 
-    private ToolType toolType;
+    private ToolTypeRequestDto toolTypeRequestDto;
 
-    private ToolStatus toolStatus;
+    private ToolStatusRequestDto toolStatusRequestDto;
 
-    private ToolIssuance toolIssuance;
+    private ToolIssuanceRequestDto toolIssuanceRequestDto;
 
-    private StorageRoom storageRoom;
+    private StorageRoomRequestDto storageRoomRequestDto;
 
 }

@@ -1,9 +1,5 @@
 package by.petrovich.tool.dto.response;
 
-import by.petrovich.tool.model.StorageRoom;
-import by.petrovich.tool.model.ToolIssuance;
-import by.petrovich.tool.model.ToolStatus;
-import by.petrovich.tool.model.ToolType;
 import lombok.Builder;
 import lombok.Data;
 
@@ -24,12 +20,12 @@ public class ToolResponseDto {
 
     private LocalDateTime updatedAt;
 
-    private ToolType toolType;
+    private ToolTypeResponseDto toolTypeResponseDto;
 
-    private ToolStatus toolStatus;
+    private ToolStatusResponseDto toolStatusResponseDto;
 
-    private ToolIssuance toolIssuance;
+    private ToolIssuanceResponseDto toolIssuanceResponseDto;
 
-    private StorageRoom storageRoom;
+    private StorageRoomResponseDto storageRoomResponseDto;
 
 }

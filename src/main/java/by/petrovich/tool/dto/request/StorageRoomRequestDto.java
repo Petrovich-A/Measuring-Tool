@@ -1,6 +1,5 @@
 package by.petrovich.tool.dto.request;
 
-import by.petrovich.tool.model.Department;
 import lombok.Builder;
 import lombok.Data;
 
@@ -9,6 +8,6 @@ import lombok.Data;
 public class StorageRoomRequestDto {
     private Long id;
 
-    private Department department;
+    private DepartmentRequestDto departmentRequestDto;
 
 }

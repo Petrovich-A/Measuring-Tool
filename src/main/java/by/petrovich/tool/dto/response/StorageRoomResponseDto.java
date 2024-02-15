@@ -9,6 +9,6 @@ import lombok.Data;
 public class StorageRoomResponseDto {
     private Long id;
 
-    private Department department;
+    private DepartmentResponseDto departmentResponseDto;
 
 }
