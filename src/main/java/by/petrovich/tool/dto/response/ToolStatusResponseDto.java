@@ -6,6 +6,8 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+import static by.petrovich.tool.util.Pattern.DATA_TIME_PATTERN;
+
 @Data
 @Builder
 public class ToolStatusResponseDto {
@@ -13,10 +15,10 @@ public class ToolStatusResponseDto {
 
     private String name;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = DATA_TIME_PATTERN)
     private LocalDateTime start;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = DATA_TIME_PATTERN)
     private LocalDateTime finish;
 
 }

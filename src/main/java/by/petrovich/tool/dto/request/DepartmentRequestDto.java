@@ -7,12 +7,14 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+import static by.petrovich.tool.util.Pattern.DATA_TIME_PATTERN;
+
 @Data
 @Builder
 @Schema(description = "DTO for creating or updating a department")
 public class DepartmentRequestDto {
 
-    @Schema(description = "Unique identifier of the department", example = "1")
+    @Schema(description = "Unique identifier of the department")
     private Long id;
 
     @Schema(description = "Name of the department", example = "CNC Machine Shop", minLength = 3, maxLength = 50)
@@ -21,11 +23,11 @@ public class DepartmentRequestDto {
     @Schema(description = "Code of the department", example = "050", minLength = 3, maxLength = 4)
     private String code;
 
-    @Schema(description = "Timestamp when the department was created", example = "2024-02-14T10:00:00")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Schema(description = "Timestamp when the department was created")
+    @JsonFormat(pattern = DATA_TIME_PATTERN)
     private LocalDateTime createdAt;
 
-    @Schema(description = "Timestamp when the department was last updated", example = "2024-02-14T10:05:00")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Schema(description = "Timestamp when the department was last updated")
+    @JsonFormat(pattern = DATA_TIME_PATTERN)
     private LocalDateTime updatedAt;
 }

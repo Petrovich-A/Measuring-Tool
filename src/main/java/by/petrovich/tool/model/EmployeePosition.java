@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.CascadeType;
@@ -20,6 +21,8 @@ import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Set;
+
+import static by.petrovich.tool.util.Pattern.DATA_TIME_PATTERN;
 
 @Data
 @Builder
@@ -37,14 +40,16 @@ public class EmployeePosition {
     @Column(unique = true, length = 20)
     private String position;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = DATA_TIME_PATTERN)
     @Column(updatable = false, nullable = false)
-    @DateTimeFormat(style = "yyyy-MM-dd HH:mm:ss")
+    @CreationTimestamp
+    @DateTimeFormat(style = DATA_TIME_PATTERN)
     private LocalDateTime createdAt;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = DATA_TIME_PATTERN)
     @Column(nullable = false)
-    @DateTimeFormat(style = "yyyy-MM-dd HH:mm:ss")
+    @CreationTimestamp
+    @DateTimeFormat(style = DATA_TIME_PATTERN)
     private LocalDateTime updatedAt;
 
     @JsonIgnore

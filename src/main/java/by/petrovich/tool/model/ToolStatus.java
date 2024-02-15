@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,6 +20,8 @@ import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Set;
+
+import static by.petrovich.tool.util.Pattern.DATA_TIME_PATTERN;
 
 @Data
 @Builder
@@ -36,11 +39,13 @@ public class ToolStatus {
     @Column(length = 20, nullable = false, unique = true)
     private String name;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = DATA_TIME_PATTERN)
+    @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime start;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = DATA_TIME_PATTERN)
+    @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime finish;
 

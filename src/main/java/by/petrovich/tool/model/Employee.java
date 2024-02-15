@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,6 +23,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.Set;
+
+import static by.petrovich.tool.util.Pattern.DATA_TIME_PATTERN;
 
 @Data
 @Builder
@@ -55,11 +58,13 @@ public class Employee {
     @Column(length = 50, nullable = false)
     private String email;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @Column(nullable = false)
+    @JsonFormat(pattern = DATA_TIME_PATTERN)
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = DATA_TIME_PATTERN)
+    @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 

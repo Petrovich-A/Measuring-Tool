@@ -6,6 +6,8 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+import static by.petrovich.tool.util.Pattern.DATA_TIME_PATTERN;
+
 @Data
 @Builder
 public class EmployeeResponseDto {
@@ -21,10 +23,10 @@ public class EmployeeResponseDto {
 
     private String email;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = DATA_TIME_PATTERN)
     private LocalDateTime createdAt;
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = DATA_TIME_PATTERN)
     private LocalDateTime updatedAt;
 
     private EmployeePositionResponseDto employeePositionResponseDto;

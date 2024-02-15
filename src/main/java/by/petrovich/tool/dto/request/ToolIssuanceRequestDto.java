@@ -7,6 +7,8 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+import static by.petrovich.tool.util.Pattern.DATA_TIME_PATTERN;
+
 @Data
 @Builder
 public class ToolIssuanceRequestDto {
@@ -15,11 +17,11 @@ public class ToolIssuanceRequestDto {
     private Long id;
 
     @Schema(description = "Date and time when the tool issuance was created")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = DATA_TIME_PATTERN)
     private LocalDateTime createdAt;
 
     @Schema(description = "Date and time when the tool issuance was last updated")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = DATA_TIME_PATTERN)
     private LocalDateTime updatedAt;
 
     @Schema(description = "Employee who distributed the tool")
