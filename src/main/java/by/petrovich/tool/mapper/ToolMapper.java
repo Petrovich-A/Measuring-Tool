@@ -39,24 +39,25 @@ public interface ToolMapper {
      */
     @Mapping(target = "createdAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
     @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
-    @Mapping(source = "toolType.id", target = "toolType.id")
-    @Mapping(source = "toolStatus.id", target = "toolStatus.id")
-    @Mapping(source = "toolIssuance.id", target = "toolIssuance.id")
-    @Mapping(source = "storageRoom.id", target = "storageRoom.id")
+    @Mapping(source = "toolTypeRequestDto.id", target = "toolType.id")
+    @Mapping(source = "toolStatusRequestDto.id", target = "toolStatus.id")
+    @Mapping(source = "toolIssuanceRequestDto.id", target = "toolIssuance.id")
+    @Mapping(source = "storageRoomRequestDto.id", target = "storageRoom.id")
     Tool toEntity(ToolRequestDto toolRequestDto);
 
     /**
      * Maps a ToolRequestDto to update an existing Tool entity.
      *
      * @param toolRequestDto The ToolRequestDto containing updated information.
-     * @param tool The Tool entity to update.
+     * @param tool           The Tool entity to update.
      * @return The updated Tool entity.
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
-    @Mapping(source = "toolStatus", target = "toolStatus")
-    @Mapping(source = "toolIssuance", target = "toolIssuance")
-    @Mapping(source = "storageRoom", target = "storageRoom")
+    @Mapping(source = "toolTypeRequestDto", target = "toolType")
+    @Mapping(source = "toolStatusRequestDto", target = "toolStatus")
+    @Mapping(source = "toolIssuanceRequestDto", target = "toolIssuance")
+    @Mapping(source = "storageRoomRequestDto", target = "storageRoom")
     Tool toEntityUpdate(ToolRequestDto toolRequestDto, @MappingTarget Tool tool);
 }

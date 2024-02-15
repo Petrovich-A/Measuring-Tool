@@ -37,7 +37,7 @@ public interface StorageRoomMapper {
      * @param storageRoomRequestDto The StorageRoomRequestDto to map.
      * @return The corresponding StorageRoom entity.
      */
-    @Mapping(source = "department.id", target = "department.id")
+    @Mapping(source = "departmentRequestDto.id", target = "department.id")
     StorageRoom toEntity(StorageRoomRequestDto storageRoomRequestDto);
 
 
@@ -49,6 +49,6 @@ public interface StorageRoomMapper {
      * @return The updated StorageRoom entity.
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(source = "department", target = "department")
+    @Mapping(source = "departmentRequestDto", target = "department")
     StorageRoom toEntityUpdate(StorageRoomRequestDto storageRoomRequestDto, @MappingTarget StorageRoom storageRoom);
 }

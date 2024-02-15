@@ -29,8 +29,8 @@ public interface EmployeeMapper {
      * @param employee The Employee entity to map.
      * @return The corresponding EmployeeResponseDto.
      */
-    @Mapping(source = "employeePosition", target = "employeePosition")
-    @Mapping(source = "department", target = "department")
+    @Mapping(source = "employeePosition", target = "employeePositionResponseDto")
+    @Mapping(source = "department", target = "departmentResponseDto")
     EmployeeResponseDto toResponseDto(Employee employee);
 
     /**
@@ -41,8 +41,8 @@ public interface EmployeeMapper {
      */
     @Mapping(target = "createdAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
     @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
-    @Mapping(source = "employeePosition.id", target = "employeePosition.id")
-    @Mapping(source = "department.id", target = "department.id")
+    @Mapping(source = "employeePositionRequestDto.id", target = "employeePosition.id")
+    @Mapping(source = "departmentRequestDto.id", target = "department.id")
     Employee toEntity(EmployeeRequestDto employeeRequestDto);
 
     /**
