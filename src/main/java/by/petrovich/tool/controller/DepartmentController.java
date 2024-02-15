@@ -3,6 +3,7 @@ package by.petrovich.tool.controller;
 import by.petrovich.tool.dto.request.DepartmentRequestDto;
 import by.petrovich.tool.dto.response.DepartmentResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -37,7 +38,9 @@ public interface DepartmentController {
     @ApiResponse(
             responseCode = "404",
             description = "Department not found")
-    ResponseEntity<DepartmentResponseDto> find(Long id);
+    ResponseEntity<DepartmentResponseDto> find(@Parameter(description = "The ID of the department",
+                                                          example = "1",
+                                                          required = true) Long id);
 
     @Operation(
             summary = "Create a new department",
@@ -48,7 +51,8 @@ public interface DepartmentController {
             description = "Successfully created department",
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = DepartmentResponseDto.class)))
-    ResponseEntity<DepartmentResponseDto> create(DepartmentRequestDto departmentRequestDto);
+    ResponseEntity<DepartmentResponseDto> create(@Parameter(description = "Department details",
+                                                            required = true) DepartmentRequestDto departmentRequestDto);
 
 
     @Operation(
@@ -63,7 +67,11 @@ public interface DepartmentController {
     @ApiResponse(
             responseCode = "404",
             description = "Department not found")
-    ResponseEntity<DepartmentResponseDto> update(Long id, DepartmentRequestDto departmentRequestDto);
+    ResponseEntity<DepartmentResponseDto> update(@Parameter(description = "The ID of the department",
+                                                            example = "1",
+                                                            required = true) Long id,
+                                                 @Parameter(description = "Updated department details",
+                                                            required = true) DepartmentRequestDto departmentRequestDto);
 
     @Operation(
             summary = "Delete a department",
@@ -75,5 +83,7 @@ public interface DepartmentController {
     @ApiResponse(
             responseCode = "404",
             description = "Department not found")
-    ResponseEntity<Long> delete(Long id);
+    ResponseEntity<Long> delete(@Parameter(description = "The ID of the department",
+                                           example = "1",
+                                           required = true) Long id);
 }

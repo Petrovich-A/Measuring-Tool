@@ -3,6 +3,7 @@ package by.petrovich.tool.controller;
 import by.petrovich.tool.dto.request.ToolStatusRequestDto;
 import by.petrovich.tool.dto.response.ToolStatusResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -13,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 @Tags({@Tag(name = "Tool Status Controller", description = "APIs for managing tool statuses")})
-public interface ToolStatusControllerImpl {
+public interface ToolStatusController {
     @Operation(
             tags = {"Tool Status Controller"},
             summary = "Retrieve all tool statuses",
@@ -42,7 +43,9 @@ public interface ToolStatusControllerImpl {
             responseCode = "404",
             description = "Tool status not found"
     )
-    ResponseEntity<ToolStatusResponseDto> find(Long id);
+    ResponseEntity<ToolStatusResponseDto> find(@Parameter(description = "ID of the tool status to retrieve",
+                                                          example = "1",
+                                                          required = true) Long id);
 
     @Operation(
             tags = {"Tool Status Controller"},
@@ -55,7 +58,8 @@ public interface ToolStatusControllerImpl {
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = ToolStatusResponseDto.class))
     )
-    ResponseEntity<ToolStatusResponseDto> create(ToolStatusRequestDto toolStatusRequestDto);
+    ResponseEntity<ToolStatusResponseDto> create(@Parameter(description = "Tool status details",
+                                                            required = true) ToolStatusRequestDto toolStatusRequestDto);
 
     @Operation(
             tags = {"Tool Status Controller"},
@@ -72,7 +76,11 @@ public interface ToolStatusControllerImpl {
             responseCode = "404",
             description = "Tool status not found"
     )
-    ResponseEntity<ToolStatusResponseDto> update(Long id, ToolStatusRequestDto toolStatusRequestDto);
+    ResponseEntity<ToolStatusResponseDto> update(@Parameter(description = "ID of the tool status to update",
+                                                            example = "1",
+                                                            required = true) Long id,
+                                                 @Parameter(description = "Updated tool status details",
+                                                            required = true) ToolStatusRequestDto toolStatusRequestDto);
 
     @Operation(
             tags = {"Tool Status Controller"},
@@ -87,5 +95,7 @@ public interface ToolStatusControllerImpl {
             responseCode = "404",
             description = "Tool status not found"
     )
-    ResponseEntity<Long> delete(Long id);
+    ResponseEntity<Long> delete(@Parameter(description = "ID of the tool status to delete",
+                                           example = "1",
+                                           required = true) Long id);
 }

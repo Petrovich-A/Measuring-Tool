@@ -38,7 +38,9 @@ public interface ToolController {
     @ApiResponse(
             responseCode = "404",
             description = "Tool not found")
-    ResponseEntity<ToolResponseDto> find(@Parameter(description = "ID of the tool to retrieve") Long id);
+    ResponseEntity<ToolResponseDto> find(@Parameter(description = "ID of the tool to retrieve",
+                                                    example = "1",
+                                                    required = true) Long id);
 
     @Operation(
             summary = "Create a new tool",
@@ -49,7 +51,8 @@ public interface ToolController {
             description = "Tool created successfully",
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = ToolResponseDto.class)))
-    ResponseEntity<ToolResponseDto> create(ToolRequestDto toolRequestDto);
+    ResponseEntity<ToolResponseDto> create(@Parameter(description = "Tool details",
+                                                      required = true) ToolRequestDto toolRequestDto);
 
     @Operation(
             summary = "Update a tool",
@@ -63,8 +66,11 @@ public interface ToolController {
     @ApiResponse(
             responseCode = "404",
             description = "Tool not found")
-    ResponseEntity<ToolResponseDto> update(@Parameter(description = "ID of the tool to update") Long id,
-                                           ToolRequestDto toolRequestDto);
+    ResponseEntity<ToolResponseDto> update(@Parameter(description = "ID of the tool to update",
+                                                      example = "1",
+                                                      required = true) Long id,
+                                           @Parameter(description = "Updated tool details",
+                                                      required = true) ToolRequestDto toolRequestDto);
 
     @Operation(
             summary = "Delete a tool",
@@ -76,5 +82,7 @@ public interface ToolController {
     @ApiResponse(
             responseCode = "404",
             description = "Tool not found")
-    ResponseEntity<Void> delete(@Parameter(description = "ID of the tool to delete") Long id);
+    ResponseEntity<Void> delete(@Parameter(description = "ID of the tool to delete",
+                                           example = "1",
+                                           required = true) Long id);
 }

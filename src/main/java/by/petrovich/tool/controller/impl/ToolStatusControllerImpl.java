@@ -1,6 +1,6 @@
 package by.petrovich.tool.controller.impl;
 
-import by.petrovich.tool.controller.ToolStatusControllerImpl;
+import by.petrovich.tool.controller.ToolStatusController;
 import by.petrovich.tool.dto.request.ToolStatusRequestDto;
 import by.petrovich.tool.dto.response.ToolStatusResponseDto;
 import by.petrovich.tool.service.impl.ToolStatusServiceImpl;
@@ -22,13 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.List;
 
+import static by.petrovich.tool.controller.impl.ToolStatusControllerImpl.TOOL_STATUS_BASE_URL;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping(ToolStatusController.TOOL_STATUS_BASE_URL)
+@RequestMapping(TOOL_STATUS_BASE_URL)
 @RequiredArgsConstructor
-public class ToolStatusController implements ToolStatusControllerImpl {
+public class ToolStatusControllerImpl implements ToolStatusController {
     public static final String TOOL_STATUS_BASE_URL = "/api/v1/tool-statuses";
     public static final String ID = "/{id}";
     public static final String SLASH = "/";
