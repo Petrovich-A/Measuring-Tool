@@ -1,25 +1,28 @@
 package by.petrovich.tool.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @Data
 @Builder
+@Schema(description = "DTO for creating or updating an employee position")
 public class EmployeePositionRequestDto {
+
+    @Schema(description = "Unique identifier of the employee position", example = "1")
     private Long id;
 
-    @NotNull
-    @Size(min = 3, max = 20)
+    @Schema(description = "Name of the employee position", example = "Manager", maxLength = 20)
     private String position;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Schema(description = "Timestamp when the employee position was created", example = "2024-02-14T10:00:00")
     private LocalDateTime createdAt;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Schema(description = "Timestamp when the employee position was last updated", example = "2024-02-14T10:05:00")
     private LocalDateTime updatedAt;
 }
