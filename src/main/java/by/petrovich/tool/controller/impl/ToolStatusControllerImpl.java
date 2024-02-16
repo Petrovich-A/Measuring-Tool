@@ -50,7 +50,7 @@ public class ToolStatusControllerImpl implements ToolStatusController {
 
     @Override
     @Operation(
-            tags = {"Tool Status Controller"},
+            tags = {"Tool Status controller"},
             summary = "Create a new tool status",
             description = "Add a new tool status to the system with the provided details."
     )

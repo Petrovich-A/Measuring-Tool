@@ -1,11 +1,14 @@
 package by.petrovich.tool.controller;
 
+import by.petrovich.tool.dto.request.DepartmentRequestDto;
 import by.petrovich.tool.dto.request.EmployeePositionRequestDto;
 import by.petrovich.tool.dto.response.EmployeePositionResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
@@ -44,8 +47,8 @@ public interface EmployeePositionController {
             description = "Employee position not found"
     )
     ResponseEntity<EmployeePositionResponseDto> find(@Parameter(description = "The ID of the employee position",
-                                                                example = "1",
-                                                                required = true) Long id);
+            example = "1",
+            required = true) Long id);
 
     @Operation(
             tags = {"Employee Position Controller"},
@@ -58,8 +61,16 @@ public interface EmployeePositionController {
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = EmployeePositionResponseDto.class))
     )
-    ResponseEntity<EmployeePositionResponseDto> create(@Parameter(description = "Employee position details",
-                                                                  required = true) EmployeePositionRequestDto employeePositionRequestDto);
+    ResponseEntity<EmployeePositionResponseDto> create(@RequestBody(
+            description = "Employee details", required = true,
+            content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = DepartmentRequestDto.class),
+                    examples = @ExampleObject(
+                            value = "{  \"position\":\"CNC operator\"}"
+                    )
+            )
+    ) EmployeePositionRequestDto employeePositionRequestDto);
 
     @Operation(
             tags = {"Employee Position Controller"},
@@ -76,11 +87,20 @@ public interface EmployeePositionController {
             responseCode = "404",
             description = "Employee position not found"
     )
-    ResponseEntity<EmployeePositionResponseDto> update(@Parameter(description = "The ID of the employee position",
-                                                                  example = "1",
-                                                                  required = true) Long id,
-                                                       @Parameter(description = "Updated employee position details",
-                                                                  required = true) EmployeePositionRequestDto employeePositionRequestDto);
+    ResponseEntity<EmployeePositionResponseDto> update(@Parameter(
+            description = "The ID of the employee position",
+            example = "4",
+            required = true) Long id,
+                                                       @RequestBody(
+                                                               description = "Updated employee position details", required = true,
+                                                               content = @Content(
+                                                                       mediaType = "application/json",
+                                                                       schema = @Schema(implementation = DepartmentRequestDto.class),
+                                                                       examples = @ExampleObject(
+                                                                               value = "{  \"position\":\"inspector\"}"
+                                                                       )
+                                                               )
+                                                       ) EmployeePositionRequestDto employeePositionRequestDto);
 
     @Operation(
             tags = {"Employee Position Controller"},
@@ -96,6 +116,6 @@ public interface EmployeePositionController {
             description = "Employee position not found"
     )
     ResponseEntity<Long> delete(@Parameter(description = "The ID of the employee position",
-                                           example = "1",
-                                           required = true) Long id);
+            example = "4",
+            required = true) Long id);
 }

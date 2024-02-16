@@ -21,7 +21,7 @@ public interface EmployeeController {
     @Operation(
             summary = "Retrieve all employees",
             description = "Get a list of all employees available in the system.",
-            tags = {"Employee Controller"}
+            tags = {"Employee controller"}
     )
     @ApiResponse(
             responseCode = "200",
@@ -34,7 +34,7 @@ public interface EmployeeController {
     @Operation(
             summary = "Retrieve an employee by ID",
             description = "Retrieve detailed information about a specific employee identified by its unique ID.",
-            tags = {"Employee Controller"}
+            tags = {"Employee controller"}
     )
     @ApiResponse(
             responseCode = "200",
@@ -53,7 +53,7 @@ public interface EmployeeController {
     @Operation(
             summary = "Create a new employee",
             description = "Add a new employee to the system with the provided details.",
-            tags = {"Employee Controller"}
+            tags = {"Employee controller"}
     )
     @ApiResponse(
             responseCode = "201",
@@ -85,7 +85,7 @@ public interface EmployeeController {
     @Operation(
             summary = "Update an employee",
             description = "Update details of an existing employee identified by its unique ID.",
-            tags = {"Employee Controller"}
+            tags = {"Employee controller"}
     )
     @ApiResponse(
             responseCode = "200",
@@ -125,7 +125,7 @@ public interface EmployeeController {
     @Operation(
             summary = "Delete an employee",
             description = "Remove an employee from the system using its unique ID.",
-            tags = {"Employee Controller"}
+            tags = {"Employee controller"}
     )
     @ApiResponse(
             responseCode = "200",
