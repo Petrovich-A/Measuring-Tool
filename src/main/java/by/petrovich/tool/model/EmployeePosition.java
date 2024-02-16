@@ -53,7 +53,7 @@ public class EmployeePosition {
     private LocalDateTime updatedAt;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "employeePosition", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "employeePosition", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     private Set<Employee> employees;
 
 

@@ -4,13 +4,18 @@
  */
 package by.petrovich.tool.mapper;
 
+import by.petrovich.tool.dto.request.DepartmentRequestDto;
+import by.petrovich.tool.dto.request.EmployeePositionRequestDto;
 import by.petrovich.tool.dto.request.EmployeeRequestDto;
 import by.petrovich.tool.dto.response.EmployeeResponseDto;
+import by.petrovich.tool.model.Department;
 import by.petrovich.tool.model.Employee;
+import by.petrovich.tool.model.EmployeePosition;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 
 /**
@@ -49,11 +54,41 @@ public interface EmployeeMapper {
      * Maps an EmployeeRequestDto to update an existing Employee entity.
      *
      * @param employeeRequestDto The EmployeeRequestDto containing updated information.
-     * @param employee The Employee entity to update.
+     * @param employee           The Employee entity to update.
      * @return The updated Employee entity.
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
+    @Mapping(target = "department", source = "departmentRequestDto", qualifiedByName = "mapDepartmentDtoToDepartment")
+    @Mapping(target = "employeePosition", source = "employeePositionRequestDto", qualifiedByName = "mapEmployeePositionDtoToEmployeePosition")
     Employee toEntityUpdate(EmployeeRequestDto employeeRequestDto, @MappingTarget Employee employee);
+
+
+    /**
+     * Maps a DepartmentRequestDto to a Department entity.
+     *
+     * @param departmentRequestDto The DepartmentRequestDto to map.
+     * @return The corresponding Department entity.
+     */
+    @Named("mapDepartmentDtoToDepartment")
+    default Department mapDepartmentDtoToDepartment(DepartmentRequestDto departmentRequestDto) {
+        Department department = new Department();
+        department.setId(departmentRequestDto.getId());
+        return department;
+    }
+
+    /**
+     * Maps an EmployeePositionRequestDto to an EmployeePosition entity.
+     *
+     * @param employeePositionRequestDto The EmployeePositionRequestDto to map.
+     * @return The corresponding EmployeePosition entity.
+     */
+    @Named("mapEmployeePositionDtoToEmployeePosition")
+    default EmployeePosition mapEmployeePositionDtoToEmployeePosition(EmployeePositionRequestDto employeePositionRequestDto) {
+        EmployeePosition employeePosition = new EmployeePosition();
+        employeePosition.setId(employeePositionRequestDto.getId());
+        return employeePosition;
+    }
+
 }
