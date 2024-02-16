@@ -1,11 +1,14 @@
 package by.petrovich.tool.controller;
 
+import by.petrovich.tool.dto.request.DepartmentRequestDto;
 import by.petrovich.tool.dto.request.EmployeeRequestDto;
 import by.petrovich.tool.dto.response.EmployeeResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
@@ -44,8 +47,8 @@ public interface EmployeeController {
             description = "Employee not found"
     )
     ResponseEntity<EmployeeResponseDto> find(@Parameter(description = "The ID of the employee",
-                                                        example = "1",
-                                                        required = true) Long id);
+            example = "1",
+            required = true) Long id);
 
     @Operation(
             summary = "Create a new employee",
@@ -58,8 +61,26 @@ public interface EmployeeController {
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = EmployeeResponseDto.class))
     )
-    ResponseEntity<EmployeeResponseDto> create(@Parameter(description = "Employee details",
-                                                                 required = true) EmployeeRequestDto employeeRequestDto);
+    ResponseEntity<EmployeeResponseDto> create(@RequestBody(
+            description = "Employee details", required = true,
+            content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = DepartmentRequestDto.class),
+                    examples = @ExampleObject(value =
+                            "{  \"personnelNumber\":\"41525\"," +
+                                    " \"name\":\"Alexandr\"," +
+                                    "\"surname\":\"Alexandrov\"," +
+                                    "\"patronymic\":\"Alexandrovich\"," +
+                                    "\"email\":\"alexandrov@mail.com\"," +
+                                    "\"employeePositionRequestDto\": {" +
+                                    "\"id\":\"1\"" +
+                                    "}," +
+                                    "\"departmentRequestDto\":{" +
+                                    "\"id\":\"1\"" +
+                                    "}}"
+                    )
+            )
+    ) EmployeeRequestDto employeeRequestDto);
 
     @Operation(
             summary = "Update an employee",
@@ -76,11 +97,30 @@ public interface EmployeeController {
             responseCode = "404",
             description = "Employee not found"
     )
-    ResponseEntity<EmployeeResponseDto> update(@Parameter(description = "The ID of the employee",
-                                                          example = "1",
-                                                          required = true) Long id,
-                                               @Parameter(description = "Updated employee details",
-                                                          required = true) EmployeeRequestDto employeeRequestDto);
+    ResponseEntity<EmployeeResponseDto> update(@Parameter(
+            description = "The ID of the employee",
+            example = "151",
+            required = true) Long id,
+                                               @RequestBody(
+                                                       description = "Updated employee details", required = true,
+                                                       content = @Content(
+                                                               mediaType = "application/json",
+                                                               schema = @Schema(implementation = DepartmentRequestDto.class),
+                                                               examples = @ExampleObject(value =
+                                                                       "{  \"personnelNumber\":\"21150\"," +
+                                                                               " \"name\":\"Alex\"," +
+                                                                               "\"surname\":\"Nazarov\"," +
+                                                                               "\"patronymic\":\"Mihaylovich\"," +
+                                                                               "\"email\":\"nazarov@mail.com\"," +
+                                                                               "\"employeePositionRequestDto\": {" +
+                                                                               "\"id\":\"2\"" +
+                                                                               "}," +
+                                                                               "\"departmentRequestDto\":{" +
+                                                                               "\"id\":\"2\"" +
+                                                                               "}}"
+                                                               )
+                                                       )
+                                               ) EmployeeRequestDto employeeRequestDto);
 
     @Operation(
             summary = "Delete an employee",
@@ -95,7 +135,8 @@ public interface EmployeeController {
             responseCode = "404",
             description = "Employee not found"
     )
-    ResponseEntity<Long> delete(@Parameter(description = "The ID of the employee",
-                                           example = "1",
-                                           required = true) Long id);
+    ResponseEntity<Long> delete(@Parameter(
+            description = "The ID of the employee",
+            example = "1",
+            required = true) Long id);
 }

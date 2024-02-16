@@ -5,7 +5,9 @@ import by.petrovich.tool.dto.response.DepartmentResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
@@ -39,8 +41,8 @@ public interface DepartmentController {
             responseCode = "404",
             description = "Department not found")
     ResponseEntity<DepartmentResponseDto> find(@Parameter(description = "The ID of the department",
-                                                          example = "1",
-                                                          required = true) Long id);
+            example = "1",
+            required = true) Long id);
 
     @Operation(
             summary = "Create a new department",
@@ -51,9 +53,11 @@ public interface DepartmentController {
             description = "Successfully created department",
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = DepartmentResponseDto.class)))
-    ResponseEntity<DepartmentResponseDto> create(@Parameter(description = "Department details",
-                                                            required = true) DepartmentRequestDto departmentRequestDto);
-
+    ResponseEntity<DepartmentResponseDto> create(@RequestBody(description = "Department details", required = true,
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = DepartmentRequestDto.class),
+                    examples = @ExampleObject(value = "{\"name\":\"инструментальный цех\",\"code\":\"050\"}")))
+                                                 DepartmentRequestDto departmentRequestDto);
 
     @Operation(
             summary = "Update a department",
@@ -67,11 +71,12 @@ public interface DepartmentController {
     @ApiResponse(
             responseCode = "404",
             description = "Department not found")
-    ResponseEntity<DepartmentResponseDto> update(@Parameter(description = "The ID of the department",
-                                                            example = "1",
-                                                            required = true) Long id,
-                                                 @Parameter(description = "Updated department details",
-                                                            required = true) DepartmentRequestDto departmentRequestDto);
+    ResponseEntity<DepartmentResponseDto> update(@Parameter(description = "The ID of the department", example = "4", required = true) Long id,
+                                                 @RequestBody(description = "Updated department details", required = true,
+                                                         content = @Content(mediaType = "application/json",
+                                                                 schema = @Schema(implementation = DepartmentRequestDto.class),
+                                                                 examples = @ExampleObject(value = "{\"name\":\"механосборочный цех\",\"code\":\"030\"}")))
+                                                 DepartmentRequestDto departmentRequestDto);
 
     @Operation(
             summary = "Delete a department",
@@ -83,7 +88,5 @@ public interface DepartmentController {
     @ApiResponse(
             responseCode = "404",
             description = "Department not found")
-    ResponseEntity<Long> delete(@Parameter(description = "The ID of the department",
-                                           example = "1",
-                                           required = true) Long id);
+    ResponseEntity<Long> delete(@Parameter(description = "The ID of the department", example = "4", required = true) Long id);
 }

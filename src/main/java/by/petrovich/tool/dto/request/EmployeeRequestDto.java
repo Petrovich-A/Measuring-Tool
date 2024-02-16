@@ -29,9 +29,11 @@ public class EmployeeRequestDto {
     @Schema(description = "Email of the employee", example = "romanov@mail.com", maxLength = 50)
     private String email;
 
+    @Schema(description = "Timestamp when the employee was created")
     @JsonFormat(pattern = DATA_TIME_PATTERN)
     private LocalDateTime createdAt;
 
+    @Schema(description = "Timestamp when the employee was last updated")
     @JsonFormat(pattern = DATA_TIME_PATTERN)
     private LocalDateTime updatedAt;
 
