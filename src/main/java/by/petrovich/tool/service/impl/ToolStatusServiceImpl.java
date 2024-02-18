@@ -9,6 +9,7 @@ import by.petrovich.tool.repository.ToolStatusRepository;
 import by.petrovich.tool.service.ToolStatusService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ToolStatusServiceImpl implements ToolStatusService {
     public static final String TOOL_STATUS_NOT_FOUND = "Tool status not found with id: ";
     private final ToolStatusRepository toolStatusRepository;
@@ -36,12 +38,14 @@ public class ToolStatusServiceImpl implements ToolStatusService {
     }
 
     @Override
+    @Transactional
     public ToolStatusResponseDto create(ToolStatusRequestDto toolStatusRequestDto) {
         ToolStatus toolStatus = toolStatusRepository.save(toolStatusMapper.toEntity(toolStatusRequestDto));
         return toolStatusMapper.toResponseDto(toolStatus);
     }
 
     @Override
+    @Transactional
     public ToolStatusResponseDto update(Long id, ToolStatusRequestDto toolStatusRequestDto) {
         Optional<ToolStatus> optionalToolStatus = toolStatusRepository.findById(id);
         ToolStatus toolStatusUpdate = toolStatusMapper.toEntityUpdate(toolStatusRequestDto,
@@ -51,6 +55,7 @@ public class ToolStatusServiceImpl implements ToolStatusService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         if (toolStatusRepository.existsById(id)) {
             toolStatusRepository.deleteById(id);

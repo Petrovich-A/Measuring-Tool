@@ -9,6 +9,7 @@ import by.petrovich.tool.repository.EmployeeRepository;
 import by.petrovich.tool.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
@@ -34,12 +36,14 @@ public class EmployeeServiceImpl implements EmployeeService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     @Override
     public EmployeeResponseDto create(EmployeeRequestDto employeeRequestDto) {
         Employee employee = employeeRepository.save(employeeMapper.toEntity(employeeRequestDto));
         return employeeMapper.toResponseDto(employee);
     }
 
+    @Transactional
     @Override
     public EmployeeResponseDto update(Long id, EmployeeRequestDto employeeRequestDto) {
         Optional<Employee> optionalEmployee = employeeRepository.findById(id);
@@ -49,6 +53,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeMapper.toResponseDto(employeeSaved);
     }
 
+    @Transactional
     @Override
     public void delete(Long id) {
         if (employeeRepository.existsById(id)) {

@@ -9,6 +9,7 @@ import by.petrovich.tool.repository.ToolTypeRepository;
 import by.petrovich.tool.service.ToolTypeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class ToolTypeServiceImpl implements ToolTypeService {
     public static final String TOOL_TYPE_NOT_FOUND = "Tool type not found with id: ";
     private final ToolTypeRepository toolTypeRepository;
@@ -36,12 +38,14 @@ public class ToolTypeServiceImpl implements ToolTypeService {
     }
 
     @Override
+    @Transactional
     public ToolTypeResponseDto create(ToolTypeRequestDto toolTypeRequestDto) {
         ToolType toolType = toolTypeRepository.save(toolTypeMapper.toEntity(toolTypeRequestDto));
         return toolTypeMapper.toResponseDto(toolType);
     }
 
     @Override
+    @Transactional
     public ToolTypeResponseDto update(Long id, ToolTypeRequestDto toolTypeRequestDto) {
         Optional<ToolType> optionalToolType = toolTypeRepository.findById(id);
         ToolType toolTypeUpdate = toolTypeMapper.toEntityUpdate(toolTypeRequestDto,
@@ -51,6 +55,7 @@ public class ToolTypeServiceImpl implements ToolTypeService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         if (toolTypeRepository.existsById(id)) {
             toolTypeRepository.deleteById(id);

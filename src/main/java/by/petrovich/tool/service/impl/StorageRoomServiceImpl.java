@@ -9,14 +9,15 @@ import by.petrovich.tool.repository.StorageRoomRepository;
 import by.petrovich.tool.service.StorageRoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class StorageRoomServiceImpl implements StorageRoomService {
     public static final String STORAGE_ROOM_NOT_FOUND = "Storage room not found with id: ";
     private final StorageRoomRepository storageRoomRepository;
@@ -37,12 +38,14 @@ public class StorageRoomServiceImpl implements StorageRoomService {
     }
 
     @Override
+    @Transactional
     public StorageRoomResponseDto create(StorageRoomRequestDto storageRoomRequestDto) {
         StorageRoom storageRoom = storageRoomRepository.save(storageRoomMapper.toEntity(storageRoomRequestDto));
         return storageRoomMapper.toResponseDto(storageRoom);
     }
 
     @Override
+    @Transactional
     public StorageRoomResponseDto update(Long id, StorageRoomRequestDto storageRoomRequestDto) {
         StorageRoom storageRoom = storageRoomRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException(STORAGE_ROOM_NOT_FOUND + id));
@@ -52,6 +55,7 @@ public class StorageRoomServiceImpl implements StorageRoomService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         if (storageRoomRepository.existsById(id)) {
             storageRoomRepository.deleteById(id);

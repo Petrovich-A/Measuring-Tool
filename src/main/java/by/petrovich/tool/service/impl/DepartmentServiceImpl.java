@@ -9,6 +9,7 @@ import by.petrovich.tool.repository.DepartmentRepository;
 import by.petrovich.tool.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class DepartmentServiceImpl implements DepartmentService {
     public static final String DEPARTMENT_NOT_FOUND = "Department not found with id: ";
     private final DepartmentRepository departmentRepository;
@@ -36,12 +38,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    @Transactional
     public DepartmentResponseDto create(DepartmentRequestDto departmentRequestDto) {
         Department department = departmentRepository.save(departmentMapper.toEntity(departmentRequestDto));
         return departmentMapper.toResponseDto(department);
     }
 
     @Override
+    @Transactional
     public DepartmentResponseDto update(Long id, DepartmentRequestDto departmentRequestDto) {
         Optional<Department> optionalDepartment = departmentRepository.findById(id);
         Department departmentUpdate = departmentMapper.toEntityUpdate(departmentRequestDto,
@@ -51,6 +55,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         if (departmentRepository.existsById(id)) {
             departmentRepository.deleteById(id);
