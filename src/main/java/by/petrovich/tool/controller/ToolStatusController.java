@@ -88,7 +88,8 @@ public interface ToolStatusController {
             responseCode = "404",
             description = "Tool status not found"
     )
-    ResponseEntity<ToolStatusResponseDto> update(@Parameter(description = "ID of the tool status to update",
+    ResponseEntity<ToolStatusResponseDto> update(@Parameter(
+            description = "ID of the tool status to update",
             example = "4",
             required = true) Long id,
                                                  @RequestBody(

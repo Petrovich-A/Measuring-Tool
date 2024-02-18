@@ -1,11 +1,14 @@
 package by.petrovich.tool.controller;
 
+import by.petrovich.tool.dto.request.DepartmentRequestDto;
 import by.petrovich.tool.dto.request.StorageRoomRequestDto;
 import by.petrovich.tool.dto.response.StorageRoomResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
@@ -44,8 +47,8 @@ public interface StorageRoomController {
             description = "Storage room not found"
     )
     ResponseEntity<StorageRoomResponseDto> find(@Parameter(description = "The ID of the storage room",
-                                                           example = "1",
-                                                           required = true) Long id);
+            example = "1",
+            required = true) Long id);
 
     @Operation(
             tags = {"Storage Room Controller"},
@@ -58,8 +61,21 @@ public interface StorageRoomController {
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = StorageRoomResponseDto.class))
     )
-    ResponseEntity<StorageRoomResponseDto> create(@Parameter(description = "Storage room details",
-                                                             required = true) StorageRoomRequestDto storageRoomRequestDto);
+    ResponseEntity<StorageRoomResponseDto> create(@RequestBody(
+            description = "Storage room details",
+            required = true,
+            content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = DepartmentRequestDto.class),
+                    examples = @ExampleObject(
+                            value = "{" +
+                                    "\"departmentRequestDto\":{" +
+                                    "\"id\":\"2\"" +
+                                    "}" +
+                                    "}"
+                    )
+            )
+    ) StorageRoomRequestDto storageRoomRequestDto);
 
     @Operation(
             tags = {"Storage Room Controller"},
@@ -77,10 +93,23 @@ public interface StorageRoomController {
             description = "Storage room not found"
     )
     ResponseEntity<StorageRoomResponseDto> update(@Parameter(description = "The ID of the storage room",
-                                                             example = "1",
-                                                             required = true) Long id,
-                                                  @Parameter(description = "Updated storage room details",
-                                                             required = true) StorageRoomRequestDto storageRoomRequestDto);
+            example = "3",
+            required = true) Long id,
+                                                  @RequestBody(
+                                                          description = "Updated storage room details",
+                                                          required = true,
+                                                          content = @Content(
+                                                                  mediaType = "application/json",
+                                                                  schema = @Schema(implementation = DepartmentRequestDto.class),
+                                                                  examples = @ExampleObject(
+                                                                          value = "{" +
+                                                                                  "\"departmentRequestDto\":{" +
+                                                                                  "\"id\":\"1\"" +
+                                                                                  "}" +
+                                                                                  "}"
+                                                                  )
+                                                          )
+                                                  ) StorageRoomRequestDto storageRoomRequestDto);
 
     @Operation(
             tags = {"Storage Room Controller"},
@@ -96,6 +125,6 @@ public interface StorageRoomController {
             description = "Storage room not found"
     )
     ResponseEntity<Long> delete(@Parameter(description = "The ID of the storage room",
-                                           example = "1",
-                                           required = true) Long id);
+            example = "3",
+            required = true) Long id);
 }

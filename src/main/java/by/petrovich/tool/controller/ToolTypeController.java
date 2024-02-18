@@ -1,11 +1,14 @@
 package by.petrovich.tool.controller;
 
+import by.petrovich.tool.dto.request.DepartmentRequestDto;
 import by.petrovich.tool.dto.request.ToolTypeRequestDto;
 import by.petrovich.tool.dto.response.ToolTypeResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
@@ -44,8 +47,8 @@ public interface ToolTypeController {
             description = "Tool type not found"
     )
     ResponseEntity<ToolTypeResponseDto> find(@Parameter(description = "ID of the tool type to retrieve",
-                                                        example = "1",
-                                                        required = true) Long id);
+            example = "1",
+            required = true) Long id);
 
     @Operation(
             tags = {"Tool Type Controller"},
@@ -58,8 +61,17 @@ public interface ToolTypeController {
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = ToolTypeResponseDto.class))
     )
-    ResponseEntity<ToolTypeResponseDto> create(@Parameter(description = "Tool type details",
-                                                          required = true) ToolTypeRequestDto toolTypeRequestDto);
+    ResponseEntity<ToolTypeResponseDto> create(@RequestBody(
+            description = "Tool type details",
+            required = true,
+            content = @Content(
+                    mediaType = "application/json",
+                    schema = @Schema(implementation = DepartmentRequestDto.class),
+                    examples = @ExampleObject(
+                            value = "{  \"name\":\"thread tap\"}"
+                    )
+            )
+    ) ToolTypeRequestDto toolTypeRequestDto);
 
     @Operation(
             tags = {"Tool Type Controller"},
@@ -76,11 +88,21 @@ public interface ToolTypeController {
             responseCode = "404",
             description = "Tool type not found"
     )
-    ResponseEntity<ToolTypeResponseDto> update(@Parameter(description = "ID of the tool type to update",
-                                                          example = "1",
-                                                          required = true) Long id,
-                                               @Parameter(description = "Updated tool type details",
-                                                          required = true) ToolTypeRequestDto toolTypeRequestDto);
+    ResponseEntity<ToolTypeResponseDto> update(@Parameter(
+            description = "ID of the tool type to update",
+            example = "4",
+            required = true) Long id,
+                                               @RequestBody(
+                                                       description = "Updated tool type details",
+                                                       required = true,
+                                                       content = @Content(
+                                                               mediaType = "application/json",
+                                                               schema = @Schema(implementation = DepartmentRequestDto.class),
+                                                               examples = @ExampleObject(
+                                                                       value = "{  \"name\":\"countersink\"}"
+                                                               )
+                                                       )
+                                               ) ToolTypeRequestDto toolTypeRequestDto);
 
     @Operation(
             tags = {"Tool Type Controller"},
@@ -96,6 +118,6 @@ public interface ToolTypeController {
             description = "Tool type not found"
     )
     ResponseEntity<Long> delete(@Parameter(description = "ID of the tool type to delete",
-                                           example = "1",
-                                           required = true) Long id);
+            example = "4",
+            required = true) Long id);
 }
