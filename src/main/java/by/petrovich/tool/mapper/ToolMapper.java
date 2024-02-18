@@ -4,13 +4,22 @@
  */
 package by.petrovich.tool.mapper;
 
+import by.petrovich.tool.dto.request.StorageRoomRequestDto;
+import by.petrovich.tool.dto.request.ToolIssuanceRequestDto;
 import by.petrovich.tool.dto.request.ToolRequestDto;
+import by.petrovich.tool.dto.request.ToolStatusRequestDto;
+import by.petrovich.tool.dto.request.ToolTypeRequestDto;
 import by.petrovich.tool.dto.response.ToolResponseDto;
+import by.petrovich.tool.model.StorageRoom;
 import by.petrovich.tool.model.Tool;
+import by.petrovich.tool.model.ToolIssuance;
+import by.petrovich.tool.model.ToolStatus;
+import by.petrovich.tool.model.ToolType;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 
 /**
@@ -37,12 +46,12 @@ public interface ToolMapper {
      * @param toolRequestDto The ToolRequestDto to map.
      * @return The corresponding Tool entity.
      */
-    @Mapping(target = "createdAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
-    @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
     @Mapping(source = "toolTypeRequestDto.id", target = "toolType.id")
     @Mapping(source = "toolStatusRequestDto.id", target = "toolStatus.id")
     @Mapping(source = "toolIssuanceRequestDto.id", target = "toolIssuance.id")
     @Mapping(source = "storageRoomRequestDto.id", target = "storageRoom.id")
+    @Mapping(target = "createdAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
+    @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
     Tool toEntity(ToolRequestDto toolRequestDto);
 
     /**
@@ -52,12 +61,63 @@ public interface ToolMapper {
      * @param tool           The Tool entity to update.
      * @return The updated Tool entity.
      */
+    @Mapping(source = "toolTypeRequestDto", target = "toolType", qualifiedByName = "mapToolTypeDtoToToolType")
+    @Mapping(source = "toolStatusRequestDto", target = "toolStatus", qualifiedByName = "mapToolStatusDtoToToolStatus")
+    @Mapping(source = "toolIssuanceRequestDto", target = "toolIssuance", qualifiedByName = "mapToolIssuanceDtoToToolIssuance")
+    @Mapping(source = "storageRoomRequestDto", target = "storageRoom", qualifiedByName = "mapStorageRoomDtoToStorageRoom")
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
     @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
-    @Mapping(source = "toolTypeRequestDto", target = "toolType")
-    @Mapping(source = "toolStatusRequestDto", target = "toolStatus")
-    @Mapping(source = "toolIssuanceRequestDto", target = "toolIssuance")
-    @Mapping(source = "storageRoomRequestDto", target = "storageRoom")
     Tool toEntityUpdate(ToolRequestDto toolRequestDto, @MappingTarget Tool tool);
+
+    @Named("mapToolTypeDtoToToolType")
+    default ToolType mapToolTypeDtoToToolType(ToolTypeRequestDto toolTypeRequestDto) {
+        ToolType toolType = new ToolType();
+        toolType.setId(toolTypeRequestDto.getId());
+        return toolType;
+    }
+
+    /**
+     * Maps a ToolStatusRequestDto to a ToolStatus entity.
+     *
+     * @param toolStatusRequestDto The ToolStatusRequestDto containing information.
+     * @return The corresponding ToolStatus entity.
+     */
+    @Named("mapToolStatusDtoToToolStatus")
+    default ToolStatus mapToolStatusDtoToToolStatus(ToolStatusRequestDto toolStatusRequestDto) {
+        ToolStatus toolStatus = new ToolStatus();
+        toolStatus.setId(toolStatusRequestDto.getId());
+        return toolStatus;
+    }
+
+    /**
+     * Maps a ToolIssuanceRequestDto to a ToolIssuance entity.
+     *
+     * @param toolIssuanceRequestDto The ToolIssuanceRequestDto containing information.
+     * @return The corresponding ToolIssuance entity.
+     */
+    @Named("mapToolIssuanceDtoToToolIssuance")
+    default ToolIssuance mapToolIssuanceDtoToToolIssuance(ToolIssuanceRequestDto toolIssuanceRequestDto) {
+        ToolIssuance toolIssuance = new ToolIssuance();
+        if (toolIssuanceRequestDto == null) {
+            return toolIssuance;
+        } else {
+            toolIssuance.setId(toolIssuanceRequestDto.getId());
+        }
+        return toolIssuance;
+    }
+
+    /**
+     * Maps a StorageRoomRequestDto to a StorageRoom entity.
+     *
+     * @param storageRoomRequestDto The StorageRoomRequestDto containing information.
+     * @return The corresponding StorageRoom entity.
+     */
+    @Named("mapStorageRoomDtoToStorageRoom")
+    default StorageRoom mapStorageRoomDtoToStorageRoom(StorageRoomRequestDto storageRoomRequestDto) {
+        StorageRoom storageRoom = new StorageRoom();
+        storageRoom.setId(storageRoomRequestDto.getId());
+        return storageRoom;
+    }
+
 }

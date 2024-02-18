@@ -4,13 +4,16 @@
  */
 package by.petrovich.tool.mapper;
 
+import by.petrovich.tool.dto.request.DepartmentRequestDto;
 import by.petrovich.tool.dto.request.StorageRoomRequestDto;
 import by.petrovich.tool.dto.response.StorageRoomResponseDto;
+import by.petrovich.tool.model.Department;
 import by.petrovich.tool.model.StorageRoom;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingConstants;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Named;
 import org.mapstruct.ReportingPolicy;
 
 /**
@@ -45,10 +48,23 @@ public interface StorageRoomMapper {
      * Maps a StorageRoomRequestDto to update an existing StorageRoom entity.
      *
      * @param storageRoomRequestDto The StorageRoomRequestDto containing updated information.
-     * @param storageRoom The StorageRoom entity to update.
+     * @param storageRoom           The StorageRoom entity to update.
      * @return The updated StorageRoom entity.
      */
     @Mapping(target = "id", ignore = true)
-    @Mapping(source = "departmentRequestDto", target = "department")
+    @Mapping(source = "departmentRequestDto", target = "department", qualifiedByName = "mapDepartmentRequestDtoToDepartment")
     StorageRoom toEntityUpdate(StorageRoomRequestDto storageRoomRequestDto, @MappingTarget StorageRoom storageRoom);
+
+    /**
+     * Maps a DepartmentRequestDto to update an existing Department entity.
+     *
+     * @param departmentRequestDto The DepartmentRequestDto containing updated information.
+     * @return The updated Department entity.
+     */
+    @Named("mapDepartmentRequestDtoToDepartment")
+    default Department mapDepartmentRequestDtoToDepartment(DepartmentRequestDto departmentRequestDto) {
+        Department department = new Department();
+        department.setId(departmentRequestDto.getId());
+        return department;
+    }
 }
