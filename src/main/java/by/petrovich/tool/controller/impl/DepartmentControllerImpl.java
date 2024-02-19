@@ -19,17 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.List;
 
-import static by.petrovich.tool.controller.impl.DepartmentControllerImpl.DEPARTMENT_BASE_URL;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping(DEPARTMENT_BASE_URL)
+@RequestMapping("/api/v1/departments")
 @RequiredArgsConstructor
 public class DepartmentControllerImpl implements DepartmentController {
-    public static final String DEPARTMENT_BASE_URL = "/api/v1/departments";
-    public static final String ID = "/{id}";
-    public static final String SLASH = "/";
 
     private final DepartmentServiceImpl departmentService;
 
@@ -41,13 +37,13 @@ public class DepartmentControllerImpl implements DepartmentController {
 
     @Override
 
-    @GetMapping(ID)
+    @GetMapping("/{id}")
     public ResponseEntity<DepartmentResponseDto> find(@PathVariable("id") Long id) {
         return ResponseEntity.status(OK).body(departmentService.find(id));
     }
 
     @Override
-    @PostMapping(SLASH)
+    @PostMapping("/")
     @ResponseStatus(CREATED)
     public ResponseEntity<DepartmentResponseDto> create(@Valid @RequestBody DepartmentRequestDto departmentRequestDto) {
         return ResponseEntity.status(CREATED).body(departmentService.create(departmentRequestDto));
@@ -55,14 +51,14 @@ public class DepartmentControllerImpl implements DepartmentController {
     }
 
     @Override
-    @PutMapping(ID)
+    @PutMapping("/{id}")
     public ResponseEntity<DepartmentResponseDto> update(@PathVariable("id") Long id,
                                                         @Valid @RequestBody DepartmentRequestDto departmentRequestDto) {
         return ResponseEntity.status(OK).body(departmentService.update(id, departmentRequestDto));
     }
 
     @Override
-    @DeleteMapping(ID)
+    @DeleteMapping("/{id}")
     public ResponseEntity<Long> delete(@PathVariable Long id) {
         departmentService.delete(id);
         return ResponseEntity.status(OK).body(id);

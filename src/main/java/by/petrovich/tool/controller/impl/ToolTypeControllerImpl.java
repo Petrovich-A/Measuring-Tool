@@ -22,12 +22,9 @@ import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping(ToolTypeControllerImpl.TOOL_TYPE_BASE_URL)
+@RequestMapping("/api/v1/tool-types")
 @RequiredArgsConstructor
 public class ToolTypeControllerImpl implements ToolTypeController {
-    public static final String TOOL_TYPE_BASE_URL = "/api/v1/tool-types";
-    public static final String ID = "/{id}";
-    public static final String SLASH = "/";
 
     private final ToolTypeServiceImpl toolTypeService;
 
@@ -38,26 +35,26 @@ public class ToolTypeControllerImpl implements ToolTypeController {
     }
 
     @Override
-    @GetMapping(ID)
+    @GetMapping("/{id}")
     public ResponseEntity<ToolTypeResponseDto> find(@PathVariable("id") Long id) {
         return ResponseEntity.status(OK).body(toolTypeService.find(id));
     }
 
     @Override
-    @PostMapping(SLASH)
+    @PostMapping("/")
     public ResponseEntity<ToolTypeResponseDto> create(@Valid @RequestBody ToolTypeRequestDto toolTypeRequestDto) {
         return ResponseEntity.status(CREATED).body(toolTypeService.create(toolTypeRequestDto));
     }
 
     @Override
-    @PutMapping(ID)
+    @PutMapping("/{id}")
     public ResponseEntity<ToolTypeResponseDto> update(@PathVariable("id") Long id,
                                                       @Valid @RequestBody ToolTypeRequestDto toolTypeRequestDto) {
         return ResponseEntity.status(OK).body(toolTypeService.update(id, toolTypeRequestDto));
     }
 
     @Override
-    @DeleteMapping(ID)
+    @DeleteMapping("/{id}")
     public ResponseEntity<Long> delete(@PathVariable Long id) {
         toolTypeService.delete(id);
         return ResponseEntity.status(OK).body(id);

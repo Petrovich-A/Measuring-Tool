@@ -22,42 +22,39 @@ import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping(StorageRoomControllerImpl.STORAGE_ROOM_BASE_URL)
+@RequestMapping("/api/v1/storage-rooms")
 @RequiredArgsConstructor
 public class StorageRoomControllerImpl implements StorageRoomController {
-    public static final String STORAGE_ROOM_BASE_URL = "/api/v1/storage-rooms";
-    public static final String ID = "/{id}";
-    public static final String SLASH = "/";
 
     private final StorageRoomServiceImpl storageRoomService;
 
     @Override
-        @GetMapping
+    @GetMapping
     public ResponseEntity<List<StorageRoomResponseDto>> findAll() {
         return ResponseEntity.status(OK).body(storageRoomService.findAll());
     }
 
     @Override
-        @GetMapping(ID)
+    @GetMapping("/{id}")
     public ResponseEntity<StorageRoomResponseDto> find(@PathVariable("id") Long id) {
         return ResponseEntity.status(OK).body(storageRoomService.find(id));
     }
 
     @Override
-       @PostMapping(SLASH)
+    @PostMapping("/")
     public ResponseEntity<StorageRoomResponseDto> create(@Valid @RequestBody StorageRoomRequestDto storageRoomRequestDto) {
         return ResponseEntity.status(CREATED).body(storageRoomService.create(storageRoomRequestDto));
     }
 
     @Override
-        @PutMapping(ID)
+    @PutMapping("/{id}")
     public ResponseEntity<StorageRoomResponseDto> update(@PathVariable("id") Long id,
                                                          @Valid @RequestBody StorageRoomRequestDto storageRoomRequestDto) {
         return ResponseEntity.status(OK).body(storageRoomService.update(id, storageRoomRequestDto));
     }
 
     @Override
-        @DeleteMapping(ID)
+    @DeleteMapping("/{id}")
     public ResponseEntity<Long> delete(@PathVariable Long id) {
         storageRoomService.delete(id);
         return ResponseEntity.status(OK).body(id);

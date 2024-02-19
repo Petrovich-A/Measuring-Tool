@@ -22,17 +22,13 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 import java.util.List;
 
-import static by.petrovich.tool.controller.impl.ToolStatusControllerImpl.TOOL_STATUS_BASE_URL;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping(TOOL_STATUS_BASE_URL)
+@RequestMapping("/api/v1/tool-statuses")
 @RequiredArgsConstructor
 public class ToolStatusControllerImpl implements ToolStatusController {
-    public static final String TOOL_STATUS_BASE_URL = "/api/v1/tool-statuses";
-    public static final String ID = "/{id}";
-    public static final String SLASH = "/";
 
     private final ToolStatusServiceImpl toolStatusService;
 
@@ -43,7 +39,7 @@ public class ToolStatusControllerImpl implements ToolStatusController {
     }
 
     @Override
-    @GetMapping(ID)
+    @GetMapping("/{id}")
     public ResponseEntity<ToolStatusResponseDto> find(@PathVariable("id") Long id) {
         return ResponseEntity.status(OK).body(toolStatusService.find(id));
     }
@@ -60,20 +56,20 @@ public class ToolStatusControllerImpl implements ToolStatusController {
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = ToolStatusResponseDto.class))
     )
-    @PostMapping(SLASH)
+    @PostMapping("/")
     public ResponseEntity<ToolStatusResponseDto> create(@Valid @RequestBody ToolStatusRequestDto toolStatusRequestDto) {
         return ResponseEntity.status(CREATED).body(toolStatusService.create(toolStatusRequestDto));
     }
 
     @Override
-    @PutMapping(ID)
+    @PutMapping("/{id}")
     public ResponseEntity<ToolStatusResponseDto> update(@PathVariable("id") Long id,
                                                         @Valid @RequestBody ToolStatusRequestDto toolStatusRequestDto) {
         return ResponseEntity.status(OK).body(toolStatusService.update(id, toolStatusRequestDto));
     }
 
     @Override
-    @DeleteMapping(ID)
+    @DeleteMapping("/{id}")
     public ResponseEntity<Long> delete(@PathVariable Long id) {
         toolStatusService.delete(id);
         return ResponseEntity.status(OK).body(id);

@@ -22,12 +22,9 @@ import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping(EmployeeControllerImpl.DEPARTMENT_BASE_URL)
+@RequestMapping("/api/v1/employees")
 @RequiredArgsConstructor
 public class EmployeeControllerImpl implements EmployeeController {
-    public static final String DEPARTMENT_BASE_URL = "/api/v1/employees";
-    public static final String ID = "/{id}";
-    public static final String SLASH = "/";
 
     private final EmployeeServiceImpl employeeService;
 
@@ -38,26 +35,26 @@ public class EmployeeControllerImpl implements EmployeeController {
     }
 
     @Override
-    @GetMapping(ID)
+    @GetMapping("/{id}")
     public ResponseEntity<EmployeeResponseDto> find(@PathVariable("id") Long id) {
         return ResponseEntity.status(OK).body(employeeService.find(id));
     }
 
     @Override
-    @PostMapping(SLASH)
+    @PostMapping("/")
     public ResponseEntity<EmployeeResponseDto> create(@Valid @RequestBody EmployeeRequestDto employeeRequestDto) {
         return ResponseEntity.status(CREATED).body(employeeService.create(employeeRequestDto));
     }
 
     @Override
-    @PutMapping(ID)
+    @PutMapping("/{id}")
     public ResponseEntity<EmployeeResponseDto> update(@PathVariable("id") Long id,
                                                       @Valid @RequestBody EmployeeRequestDto employeeRequestDto) {
         return ResponseEntity.status(OK).body(employeeService.update(id, employeeRequestDto));
     }
 
     @Override
-    @DeleteMapping(ID)
+    @DeleteMapping("/{id}")
     public ResponseEntity<Long> delete(@PathVariable Long id) {
         employeeService.delete(id);
         return ResponseEntity.status(OK).body(id);

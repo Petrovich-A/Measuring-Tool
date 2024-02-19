@@ -26,12 +26,9 @@ import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping(EmployeePositionControllerImpl.EMPLOYEE_POSITION_BASE_URL)
+@RequestMapping("/api/v1/positions")
 @RequiredArgsConstructor
 public class EmployeePositionControllerImpl implements EmployeePositionController {
-    public static final String EMPLOYEE_POSITION_BASE_URL = "/api/v1/positions";
-    public static final String ID = "/{id}";
-    public static final String SLASH = "/";
 
     private final EmployeePositionServiceImpl employeePositionServiceImpl;
 
@@ -66,7 +63,7 @@ public class EmployeePositionControllerImpl implements EmployeePositionControlle
             responseCode = "404",
             description = "Employee position not found"
     )
-    @GetMapping(ID)
+    @GetMapping("/{id}")
     public ResponseEntity<EmployeePositionResponseDto> find(@PathVariable("id") Long id) {
         return ResponseEntity.status(OK).body(employeePositionServiceImpl.find(id));
     }
@@ -82,7 +79,7 @@ public class EmployeePositionControllerImpl implements EmployeePositionControlle
             content = @Content(mediaType = "application/json",
                     schema = @Schema(implementation = EmployeePositionResponseDto.class))
     )
-    @PostMapping(SLASH)
+    @PostMapping("/")
     public ResponseEntity<EmployeePositionResponseDto> create(
             @Valid @RequestBody EmployeePositionRequestDto employeePositionRequestDto) {
         return ResponseEntity.status(CREATED).body(employeePositionServiceImpl.create(employeePositionRequestDto));
@@ -103,7 +100,7 @@ public class EmployeePositionControllerImpl implements EmployeePositionControlle
             responseCode = "404",
             description = "Employee position not found"
     )
-    @PutMapping(ID)
+    @PutMapping("/{id}")
     public ResponseEntity<EmployeePositionResponseDto> update(@PathVariable("id") Long id,
                                                               @Valid @RequestBody EmployeePositionRequestDto employeePositionRequestDto) {
         return ResponseEntity.status(OK).body(employeePositionServiceImpl.update(id, employeePositionRequestDto));
@@ -122,7 +119,7 @@ public class EmployeePositionControllerImpl implements EmployeePositionControlle
             responseCode = "404",
             description = "Employee position not found"
     )
-    @DeleteMapping(ID)
+    @DeleteMapping("/{id}")
     public ResponseEntity<Long> delete(@PathVariable("id") Long id) {
         employeePositionServiceImpl.delete(id);
         return ResponseEntity.status(OK).body(id);
