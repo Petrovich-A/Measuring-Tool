@@ -7,6 +7,8 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+import static by.petrovich.tool.util.Pattern.DATA_TIME_PATTERN;
+
 @Data
 @Builder
 public class DepartmentResponseDto {
@@ -22,12 +24,12 @@ public class DepartmentResponseDto {
 
     @Schema(description = "Date and time when the department was created",
             example = "2023-02-14T10:00:00")
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @JsonFormat(pattern = DATA_TIME_PATTERN)
     private LocalDateTime createdAt;
 
     @Schema(description = "Date and time when the department was last updated",
             example = "2023-02-14T11:30:00")
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    @JsonFormat(pattern = DATA_TIME_PATTERN)
     private LocalDateTime updatedAt;
 
 }

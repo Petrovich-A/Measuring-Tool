@@ -33,16 +33,22 @@ public interface DepartmentMapper {
 
     /**
      * Maps a DepartmentRequestDto to a Department entity.
+     * Ignores assigning a value to the id field.
+     * Sets the createdAt field with the current LocalDateTime expression.
+     * Sets the updatedAt field with the current LocalDateTime expression.
      *
      * @param departmentRequestDto The DepartmentRequestDto to map.
      * @return The corresponding Department entity.
      */
-    @Mapping(target = "createdAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
-    @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
+    @Mapping(target = "createdAt", expression = "java(java.time.LocalDateTime.now())")
+    @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now())")
     Department toEntity(DepartmentRequestDto departmentRequestDto);
 
     /**
      * Maps a DepartmentRequestDto to update an existing Department entity.
+     * Ignores assigning a value to the id field.
+     * Ignores assigning a value to the createdAt field.
+     * Sets the updatedAt field with the current LocalDateTime expression.
      *
      * @param departmentRequestDto The DepartmentRequestDto containing updated information.
      * @param department The Department entity to update.
@@ -50,6 +56,6 @@ public interface DepartmentMapper {
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
+    @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now())")
     Department toEntityUpdate(DepartmentRequestDto departmentRequestDto, @MappingTarget Department department);
 }

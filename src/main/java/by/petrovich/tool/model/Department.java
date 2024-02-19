@@ -5,7 +5,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.CascadeType;
@@ -20,7 +22,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.Set;
+import java.util.List;
 
 import static by.petrovich.tool.util.Pattern.DATA_TIME_PATTERN;
 
@@ -29,6 +31,8 @@ import static by.petrovich.tool.util.Pattern.DATA_TIME_PATTERN;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@EqualsAndHashCode(exclude = {"employees", "storageRoom"})
+@ToString(exclude = {"employees", "storageRoom"})
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "department_seq")
@@ -44,19 +48,17 @@ public class Department {
     @Size(min = 3, max = 4)
     private String code;
 
-    @JsonFormat(pattern = DATA_TIME_PATTERN)
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @JsonFormat(pattern = DATA_TIME_PATTERN)
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
     @JsonIgnore
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Employee> employees;
+    private List<Employee> employees;
 
     @JsonIgnore
     @OneToOne(mappedBy = "department", cascade = CascadeType.MERGE)

@@ -1,13 +1,10 @@
 package by.petrovich.tool.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-
-import static by.petrovich.tool.util.Pattern.DATA_TIME_PATTERN;
 
 @Data
 @Builder
@@ -24,10 +21,8 @@ public class DepartmentRequestDto {
     private String code;
 
     @Schema(description = "Timestamp when the department was created")
-    @JsonFormat(pattern = DATA_TIME_PATTERN)
     private LocalDateTime createdAt;
 
     @Schema(description = "Timestamp when the department was last updated")
-    @JsonFormat(pattern = DATA_TIME_PATTERN)
     private LocalDateTime updatedAt;
 }
