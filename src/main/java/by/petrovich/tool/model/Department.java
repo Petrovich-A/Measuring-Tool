@@ -1,6 +1,5 @@
 package by.petrovich.tool.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,15 +23,13 @@ import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static by.petrovich.tool.util.Pattern.DATA_TIME_PATTERN;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @EqualsAndHashCode(exclude = {"employees", "storageRoom"})
 @ToString(exclude = {"employees", "storageRoom"})
+@Entity
 public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "department_seq")

@@ -1,11 +1,12 @@
 package by.petrovich.tool.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.CascadeType;
@@ -20,14 +21,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import java.time.LocalDateTime;
-import java.util.Set;
-
-import static by.petrovich.tool.util.Pattern.DATA_TIME_PATTERN;
+import java.util.List;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"tools", "distributingByEmployee", "receivingByEmployee", "storageRoom"})
+@ToString(exclude = {"tools", "distributingByEmployee", "receivingByEmployee", "storageRoom"})
 @Entity
 public class ToolIssuance {
     @Id
@@ -36,19 +37,17 @@ public class ToolIssuance {
     @Column(columnDefinition = "bigint")
     private Long id;
 
-    @JsonFormat(pattern = DATA_TIME_PATTERN)
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @JsonFormat(pattern = DATA_TIME_PATTERN)
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
     @JsonIgnore
     @OneToMany(mappedBy = "toolIssuance", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Tool> tools;
+    private List<Tool> tools;
 
     @ManyToOne
     @JoinColumn(name = "distributing_by_employee_id", nullable = false, columnDefinition = "bigint")

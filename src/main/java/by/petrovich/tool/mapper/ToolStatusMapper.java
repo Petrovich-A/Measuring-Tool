@@ -33,24 +33,29 @@ public interface ToolStatusMapper {
 
     /**
      * Maps a ToolStatusRequestDto to a ToolStatus entity.
+     * Sets the 'start' field to the current LocalDateTime.
+     * Sets the 'finish' field to the current LocalDateTime.
      *
      * @param toolStatusRequestDto The ToolStatusRequestDto to map.
      * @return The corresponding ToolStatus entity.
      */
-    @Mapping(target = "start", expression = "java(java.time.LocalDateTime.now().withNano(0))")
-    @Mapping(target = "finish", expression = "java(java.time.LocalDateTime.now().withNano(0))")
+    @Mapping(target = "start", expression = "java(java.time.LocalDateTime.now())")
+    @Mapping(target = "finish", expression = "java(java.time.LocalDateTime.now())")
     ToolStatus toEntity(ToolStatusRequestDto toolStatusRequestDto);
 
 
     /**
      * Maps a ToolStatusRequestDto to update an existing ToolStatus entity.
+     * Ignores assigning a value to the 'id' field.
+     * Ignores assigning a value to the 'start' field.
+     * Sets the 'finish' field to the current LocalDateTime.
      *
      * @param toolStatusRequestDto The ToolStatusRequestDto containing updated information.
-     * @param toolStatus The ToolStatus entity to update.
+     * @param toolStatus            The ToolStatus entity to update.
      * @return The updated ToolStatus entity.
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "start", ignore = true)
-    @Mapping(target = "finish", expression = "java(java.time.LocalDateTime.now().withNano(0))")
+    @Mapping(target = "finish", expression = "java(java.time.LocalDateTime.now())")
     ToolStatus toEntityUpdate(ToolStatusRequestDto toolStatusRequestDto, @MappingTarget ToolStatus toolStatus);
 }

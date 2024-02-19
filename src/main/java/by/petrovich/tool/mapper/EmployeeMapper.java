@@ -40,18 +40,27 @@ public interface EmployeeMapper {
 
     /**
      * Maps an EmployeeRequestDto to an Employee entity.
+     * Sets the createdAt field with the current LocalDateTime expression.
+     * Sets the updatedAt field with the current LocalDateTime expression.
+     * Maps the employeePositionRequestDto.id to employeePosition.id.
+     * Maps the departmentRequestDto.id to department.id.
      *
      * @param employeeRequestDto The EmployeeRequestDto to map.
      * @return The corresponding Employee entity.
      */
-    @Mapping(target = "createdAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
-    @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
+    @Mapping(target = "createdAt", expression = "java(java.time.LocalDateTime.now())")
+    @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(source = "employeePositionRequestDto.id", target = "employeePosition.id")
     @Mapping(source = "departmentRequestDto.id", target = "department.id")
     Employee toEntity(EmployeeRequestDto employeeRequestDto);
 
     /**
      * Maps an EmployeeRequestDto to update an existing Employee entity.
+     * Ignores assigning a value to the id field.
+     * Ignores assigning a value to the createdAt field.
+     * Sets the updatedAt field with the current LocalDateTime expression.
+     * Maps the departmentRequestDto to the department entity using mapDepartmentDtoToDepartment.
+     * Maps the employeePositionRequestDto to the employeePosition entity using mapEmployeePositionDtoToEmployeePosition.
      *
      * @param employeeRequestDto The EmployeeRequestDto containing updated information.
      * @param employee           The Employee entity to update.
@@ -59,11 +68,10 @@ public interface EmployeeMapper {
      */
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
+    @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now())")
     @Mapping(target = "department", source = "departmentRequestDto", qualifiedByName = "mapDepartmentDtoToDepartment")
     @Mapping(target = "employeePosition", source = "employeePositionRequestDto", qualifiedByName = "mapEmployeePositionDtoToEmployeePosition")
     Employee toEntityUpdate(EmployeeRequestDto employeeRequestDto, @MappingTarget Employee employee);
-
 
     /**
      * Maps a DepartmentRequestDto to a Department entity.

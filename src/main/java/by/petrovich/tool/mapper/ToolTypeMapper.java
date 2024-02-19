@@ -42,9 +42,10 @@ public interface ToolTypeMapper {
 
     /**
      * Maps a ToolTypeRequestDto to update an existing ToolType entity.
+     * Ignores assigning a value to the 'id' field.
      *
      * @param toolTypeRequestDto The ToolTypeRequestDto containing updated information.
-     * @param toolType The ToolType entity to update.
+     * @param toolType           The ToolType entity to update.
      * @return The updated ToolType entity.
      */
     @Mapping(target = "id", ignore = true)

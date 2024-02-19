@@ -42,6 +42,8 @@ public interface ToolMapper {
 
     /**
      * Maps a ToolRequestDto to a Tool entity.
+     * Sets the corresponding IDs from the DTOs to the entity.
+     * Sets the createdAt and updatedAt fields to the current LocalDateTime.
      *
      * @param toolRequestDto The ToolRequestDto to map.
      * @return The corresponding Tool entity.
@@ -50,12 +52,15 @@ public interface ToolMapper {
     @Mapping(source = "toolStatusRequestDto.id", target = "toolStatus.id")
     @Mapping(source = "toolIssuanceRequestDto.id", target = "toolIssuance.id")
     @Mapping(source = "storageRoomRequestDto.id", target = "storageRoom.id")
-    @Mapping(target = "createdAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
-    @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
+    @Mapping(target = "createdAt", expression = "java(java.time.LocalDateTime.now())")
+    @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now())")
     Tool toEntity(ToolRequestDto toolRequestDto);
 
     /**
      * Maps a ToolRequestDto to update an existing Tool entity.
+     * Ignores assigning a value to the id field.
+     * Sets the corresponding entity fields with the updated information.
+     * Sets the updatedAt field to the current LocalDateTime.
      *
      * @param toolRequestDto The ToolRequestDto containing updated information.
      * @param tool           The Tool entity to update.
@@ -67,9 +72,15 @@ public interface ToolMapper {
     @Mapping(source = "storageRoomRequestDto", target = "storageRoom", qualifiedByName = "mapStorageRoomDtoToStorageRoom")
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
+    @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now())")
     Tool toEntityUpdate(ToolRequestDto toolRequestDto, @MappingTarget Tool tool);
 
+    /**
+     * Maps a ToolTypeRequestDto to a ToolType entity.
+     *
+     * @param toolTypeRequestDto The ToolTypeRequestDto containing information.
+     * @return The corresponding ToolType entity.
+     */
     @Named("mapToolTypeDtoToToolType")
     default ToolType mapToolTypeDtoToToolType(ToolTypeRequestDto toolTypeRequestDto) {
         ToolType toolType = new ToolType();

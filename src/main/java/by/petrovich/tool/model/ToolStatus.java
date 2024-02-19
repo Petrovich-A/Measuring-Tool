@@ -1,11 +1,12 @@
 package by.petrovich.tool.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.CascadeType;
@@ -19,14 +20,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.Set;
-
-import static by.petrovich.tool.util.Pattern.DATA_TIME_PATTERN;
+import java.util.List;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"tools"})
+@ToString(exclude = {"tools"})
 @Entity
 public class ToolStatus {
     @Id
@@ -39,18 +40,16 @@ public class ToolStatus {
     @Column(length = 20, nullable = false, unique = true)
     private String name;
 
-    @JsonFormat(pattern = DATA_TIME_PATTERN)
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime start;
 
-    @JsonFormat(pattern = DATA_TIME_PATTERN)
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime finish;
 
     @JsonIgnore
     @OneToMany(mappedBy = "toolStatus", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Tool> tools;
+    private List<Tool> tools;
 
 }

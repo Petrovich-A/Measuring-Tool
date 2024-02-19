@@ -26,16 +26,21 @@ public interface EmployeePositionMapper {
 
     /**
      * Maps an EmployeePositionRequestDto to an EmployeePosition entity.
+     * Sets the createdAt field with the current LocalDateTime expression.
+     * Sets the updatedAt field with the current LocalDateTime expression.
      *
      * @param employeePositionRequestDto The EmployeePositionRequestDto to map.
      * @return The corresponding EmployeePosition entity.
      */
-    @Mapping(target = "createdAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
-    @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
+    @Mapping(target = "createdAt", expression = "java(java.time.LocalDateTime.now())")
+    @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now())")
     EmployeePosition toEntity(EmployeePositionRequestDto employeePositionRequestDto);
 
     /**
      * Maps an EmployeePositionRequestDto to update an existing EmployeePosition entity.
+     * Ignores null values during mapping.
+     * Ignores assigning a value to the createdAt field.
+     * Sets the updatedAt field with the current LocalDateTime expression.
      *
      * @param employeePositionRequestDto The EmployeePositionRequestDto containing updated information.
      * @param employeePosition The EmployeePosition entity to update.
@@ -43,7 +48,7 @@ public interface EmployeePositionMapper {
      */
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
     @Mapping(target = "createdAt", ignore = true)
-    @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now().withNano(0))")
+    @Mapping(target = "updatedAt", expression = "java(java.time.LocalDateTime.now())")
     EmployeePosition toEntityUpdate(EmployeePositionRequestDto employeePositionRequestDto, @MappingTarget EmployeePosition employeePosition);
 
     /**

@@ -36,6 +36,7 @@ public interface StorageRoomMapper {
 
     /**
      * Maps a StorageRoomRequestDto to a StorageRoom entity.
+     * Sets the department id from the corresponding DepartmentRequestDto.
      *
      * @param storageRoomRequestDto The StorageRoomRequestDto to map.
      * @return The corresponding StorageRoom entity.
@@ -46,6 +47,8 @@ public interface StorageRoomMapper {
 
     /**
      * Maps a StorageRoomRequestDto to update an existing StorageRoom entity.
+     * Ignores assigning a value to the id field.
+     * Maps the departmentRequestDto to the department using a qualified mapper method.
      *
      * @param storageRoomRequestDto The StorageRoomRequestDto containing updated information.
      * @param storageRoom           The StorageRoom entity to update.
@@ -56,10 +59,10 @@ public interface StorageRoomMapper {
     StorageRoom toEntityUpdate(StorageRoomRequestDto storageRoomRequestDto, @MappingTarget StorageRoom storageRoom);
 
     /**
-     * Maps a DepartmentRequestDto to update an existing Department entity.
+     * Maps a DepartmentRequestDto to a Department entity.
      *
-     * @param departmentRequestDto The DepartmentRequestDto containing updated information.
-     * @return The updated Department entity.
+     * @param departmentRequestDto The DepartmentRequestDto to map.
+     * @return The corresponding Department entity.
      */
     @Named("mapDepartmentRequestDtoToDepartment")
     default Department mapDepartmentRequestDtoToDepartment(DepartmentRequestDto departmentRequestDto) {

@@ -1,13 +1,13 @@
 package by.petrovich.tool.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -20,14 +20,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.Set;
-
-import static by.petrovich.tool.util.Pattern.DATA_TIME_PATTERN;
+import java.util.List;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = "employees")
+@ToString(exclude = "employees")
 @Entity
 public class EmployeePosition {
     @Id
@@ -40,21 +40,17 @@ public class EmployeePosition {
     @Column(unique = true, length = 20)
     private String position;
 
-    @JsonFormat(pattern = DATA_TIME_PATTERN)
     @Column(updatable = false, nullable = false)
     @CreationTimestamp
-    @DateTimeFormat(style = DATA_TIME_PATTERN)
     private LocalDateTime createdAt;
 
-    @JsonFormat(pattern = DATA_TIME_PATTERN)
     @Column(nullable = false)
     @CreationTimestamp
-    @DateTimeFormat(style = DATA_TIME_PATTERN)
     private LocalDateTime updatedAt;
 
     @JsonIgnore
     @OneToMany(mappedBy = "employeePosition", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    private Set<Employee> employees;
+    private List<Employee> employees;
 
 
 }

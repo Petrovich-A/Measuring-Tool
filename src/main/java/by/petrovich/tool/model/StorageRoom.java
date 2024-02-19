@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -17,12 +19,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"department", "toolIssuances", "tools"})
+@ToString(exclude = {"department", "toolIssuances", "tools"})
 @Entity
 public class StorageRoom {
     @Id
@@ -37,10 +41,10 @@ public class StorageRoom {
 
     @JsonIgnore
     @OneToMany(mappedBy = "storageRoom", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<ToolIssuance> toolIssuances;
+    private List<ToolIssuance> toolIssuances;
 
     @JsonIgnore
     @OneToMany(mappedBy = "storageRoom", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Tool> tools;
+    private List<Tool> tools;
 
 }

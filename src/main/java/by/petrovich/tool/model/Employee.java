@@ -1,11 +1,12 @@
 package by.petrovich.tool.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.CascadeType;
@@ -22,14 +23,14 @@ import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.Set;
-
-import static by.petrovich.tool.util.Pattern.DATA_TIME_PATTERN;
+import java.util.List;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"employeePosition", "department", "receivingToolIssuances", "distributingToolIssuances"})
+@ToString(exclude = {"employeePosition", "department", "receivingToolIssuances", "distributingToolIssuances"})
 @Entity
 public class Employee {
     @Id
@@ -58,12 +59,10 @@ public class Employee {
     @Column(length = 50, nullable = false)
     private String email;
 
-    @JsonFormat(pattern = DATA_TIME_PATTERN)
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @JsonFormat(pattern = DATA_TIME_PATTERN)
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime updatedAt;
@@ -78,10 +77,10 @@ public class Employee {
 
     @JsonIgnore
     @OneToMany(mappedBy = "receivingByEmployee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<ToolIssuance> receivingToolIssuances;
+    private List<ToolIssuance> receivingToolIssuances;
 
     @JsonIgnore
     @OneToMany(mappedBy = "distributingByEmployee", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<ToolIssuance> distributingToolIssuances;
+    private List<ToolIssuance> distributingToolIssuances;
 
 }

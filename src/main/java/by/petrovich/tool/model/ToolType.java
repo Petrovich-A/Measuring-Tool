@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,12 +18,14 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Size;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = {"tools"})
+@ToString(exclude = {"tools"})
 @Entity
 public class ToolType {
     @Id
@@ -36,6 +40,6 @@ public class ToolType {
 
     @JsonIgnore
     @OneToMany(mappedBy = "toolType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Tool> tools;
+    private List<Tool> tools;
 
 }
