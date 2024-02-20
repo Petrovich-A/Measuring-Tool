@@ -46,7 +46,7 @@ public class ToolIssuance {
     private LocalDateTime updatedAt;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "toolIssuance", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "toolIssuance", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Tool> tools;
 
     @ManyToOne

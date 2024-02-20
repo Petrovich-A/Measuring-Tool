@@ -48,7 +48,7 @@ databaseChangeLog:
 
         - addForeignKeyConstraint:
             baseTableSchemaName: tool
-            baseColumnNames: id
+            baseColumnNames: distributing_by_employee_id
             baseTableName: tool_issuance
             constraintName: fk_distributing_by_employee_employee
             referencedTableSchemaName: tool
@@ -58,7 +58,7 @@ databaseChangeLog:
 
         - addForeignKeyConstraint:
             baseTableSchemaName: tool
-            baseColumnNames: id
+            baseColumnNames: receiving_by_employee_id
             baseTableName: tool_issuance
             constraintName: fk_receiving_by_employee_employee
             referencedTableSchemaName: tool

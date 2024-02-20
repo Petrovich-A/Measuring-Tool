@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static by.petrovich.tool.util.Pattern.DATA_TIME_PATTERN;
 
@@ -19,9 +20,11 @@ public class ToolIssuanceResponseDto {
     @JsonFormat(pattern = DATA_TIME_PATTERN)
     private LocalDateTime updatedAt;
 
-    private EmployeeResponseDto distributingByEmployee;
+    private List<ToolResponseDto> toolsResponseDto;
 
-    private EmployeeResponseDto receivingByEmployee;
+    private EmployeeResponseDto distributingByEmployeeResponseDto;
+
+    private EmployeeResponseDto receivingByEmployeeResponseDto;
 
     private StorageRoomResponseDto storageRoomResponseDto;
 
