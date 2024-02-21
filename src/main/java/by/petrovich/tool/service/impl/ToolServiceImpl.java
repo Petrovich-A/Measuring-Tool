@@ -5,9 +5,12 @@ import by.petrovich.tool.dto.response.ToolResponseDto;
 import by.petrovich.tool.exception.ResourceNotFoundException;
 import by.petrovich.tool.mapper.ToolMapper;
 import by.petrovich.tool.model.Tool;
+import by.petrovich.tool.model.ToolStatus;
 import by.petrovich.tool.repository.ToolRepository;
 import by.petrovich.tool.service.ToolService;
+import by.petrovich.tool.service.ToolStatusService;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +23,9 @@ import java.util.stream.Collectors;
 @Transactional(readOnly = true)
 public class ToolServiceImpl implements ToolService {
     public static final String TOOL_NOT_FOUND = "Tool not found with id: ";
+    public static final String UNDER_PRECISION_CHECK = "under precision check";
     private final ToolRepository toolRepository;
+    private final ToolStatusService toolStatusService;
     private final ToolMapper toolMapper;
 
     @Override
@@ -62,6 +67,15 @@ public class ToolServiceImpl implements ToolService {
         } else {
             throw new ResourceNotFoundException(TOOL_NOT_FOUND + id);
         }
+    }
+
+    @Transactional
+    public ToolResponseDto changeToolStatusToUnderPrecisionCheck(Long id) {
+        Tool tool = toolRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(TOOL_NOT_FOUND + id));
+        ToolStatus underPrecisionCheckToolStatus = toolStatusService.findByName(UNDER_PRECISION_CHECK);
+        tool.setToolStatus(underPrecisionCheckToolStatus);
+        Tool toolUpdated = toolRepository.save(tool);
+        return toolMapper.toResponseDto(toolUpdated);
     }
 
 }

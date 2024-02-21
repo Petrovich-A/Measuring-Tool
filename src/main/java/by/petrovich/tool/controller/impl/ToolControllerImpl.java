@@ -61,4 +61,10 @@ public class ToolControllerImpl implements ToolController {
         toolService.delete(id);
         return ResponseEntity.status(OK).build();
     }
+
+    @PostMapping("/{id}/submit-for-precision-check")
+    public ResponseEntity<ToolResponseDto> submitForPrecisionCheck(@PathVariable Long id) {
+        return ResponseEntity.status(CREATED).body(toolService.changeToolStatusToUnderPrecisionCheck(id));
+    }
+
 }
