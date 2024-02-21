@@ -4,8 +4,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 import lombok.Data;
 
-import java.time.LocalDateTime;
-
 @Data
 @Builder
 public class ToolStatusRequestDto {
@@ -15,9 +13,4 @@ public class ToolStatusRequestDto {
     @Schema(description = "Name of the tool status", example = "In Use", minLength = 5, maxLength = 20)
     private String name;
 
-    @Schema(description = "Start date and time of the tool status")
-    private LocalDateTime start;
-
-    @Schema(description = "Finish date and time of the tool status")
-    private LocalDateTime finish;
 }
