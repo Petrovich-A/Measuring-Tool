@@ -1,0 +1,46 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-tool-status-date-modification-table
+      author: "Alexandr_Petrovich"
+      changes:
+        - createSequence:
+            schemaName: tool
+            sequenceName: tool_status_date_modification_id_seq
+            incrementBy: 50
+            startValue: 1
+            minValue: 1
+            ifNotExists: true
+        - createTable:
+            schemaName: tool
+            tableName: tool_status_date_modification
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: start
+                  type: timestamp
+                  constraints:
+                    notNull: true
+              - column:
+                  name: finish
+                  type: timestamp
+                  constraints:
+                    notNull: true
+              - column:
+                  name: tool_id
+                  type: bigint
+                  constraints:
+                    foreignKey:
+                      name: fk_tool_status_date_modification_tool
+                      references: tool
+              - column:
+                  name: tool_status_id
+                  type: bigint
+                  constraints:
+                    foreignKey:
+                      name: fk_tool_status_date_modification_tool_status
+                      references: tool_status

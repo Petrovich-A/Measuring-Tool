@@ -26,13 +26,3 @@ databaseChangeLog:
                   constraints:
                     nullable: false
                     unique: true
-              - column:
-                  name: start
-                  type: timestamp
-                  constraints:
-                    nullable: false
-              - column:
-                  name: finish
-                  type: timestamp
-                  constraints:
-                    nullable: false

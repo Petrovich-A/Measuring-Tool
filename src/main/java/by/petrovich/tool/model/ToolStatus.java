@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -19,7 +18,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.validation.constraints.Size;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -39,14 +37,6 @@ public class ToolStatus {
     @Size(min = 5, max = 20)
     @Column(length = 20, nullable = false, unique = true)
     private String name;
-
-    @CreationTimestamp
-    @Column(nullable = false)
-    private LocalDateTime start;
-
-    @CreationTimestamp
-    @Column(nullable = false)
-    private LocalDateTime finish;
 
     @JsonIgnore
     @OneToMany(mappedBy = "toolStatus", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
