@@ -36,3 +36,25 @@ databaseChangeLog:
                   name: name
                   value: 'caliper'
 
+        - insert:
+            schemaName: tool
+            tableName: tool_type
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_type_id_seq')"
+              - column:
+                  name: name
+                  value: 'profilometer'
+
+        - insert:
+            schemaName: tool
+            tableName: tool_type
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_type_id_seq')"
+              - column:
+                  name: name
+                  value: 'bore gauge'
+

@@ -33,7 +33,7 @@ databaseChangeLog:
                   value: 1
               - column:
                   name: tool_status_id
-                  value: 2
+                  value: 3
               - column:
                   name: storage_room_id
                   value: 1
@@ -103,7 +103,7 @@ databaseChangeLog:
                   value: 3
               - column:
                   name: tool_status_id
-                  value: 2
+                  value: 1
               - column:
                   name: storage_room_id
                   value: 1
@@ -219,13 +219,13 @@ databaseChangeLog:
                   valueComputed: "nextval('tool.tool_id_seq')"
               - column:
                   name: designation
-                  value: "4250-3125"
+                  value: "4000-3111"
               - column:
                   name: laboratory_number
-                  value: "848958"
+                  value: "756444"
               - column:
                   name: measurable_size_range
-                  value: "600"
+                  value: "1000"
               - column:
                   name: created_at
                   value: '2023-12-08 11:38:49'
@@ -234,10 +234,10 @@ databaseChangeLog:
                   value: '2023-12-08 11:38:49'
               - column:
                   name: tool_type_id
-                  value: 3
+                  value: 4
               - column:
                   name: tool_status_id
-                  value: 2
+                  value: 3
               - column:
                   name: storage_room_id
                   value: 2
@@ -272,7 +272,7 @@ databaseChangeLog:
                   value: 3
               - column:
                   name: tool_status_id
-                  value: 2
+                  value: 3
               - column:
                   name: storage_room_id
                   value: 2
