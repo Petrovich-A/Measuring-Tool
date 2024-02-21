@@ -6,7 +6,9 @@ import by.petrovich.tool.exception.ResourceNotFoundException;
 import by.petrovich.tool.mapper.ToolMapper;
 import by.petrovich.tool.model.Tool;
 import by.petrovich.tool.model.ToolStatus;
+import by.petrovich.tool.model.ToolStatusDateModification;
 import by.petrovich.tool.repository.ToolRepository;
+import by.petrovich.tool.repository.ToolStatusDateModificationRepository;
 import by.petrovich.tool.service.ToolService;
 import by.petrovich.tool.service.ToolStatusService;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,7 @@ import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -26,6 +29,7 @@ public class ToolServiceImpl implements ToolService {
     public static final String UNDER_PRECISION_CHECK = "under precision check";
     private final ToolRepository toolRepository;
     private final ToolStatusService toolStatusService;
+    private final ToolStatusDateModificationRepository toolStatusDateModificationRepository;
     private final ToolMapper toolMapper;
 
     @Override
@@ -46,6 +50,8 @@ public class ToolServiceImpl implements ToolService {
     @Transactional
     public ToolResponseDto create(ToolRequestDto toolRequestDto) {
         Tool tool = toolRepository.save(toolMapper.toEntity(toolRequestDto));
+        ToolStatusDateModification toolStatusDateModification = buildToolStatusDateModification(tool);
+        toolStatusDateModificationRepository.save(toolStatusDateModification);
         return toolMapper.toResponseDto(tool);
     }
 
@@ -78,4 +84,12 @@ public class ToolServiceImpl implements ToolService {
         return toolMapper.toResponseDto(toolUpdated);
     }
 
+
+    private ToolStatusDateModification buildToolStatusDateModification(Tool tool) {
+        return ToolStatusDateModification.builder()
+                .start(LocalDateTime.now())
+                .toolStatus(tool.getToolStatus())
+                .tool(tool)
+                .build();
+    }
 }

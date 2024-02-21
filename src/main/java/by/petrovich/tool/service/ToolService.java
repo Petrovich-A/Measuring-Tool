@@ -29,10 +29,14 @@ public interface ToolService {
     List<ToolResponseDto> findAll();
 
     /**
-     * Creates a new Tool.
+     * Creates a new Tool based on the provided ToolRequestDto.
+     * <p>
+     * This method saves the Tool entity obtained by mapping the ToolRequestDto to the database.
+     * It also constructs a ToolStatusDateModification entity based on the newly created Tool and saves it to the database.
+     * Finally, it returns the response DTO corresponding to the newly created Tool.
      *
      * @param toolRequestDto The ToolRequestDto containing the data for the new Tool.
-     * @return The ToolResponseDto representing the newly created Tool.
+     * @return The response DTO representing the newly created Tool.
      */
     ToolResponseDto create(ToolRequestDto toolRequestDto);
 

@@ -33,8 +33,6 @@ public class ToolStatusDateModification {
     @Column(nullable = false)
     private LocalDateTime start;
 
-    @CreationTimestamp
-    @Column(nullable = false)
     @Future
     private LocalDateTime finish;
 

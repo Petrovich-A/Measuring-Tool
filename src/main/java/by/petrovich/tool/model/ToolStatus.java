@@ -24,8 +24,6 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@EqualsAndHashCode(exclude = {"tools"})
-@ToString(exclude = {"tools"})
 @Entity
 public class ToolStatus {
     @Id
@@ -37,9 +35,5 @@ public class ToolStatus {
     @Size(min = 5, max = 20)
     @Column(length = 20, nullable = false, unique = true)
     private String name;
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "toolStatus", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Tool> tools;
 
 }
