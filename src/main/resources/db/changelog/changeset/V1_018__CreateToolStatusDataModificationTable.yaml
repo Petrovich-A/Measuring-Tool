@@ -28,19 +28,36 @@ databaseChangeLog:
               - column:
                   name: finish
                   type: timestamp
+                  defaultValue: 'null'
                   constraints:
-                    notNull: true
+                    notNull: false
               - column:
                   name: tool_id
                   type: bigint
                   constraints:
-                    foreignKey:
-                      name: fk_tool_status_date_modification_tool
-                      references: tool
+                    nullable: false
               - column:
                   name: tool_status_id
                   type: bigint
                   constraints:
-                    foreignKey:
-                      name: fk_tool_status_date_modification_tool_status
-                      references: tool_status
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: tool
+            baseColumnNames: tool_id
+            baseTableName: tool_status_date_modification
+            constraintName: fk_tool_status_date_modification_tool
+            referencedTableSchemaName: tool
+            referencedColumnNames: id
+            referencedTableName: tool
+            validate: false
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: tool
+            baseColumnNames: tool_status_id
+            baseTableName: tool_status_date_modification
+            constraintName: fk_tool_status_date_modification_tool_status
+            referencedTableSchemaName: tool
+            referencedColumnNames: id
+            referencedTableName: tool_status
+            validate: false

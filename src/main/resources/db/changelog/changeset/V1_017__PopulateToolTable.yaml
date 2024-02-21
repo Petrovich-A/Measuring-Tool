@@ -27,16 +27,16 @@ databaseChangeLog:
                   value: '2023-12-08 11:38:49'
               - column:
                   name: tool_issuance_id
-                  value: 1
+                  value:1
               - column:
                   name: tool_type_id
-                  value: 1
+                  value:1
               - column:
                   name: tool_status_id
-                  value: 3
+                  value:3
               - column:
                   name: storage_room_id
-                  value: 1
+                  value:1
 
         - insert:
             schemaName: tool
@@ -62,16 +62,16 @@ databaseChangeLog:
                   value: '2023-12-08 11:38:49'
               - column:
                   name: tool_issuance_id
-                  value: 1
+                  value:1
               - column:
                   name: tool_type_id
-                  value: 3
+                  value:3
               - column:
                   name: tool_status_id
-                  value: 2
+                  value:2
               - column:
                   name: storage_room_id
-                  value: 1
+                  value:1
 
         - insert:
             schemaName: tool
@@ -97,16 +97,16 @@ databaseChangeLog:
                   value: '2023-12-08 11:38:49'
               - column:
                   name: tool_issuance_id
-                  value: 1
+                  value:1
               - column:
                   name: tool_type_id
-                  value: 3
+                  value:3
               - column:
                   name: tool_status_id
-                  value: 1
+                  value:1
               - column:
                   name: storage_room_id
-                  value: 1
+                  value:1
 
         - insert:
             schemaName: tool
@@ -132,13 +132,13 @@ databaseChangeLog:
                   value: '2023-12-08 11:38:49'
               - column:
                   name: tool_type_id
-                  value: 3
+                  value:3
               - column:
                   name: tool_status_id
-                  value: 2
+                  value:2
               - column:
                   name: storage_room_id
-                  value: 1
+                  value:1
 
         - insert:
             schemaName: tool
@@ -164,16 +164,16 @@ databaseChangeLog:
                   value: '2023-12-08 11:38:49'
               - column:
                   name: tool_issuance_id
-                  value: 1
+                  value:1
               - column:
                   name: tool_type_id
-                  value: 3
+                  value:3
               - column:
                   name: tool_status_id
-                  value: 2
+                  value:2
               - column:
                   name: storage_room_id
-                  value: 2
+                  value:2
 
         - insert:
             schemaName: tool
@@ -199,16 +199,16 @@ databaseChangeLog:
                   value: '2023-12-08 11:38:49'
               - column:
                   name: tool_issuance_id
-                  value: 1
+                  value:1
               - column:
                   name: tool_type_id
-                  value: 3
+                  value:3
               - column:
                   name: tool_status_id
-                  value: 2
+                  value:2
               - column:
                   name: storage_room_id
-                  value: 2
+                  value:2
 
         - insert:
             schemaName: tool
@@ -234,13 +234,13 @@ databaseChangeLog:
                   value: '2023-12-08 11:38:49'
               - column:
                   name: tool_type_id
-                  value: 4
+                  value:4
               - column:
                   name: tool_status_id
-                  value: 3
+                  value:3
               - column:
                   name: storage_room_id
-                  value: 2
+                  value:2
 
         - insert:
             schemaName: tool
@@ -266,13 +266,13 @@ databaseChangeLog:
                   value: '2023-12-08 11:38:49'
               - column:
                   name: tool_issuance_id
-                  value: 1
+                  value:1
               - column:
                   name: tool_type_id
-                  value: 3
+                  value:3
               - column:
                   name: tool_status_id
-                  value: 3
+                  value:3
               - column:
                   name: storage_room_id
-                  value: 2
+                  value:2
