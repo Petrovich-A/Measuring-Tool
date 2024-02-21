@@ -6,6 +6,7 @@ import by.petrovich.tool.exception.ResourceNotFoundException;
 import by.petrovich.tool.mapper.ToolIssuanceMapper;
 import by.petrovich.tool.model.ToolIssuance;
 import by.petrovich.tool.repository.ToolIssuanceRepository;
+import by.petrovich.tool.service.ToolIssuanceService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class ToolIssuanceServiceImpl implements by.petrovich.tool.service.ToolIssuanceService {
+public class ToolIssuanceServiceImpl implements ToolIssuanceService {
     public static final String TOOL_ISSUANCE_NOT_FOUND = "Tool issuance not found with id: ";
     private final ToolIssuanceRepository toolIssuanceRepository;
     private final ToolIssuanceMapper toolIssuanceMapper;
