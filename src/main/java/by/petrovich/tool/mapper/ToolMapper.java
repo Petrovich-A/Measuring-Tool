@@ -34,10 +34,21 @@ public interface ToolMapper {
 
     /**
      * Maps a Tool entity to a ToolResponseDto.
+     * <p>
+     * This method converts a Tool entity into a ToolResponseDto object. It maps the fields of the Tool entity
+     * to their corresponding fields in the ToolResponseDto, including toolType, toolStatus, toolIssuance, and storageRoom.
+     * The toolType, toolStatus, toolIssuance, and storageRoom fields are mapped to their respective DTOs (toolTypeResponseDto,
+     * toolStatusResponseDto, toolIssuanceResponseDto, and storageRoomResponseDto) to ensure that the response DTO
+     * contains all relevant information about the tool.
+     * </p>
      *
      * @param tool The Tool entity to map.
      * @return The corresponding ToolResponseDto.
      */
+    @Mapping(source = "toolType", target = "toolTypeResponseDto")
+    @Mapping(source = "toolStatus", target = "toolStatusResponseDto")
+    @Mapping(source = "toolIssuance", target = "toolIssuanceResponseDto")
+    @Mapping(source = "storageRoom", target = "storageRoomResponseDto")
     ToolResponseDto toResponseDto(Tool tool);
 
     /**
