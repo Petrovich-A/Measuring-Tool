@@ -29,6 +29,17 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    public List<EmployeeResponseDto> findByCriteria(String surname) {
+        List<Employee> employees = employeeRepository.findBySurnameContainingIgnoreCase(surname);
+        if (employees.isEmpty()) {
+            throw new ResourceNotFoundException("Employee not found with surname: " + surname);
+        }
+        return employees.stream()
+                .map(employeeMapper::toResponseDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public List<EmployeeResponseDto> findAll() {
         List<Employee> employees = employeeRepository.findAll();
         return employees.stream()

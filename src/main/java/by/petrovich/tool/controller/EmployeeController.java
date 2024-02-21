@@ -51,6 +51,23 @@ public interface EmployeeController {
             required = true) Long id);
 
     @Operation(
+            summary = "Find employees by surname",
+            description = "Search for employees whose last name contains a specific substring, regardless of the case. " +
+                    "For instance, if the surname 'Smith' exists in the database, using 'mi' will return " +
+                    "employees with the last name 'Smith', 'Jamison', 'Mitchell' etc."
+    )
+    @ApiResponse(
+            responseCode = "200",
+            description = "Successfully retrieved list of employees",
+            content = @Content(mediaType = "application/json",
+                    schema = @Schema(implementation = EmployeeResponseDto.class))
+    )
+    ResponseEntity<List<EmployeeResponseDto>> findByCriteria(@Parameter(
+            description = "Surname's substring to search for",
+            required = true,
+            example = "petr") String surname);
+
+    @Operation(
             summary = "Create a new employee",
             description = "Add a new employee to the system with the provided details.",
             tags = {"Employee controller"}

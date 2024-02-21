@@ -41,6 +41,12 @@ public class EmployeeControllerImpl implements EmployeeController {
     }
 
     @Override
+    @GetMapping("search/{surname}")
+    public ResponseEntity<List<EmployeeResponseDto>> findByCriteria(@PathVariable("surname") String surname) {
+        return ResponseEntity.status(OK).body(employeeService.findByCriteria(surname));
+    }
+
+    @Override
     @PostMapping("/")
     public ResponseEntity<EmployeeResponseDto> create(@Valid @RequestBody EmployeeRequestDto employeeRequestDto) {
         return ResponseEntity.status(CREATED).body(employeeService.create(employeeRequestDto));
