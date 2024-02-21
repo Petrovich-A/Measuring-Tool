@@ -30,10 +30,10 @@ databaseChangeLog:
   - include:
       file: db/changelog/changeset/V1_015__PopulateToolIssuanceTable.yaml
   - include:
-      file: db/changelog/changeset/V1_016__CreateToolStatusDataModificationTable.yaml
+      file: db/changelog/changeset/V1_016__CreateToolTable.yaml
   - include:
-      file: db/changelog/changeset/V1_017__PopulateToolSatusDataModificationTable.yaml
+      file: db/changelog/changeset/V1_017__PopulateToolTable.yaml
   - include:
-      file: db/changelog/changeset/V1_018__CreateToolTable.yaml
+      file: db/changelog/changeset/V1_018__CreateToolStatusDataModificationTable.yaml
   - include:
-      file: db/changelog/changeset/V1_019__PopulateToolTable.yaml
+      file: db/changelog/changeset/V1_019__PopulateToolSatusDataModificationTable.yaml

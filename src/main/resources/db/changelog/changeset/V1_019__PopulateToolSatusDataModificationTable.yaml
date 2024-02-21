@@ -14,12 +14,29 @@ databaseChangeLog:
                   name: start
                   value: '2023-12-08 11:38:49'
               - column:
-                  name: finish
-                  value: '2024-03-08 11:38:49'
-              - column:
                   name: tool_id
-                  value: 1
+                  value:1
               - column:
                   name: tool_status_id
-                  value: 1
+                  value:1
+
+        - insert:
+            schemaName: tool
+            tableName: tool_status_date_modification
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_status_date_modification_id_seq')"
+              - column:
+                  name: start
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: finish
+                  value: '2024-05-10 11:38:49'
+              - column:
+                  name: tool_id
+                  value:1
+              - column:
+                  name: tool_status_id
+                  value:2
 

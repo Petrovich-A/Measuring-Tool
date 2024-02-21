@@ -49,7 +49,7 @@ databaseChangeLog:
               - column:
                   name: tool_issuance_id
                   type: bigint
-                  defaultValue: null
+                  defaultValue: 'null'
                   constraints:
                     nullable: true
               - column:
