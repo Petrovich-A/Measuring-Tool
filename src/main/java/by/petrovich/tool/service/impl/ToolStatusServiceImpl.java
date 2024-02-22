@@ -69,4 +69,9 @@ public class ToolStatusServiceImpl implements ToolStatusService {
         return toolStatusRepository.findByNameIgnoreCase(name).orElseThrow(() -> new ResourceNotFoundException(TOOL_STATUS_NOT_FOUND + name));
     }
 
+    @Override
+    public List<ToolStatus> findAllEntities() {
+        return toolStatusRepository.findAll();
+    }
+
 }

@@ -6,13 +6,11 @@ import by.petrovich.tool.exception.ResourceNotFoundException;
 import by.petrovich.tool.mapper.ToolMapper;
 import by.petrovich.tool.model.Tool;
 import by.petrovich.tool.model.ToolStatus;
-import by.petrovich.tool.model.ToolStatusDateModification;
 import by.petrovich.tool.repository.ToolRepository;
-import by.petrovich.tool.repository.ToolStatusDateModificationRepository;
 import by.petrovich.tool.service.ToolService;
+import by.petrovich.tool.service.ToolStatusDateModificationService;
 import by.petrovich.tool.service.ToolStatusService;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,9 +25,10 @@ import java.util.stream.Collectors;
 public class ToolServiceImpl implements ToolService {
     public static final String TOOL_NOT_FOUND = "Tool not found with id: ";
     public static final String UNDER_PRECISION_CHECK = "under precision check";
+    public static final String IN_THE_STORAGE_ROOM = "in the storage room";
     private final ToolRepository toolRepository;
     private final ToolStatusService toolStatusService;
-    private final ToolStatusDateModificationRepository toolStatusDateModificationRepository;
+    private final ToolStatusDateModificationService toolStatusDateModificationService;
     private final ToolMapper toolMapper;
 
     @Override
@@ -49,10 +48,11 @@ public class ToolServiceImpl implements ToolService {
     @Override
     @Transactional
     public ToolResponseDto create(ToolRequestDto toolRequestDto) {
-        Tool tool = toolRepository.save(toolMapper.toEntity(toolRequestDto));
-        ToolStatusDateModification toolStatusDateModification = buildToolStatusDateModification(tool);
-        toolStatusDateModificationRepository.save(toolStatusDateModification);
-        return toolMapper.toResponseDto(tool);
+        Tool tool = toolMapper.toEntity(toolRequestDto);
+        Tool toolWithStatus = changeToolStatus(tool, IN_THE_STORAGE_ROOM, null);
+        Tool toolSaved = toolRepository.save(toolWithStatus);
+        toolStatusDateModificationService.create(tool, null);
+        return toolMapper.toResponseDto(toolSaved);
     }
 
     @Override
@@ -76,20 +76,19 @@ public class ToolServiceImpl implements ToolService {
     }
 
     @Transactional
-    public ToolResponseDto changeToolStatusToUnderPrecisionCheck(Long id) {
+    @Override
+    public ToolResponseDto submitForPrecisionCheck(Long id) {
         Tool tool = toolRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(TOOL_NOT_FOUND + id));
-        ToolStatus underPrecisionCheckToolStatus = toolStatusService.findByName(UNDER_PRECISION_CHECK);
-        tool.setToolStatus(underPrecisionCheckToolStatus);
-        Tool toolUpdated = toolRepository.save(tool);
-        return toolMapper.toResponseDto(toolUpdated);
+        Tool toolWithToolStatus = changeToolStatus(tool, UNDER_PRECISION_CHECK, null);
+        Tool toolSaved = toolRepository.save(toolWithToolStatus);
+        toolStatusDateModificationService.create(tool, null);
+        return toolMapper.toResponseDto(toolSaved);
     }
 
-
-    private ToolStatusDateModification buildToolStatusDateModification(Tool tool) {
-        return ToolStatusDateModification.builder()
-                .start(LocalDateTime.now())
-                .toolStatus(tool.getToolStatus())
-                .tool(tool)
-                .build();
+    private Tool changeToolStatus(Tool tool, String statusName, LocalDateTime statusFinish) {
+        ToolStatus toolStatus = toolStatusService.findByName(statusName);
+        tool.setToolStatus(toolStatus);
+        return tool;
     }
+
 }

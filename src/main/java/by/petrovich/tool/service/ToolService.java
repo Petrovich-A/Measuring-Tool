@@ -5,6 +5,7 @@ package by.petrovich.tool.service;
 
 import by.petrovich.tool.dto.request.ToolRequestDto;
 import by.petrovich.tool.dto.response.ToolResponseDto;
+import by.petrovich.tool.exception.ResourceNotFoundException;
 
 import java.util.List;
 
@@ -43,7 +44,7 @@ public interface ToolService {
     /**
      * Updates an existing Tool.
      *
-     * @param id The ID of the Tool to update.
+     * @param id             The ID of the Tool to update.
      * @param toolRequestDto The ToolRequestDto containing the updated data.
      * @return The ToolResponseDto representing the updated Tool.
      */
@@ -55,4 +56,19 @@ public interface ToolService {
      * @param id The ID of the Tool to delete.
      */
     void delete(Long id);
+
+    /**
+     * Submits a Tool for precision check based on the provided ID.
+     * <p>
+     * This method retrieves the Tool entity from the database based on the provided ID.
+     * If the Tool is not found, it throws a ResourceNotFoundException.
+     * It then changes the status of the Tool to "UNDER_PRECISION_CHECK" and updates it in the database.
+     * After updating the Tool status, it creates a new ToolStatusDateModification entity and saves it to the database.
+     * Finally, it returns the response DTO corresponding to the updated Tool.
+     *
+     * @param id The ID of the Tool to submit for precision check.
+     * @return The response DTO representing the Tool after being submitted for precision check.
+     * @throws ResourceNotFoundException if the Tool with the provided ID is not found.
+     */
+    ToolResponseDto submitForPrecisionCheck(Long id);
 }

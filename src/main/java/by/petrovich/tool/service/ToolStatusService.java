@@ -62,4 +62,6 @@ public interface ToolStatusService {
      * @throws ResourceNotFoundException if no ToolStatus is found with the specified name.
      */
     ToolStatus findByName(String name);
+
+    List<ToolStatus> findAllEntities();
 }

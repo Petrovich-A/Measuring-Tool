@@ -136,4 +136,29 @@ public interface ToolController {
     ResponseEntity<Void> delete(@Parameter(description = "ID of the tool to delete",
             example = "9",
             required = true) Long id);
+
+    @Operation(
+            summary = "Submit Tool for Precision Check",
+            description = "Submits a tool for precision check by updating its status to 'Under Precision Check'.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successfully submitted tool for precision check",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = ToolResponseDto.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Tool not found"
+                    )
+            }
+    )
+    ResponseEntity<ToolResponseDto> submitForPrecisionCheck(@Parameter(
+            description = "ID of the tool to submit for precision check",
+            example = "1",
+            required = true
+    ) Long id);
+
 }
