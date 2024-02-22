@@ -6,7 +6,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-import static by.petrovich.tool.util.Pattern.DATA_TIME_PATTERN;
+import static by.petrovich.tool.util.Pattern.DATA_TIME_RESPONSE_PATTERN;
 
 @Data
 @Builder
@@ -19,10 +19,10 @@ public class ToolResponseDto {
 
     private String measurableSizeRange;
 
-    @JsonFormat(pattern = DATA_TIME_PATTERN)
+    @JsonFormat(pattern = DATA_TIME_RESPONSE_PATTERN)
     private LocalDateTime createdAt;
 
-    @JsonFormat(pattern = DATA_TIME_PATTERN)
+    @JsonFormat(pattern = DATA_TIME_RESPONSE_PATTERN)
     private LocalDateTime updatedAt;
 
     private ToolTypeResponseDto toolTypeResponseDto;

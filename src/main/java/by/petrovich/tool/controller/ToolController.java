@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.http.ResponseEntity;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Tags({@Tag(name = "Tool controller", description = "Tools management APIs")})
@@ -133,7 +134,8 @@ public interface ToolController {
     @ApiResponse(
             responseCode = "404",
             description = "Tool not found")
-    ResponseEntity<Void> delete(@Parameter(description = "ID of the tool to delete",
+    ResponseEntity<Void> delete(@Parameter(
+            description = "ID of the tool to delete",
             example = "9",
             required = true) Long id);
 
@@ -156,9 +158,14 @@ public interface ToolController {
             }
     )
     ResponseEntity<ToolResponseDto> submitForPrecisionCheck(@Parameter(
-            description = "ID of the tool to submit for precision check",
-            example = "1",
-            required = true
-    ) Long id);
+                                                                    description = "ID of the tool to submit for precision check",
+                                                                    example = "1",
+                                                                    required = true
+                                                            ) Long id,
+                                                            @Parameter(
+                                                                    description = "Finish datetime for the precision check",
+                                                                    example = "2024-12-22T10:15:30",
+                                                                    required = true
+                                                            ) LocalDateTime finishDatetime);
 
 }

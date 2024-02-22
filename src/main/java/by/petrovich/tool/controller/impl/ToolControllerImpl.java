@@ -5,6 +5,7 @@ import by.petrovich.tool.dto.request.ToolRequestDto;
 import by.petrovich.tool.dto.response.ToolResponseDto;
 import by.petrovich.tool.service.impl.ToolServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +14,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import static by.petrovich.tool.util.Pattern.DATA_TIME_REQUEST_PATTERN;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
@@ -64,8 +68,11 @@ public class ToolControllerImpl implements ToolController {
 
     @Override
     @PostMapping("/{id}/submit-for-precision-check")
-    public ResponseEntity<ToolResponseDto> submitForPrecisionCheck(@PathVariable Long id) {
-        return ResponseEntity.status(CREATED).body(toolService.submitForPrecisionCheck(id));
+    public ResponseEntity<ToolResponseDto> submitForPrecisionCheck(@PathVariable Long id,
+                                                                   @RequestParam("finishDatetime")
+                                                                   @DateTimeFormat(pattern = DATA_TIME_REQUEST_PATTERN)
+                                                                   LocalDateTime finishDatetime) {
+        return ResponseEntity.status(CREATED).body(toolService.submitForPrecisionCheck(id, finishDatetime));
     }
 
 }

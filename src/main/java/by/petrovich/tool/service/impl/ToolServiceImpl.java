@@ -77,11 +77,11 @@ public class ToolServiceImpl implements ToolService {
 
     @Transactional
     @Override
-    public ToolResponseDto submitForPrecisionCheck(Long id) {
+    public ToolResponseDto submitForPrecisionCheck(Long id, LocalDateTime finishDatetime) {
         Tool tool = toolRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(TOOL_NOT_FOUND + id));
-        Tool toolWithToolStatus = changeToolStatus(tool, UNDER_PRECISION_CHECK, null);
+        Tool toolWithToolStatus = changeToolStatus(tool, UNDER_PRECISION_CHECK, finishDatetime);
         Tool toolSaved = toolRepository.save(toolWithToolStatus);
-        toolStatusDateModificationService.create(tool, null);
+        toolStatusDateModificationService.create(tool, finishDatetime);
         return toolMapper.toResponseDto(toolSaved);
     }
 

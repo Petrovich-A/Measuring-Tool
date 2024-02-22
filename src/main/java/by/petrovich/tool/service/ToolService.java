@@ -7,6 +7,7 @@ import by.petrovich.tool.dto.request.ToolRequestDto;
 import by.petrovich.tool.dto.response.ToolResponseDto;
 import by.petrovich.tool.exception.ResourceNotFoundException;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -67,8 +68,9 @@ public interface ToolService {
      * Finally, it returns the response DTO corresponding to the updated Tool.
      *
      * @param id The ID of the Tool to submit for precision check.
+     * @param finishDatetime  The finish date and time for the precision check.
      * @return The response DTO representing the Tool after being submitted for precision check.
      * @throws ResourceNotFoundException if the Tool with the provided ID is not found.
      */
-    ToolResponseDto submitForPrecisionCheck(Long id);
+    ToolResponseDto submitForPrecisionCheck(Long id, LocalDateTime finishDatetime);
 }
