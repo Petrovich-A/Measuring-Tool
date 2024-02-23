@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-tool-type-table
+      author: "Alexandr_Petrovich"
+      changes:
+        - createSequence:
+            schemaName: tool
+            sequenceName: tool_type_id_seq
+            incrementBy: 1
+            startValue: 1
+            minValue: 1
+            ifNotExists: true
+        - createTable:
+            schemaName: tool
+            tableName: tool_type
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(25)
+                  constraints:
+                    nullable: false
+                    unique: true

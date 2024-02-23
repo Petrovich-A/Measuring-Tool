@@ -8,7 +8,6 @@ databaseChangeLog:
             tableName: employee_position
             columns:
               - column:
-<<<<<<< HEAD
                   name: id
                   valueComputed: "nextval('tool.employee_position_id_seq')"
               - column:
@@ -29,7 +28,6 @@ databaseChangeLog:
                   name: id
                   valueComputed: "nextval('tool.employee_position_id_seq')"
               - column:
-=======
                   name: position
                   value: 'technologist'
               - column:
@@ -44,7 +42,6 @@ databaseChangeLog:
             tableName: employee_position
             columns:
               - column:
->>>>>>> main
                   name: position
                   value: 'warehouseman'
               - column:
@@ -58,15 +55,29 @@ databaseChangeLog:
             schemaName: tool
             tableName: employee_position
             columns:
-<<<<<<< HEAD
               - column:
                   name: id
                   valueComputed: "nextval('tool.employee_position_id_seq')"
-=======
->>>>>>> main
               - column:
                   name: position
                   value: 'CNC programmer'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+
+        - insert:
+            schemaName: tool
+            tableName: employee_position
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.employee_position_id_seq')"
+              - column:
+                  name: position
+                  value: 'engineer'
               - column:
                   name: created_at
                   value: '2023-12-08 11:38:49'

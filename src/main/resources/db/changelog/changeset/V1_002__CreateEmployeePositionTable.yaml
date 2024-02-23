@@ -3,23 +3,20 @@ databaseChangeLog:
       id: create-employee-position-table
       author: "Alexandr_Petrovich"
       changes:
-<<<<<<< HEAD
         - createSequence:
             schemaName: tool
             sequenceName: employee_position_id_seq
-            incrementBy: 50
+            incrementBy: 1
             startValue: 1
             minValue: 1
             ifNotExists: true
-=======
->>>>>>> main
         - createTable:
             schemaName: tool
             tableName: employee_position
             columns:
               - column:
                   name: id
-                  type: bigserial
+                  type: bigint
                   constraints:
                     primaryKey: true
                     nullable: false

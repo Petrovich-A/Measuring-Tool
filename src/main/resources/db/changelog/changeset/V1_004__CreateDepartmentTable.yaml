@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-department-table
+      author: "Alexandr_Petrovich"
+      changes:
+        - createSequence:
+            schemaName: tool
+            sequenceName: department_id_seq
+            incrementBy: 1
+            startValue: 1
+            minValue: 1
+            ifNotExists: true
+        - createTable:
+            schemaName: tool
+            tableName: department
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: code
+                  type: varchar(4)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: created_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp
+                  constraints:
+                    nullable: false
+

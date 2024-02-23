@@ -9,6 +9,7 @@ import by.petrovich.tool.repository.EmployeePositionRepository;
 import by.petrovich.tool.service.EmployeePositionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional(readOnly = true)
 public class EmployeePositionServiceImpl implements EmployeePositionService {
     private final EmployeePositionRepository positionRepository;
     private final EmployeePositionMapper positionMapper;
@@ -36,12 +38,14 @@ public class EmployeePositionServiceImpl implements EmployeePositionService {
     }
 
     @Override
+    @Transactional
     public EmployeePositionResponseDto create(EmployeePositionRequestDto employeePositionRequestDto) {
         EmployeePosition employeePosition = positionRepository.save(positionMapper.toEntity(employeePositionRequestDto));
         return positionMapper.toResponseDto(employeePosition);
     }
 
     @Override
+    @Transactional
     public EmployeePositionResponseDto update(Long id, EmployeePositionRequestDto employeePositionRequestDto) {
         Optional<EmployeePosition> employeePosition = positionRepository.findById(id);
         EmployeePosition entityUpdated = positionMapper.toEntityUpdate(employeePositionRequestDto,
@@ -51,6 +55,7 @@ public class EmployeePositionServiceImpl implements EmployeePositionService {
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         if (positionRepository.existsById(id)) {
             positionRepository.deleteById(id);

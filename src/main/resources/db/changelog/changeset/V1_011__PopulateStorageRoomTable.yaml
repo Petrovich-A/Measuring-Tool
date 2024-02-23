@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-storage-room-table
+      author: "Alexandr_Petrovich"
+      changes:
+        - insert:
+            schemaName: tool
+            tableName: storage_room
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.storage_room_id_seq')"
+              - column:
+                  name: department_id
+                  value: 1
+
+        - insert:
+            schemaName: tool
+            tableName: storage_room
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.storage_room_id_seq')"
+              - column:
+                  name: department_id
+                  value: 2

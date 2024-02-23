@@ -1,32 +1,39 @@
 package by.petrovich.tool.model;
 
-import javax.persistence.*;
-
-import javax.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
-import java.util.Set;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(exclude = "employees")
+@ToString(exclude = "employees")
 @Entity
 public class EmployeePosition {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "employee_position_seq")
-<<<<<<< HEAD
-    @SequenceGenerator(name = "employee_position_seq", sequenceName = "employee_position_id_seq", allocationSize = 10)
-=======
     @SequenceGenerator(name = "employee_position_seq", sequenceName = "employee_position_id_seq", allocationSize = 1)
->>>>>>> main
-    @Column(columnDefinition = "bigserial")
+    @Column(columnDefinition = "bigint")
     private Long id;
 
     @Size(min = 3, max = 20)
@@ -34,16 +41,16 @@ public class EmployeePosition {
     private String position;
 
     @Column(updatable = false, nullable = false)
-//    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "yyyy-MM-dd HH:mm:ss")
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
     @Column(nullable = false)
-//    @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(style = "yyyy-MM-dd HH:mm:ss")
+    @CreationTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "employeePosition", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<Employee> employees;
+    @JsonIgnore
+    @OneToMany(mappedBy = "employeePosition", cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    private List<Employee> employees;
+
 
 }

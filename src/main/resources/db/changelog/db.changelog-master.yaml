@@ -6,6 +6,34 @@ databaseChangeLog:
   - include:
       file: db/changelog/changeset/V1_003__PopulateEmployeePositionTable.yaml
   - include:
-      file: db/changelog/changeset/V1_004__CreateEmployeeTable.yaml
-#  - include:
-#      file: db/changelog/changeset/V1_005__PopulateEmployeeTable.yaml
+      file: db/changelog/changeset/V1_004__CreateDepartmentTable.yaml
+  - include:
+      file: db/changelog/changeset/V1_005__PopulateDepartmentTable.yaml
+  - include:
+      file: db/changelog/changeset/V1_006__CreateToolStatusTable.yaml
+  - include:
+      file: db/changelog/changeset/V1_007__PopulateToolStatusTable.yaml
+  - include:
+      file: db/changelog/changeset/V1_008__CreateToolTypeTable.yaml
+  - include:
+      file: db/changelog/changeset/V1_009__PopulateToolTypeTable.yaml
+  - include:
+      file: db/changelog/changeset/V1_010__CreateStorageRoomTable.yaml
+  - include:
+      file: db/changelog/changeset/V1_011__PopulateStorageRoomTable.yaml
+  - include:
+      file: db/changelog/changeset/V1_012__CreateEmployeeTable.yaml
+  - include:
+      file: db/changelog/changeset/V1_013__PopulateEmployeeTable.yaml
+  - include:
+      file: db/changelog/changeset/V1_014__CreateToolIssuanceTable.yaml
+  - include:
+      file: db/changelog/changeset/V1_015__PopulateToolIssuanceTable.yaml
+  - include:
+      file: db/changelog/changeset/V1_016__CreateToolTable.yaml
+  - include:
+      file: db/changelog/changeset/V1_017__PopulateToolTable.yaml
+  - include:
+      file: db/changelog/changeset/V1_018__CreateToolStatusDataModificationTable.yaml
+  - include:
+      file: db/changelog/changeset/V1_019__PopulateToolSatusDataModificationTable.yaml

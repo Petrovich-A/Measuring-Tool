@@ -1,0 +1,278 @@
+databaseChangeLog:
+  - changeSet:
+      id: populate-tool-table
+      author: "Alexandr_Petrovich"
+      changes:
+        - insert:
+            schemaName: tool
+            tableName: tool
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_id_seq')"
+              - column:
+                  name: designation
+                  value: "4250-0000"
+              - column:
+                  name: laboratory_number
+                  value: "5168494"
+              - column:
+                  name: measurable_size_range
+                  value: "250"
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: tool_issuance_id
+                  value: 1
+              - column:
+                  name: tool_type_id
+                  value: 1
+              - column:
+                  name: tool_status_id
+                  value: 3
+              - column:
+                  name: storage_room_id
+                  value: 1
+
+        - insert:
+            schemaName: tool
+            tableName: tool
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_id_seq')"
+              - column:
+                  name: designation
+                  value: "4250-3116"
+              - column:
+                  name: laboratory_number
+                  value: "848949"
+              - column:
+                  name: measurable_size_range
+                  value: "500"
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: tool_issuance_id
+                  value: 1
+              - column:
+                  name: tool_type_id
+                  value: 3
+              - column:
+                  name: tool_status_id
+                  value: 2
+              - column:
+                  name: storage_room_id
+                  value: 1
+
+        - insert:
+            schemaName: tool
+            tableName: tool
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_id_seq')"
+              - column:
+                  name: designation
+                  value: "4250-3121"
+              - column:
+                  name: laboratory_number
+                  value: "848954"
+              - column:
+                  name: measurable_size_range
+                  value: "1000"
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: tool_issuance_id
+                  value: 1
+              - column:
+                  name: tool_type_id
+                  value: 3
+              - column:
+                  name: tool_status_id
+                  value: 1
+              - column:
+                  name: storage_room_id
+                  value: 1
+
+        - insert:
+            schemaName: tool
+            tableName: tool
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_id_seq')"
+              - column:
+                  name: designation
+                  value: "4250-3122"
+              - column:
+                  name: laboratory_number
+                  value: "848955"
+              - column:
+                  name: measurable_size_range
+                  value: "525"
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: tool_type_id
+                  value: 3
+              - column:
+                  name: tool_status_id
+                  value: 2
+              - column:
+                  name: storage_room_id
+                  value: 1
+
+        - insert:
+            schemaName: tool
+            tableName: tool
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_id_seq')"
+              - column:
+                  name: designation
+                  value: "4250-3123"
+              - column:
+                  name: laboratory_number
+                  value: "848956"
+              - column:
+                  name: measurable_size_range
+                  value: "550"
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: tool_issuance_id
+                  value: 1
+              - column:
+                  name: tool_type_id
+                  value: 3
+              - column:
+                  name: tool_status_id
+                  value: 2
+              - column:
+                  name: storage_room_id
+                  value: 2
+
+        - insert:
+            schemaName: tool
+            tableName: tool
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_id_seq')"
+              - column:
+                  name: designation
+                  value: "4250-3124"
+              - column:
+                  name: laboratory_number
+                  value: "848957"
+              - column:
+                  name: measurable_size_range
+                  value: "575"
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: tool_issuance_id
+                  value: 1
+              - column:
+                  name: tool_type_id
+                  value: 3
+              - column:
+                  name: tool_status_id
+                  value: 2
+              - column:
+                  name: storage_room_id
+                  value: 2
+
+        - insert:
+            schemaName: tool
+            tableName: tool
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_id_seq')"
+              - column:
+                  name: designation
+                  value: "4000-3111"
+              - column:
+                  name: laboratory_number
+                  value: "756444"
+              - column:
+                  name: measurable_size_range
+                  value: "1000"
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: tool_type_id
+                  value: 4
+              - column:
+                  name: tool_status_id
+                  value: 3
+              - column:
+                  name: storage_room_id
+                  value: 2
+
+        - insert:
+            schemaName: tool
+            tableName: tool
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_id_seq')"
+              - column:
+                  name: designation
+                  value: "4250-3126"
+              - column:
+                  name: laboratory_number
+                  value: "848959"
+              - column:
+                  name: measurable_size_range
+                  value: "625"
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: tool_issuance_id
+                  value: 1
+              - column:
+                  name: tool_type_id
+                  value: 3
+              - column:
+                  name: tool_status_id
+                  value: 3
+              - column:
+                  name: storage_room_id
+                  value: 2

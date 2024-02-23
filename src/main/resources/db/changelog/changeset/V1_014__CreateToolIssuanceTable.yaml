@@ -1,0 +1,77 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-tool-issuance-table
+      author: "Alexandr_Petrovich"
+      changes:
+        - createSequence:
+            schemaName: tool
+            sequenceName: tool_issuance_id_seq
+            incrementBy: 1
+            startValue: 1
+            minValue: 1
+            ifNotExists: true
+        - createTable:
+            schemaName: tool
+            tableName: tool_issuance
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+              - column:
+                  name: created_at
+                  type: timestamp(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: updated_at
+                  type: timestamp(6)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: distributing_by_employee_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: receiving_by_employee_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: storage_room_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: tool
+            baseColumnNames: distributing_by_employee_id
+            baseTableName: tool_issuance
+            constraintName: fk_distributing_by_employee_employee
+            referencedTableSchemaName: tool
+            referencedColumnNames: id
+            referencedTableName: employee
+            validate: false
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: tool
+            baseColumnNames: receiving_by_employee_id
+            baseTableName: tool_issuance
+            constraintName: fk_receiving_by_employee_employee
+            referencedTableSchemaName: tool
+            referencedColumnNames: id
+            referencedTableName: employee
+            validate: false
+
+        - addForeignKeyConstraint:
+            baseTableSchemaName: tool
+            baseColumnNames: storage_room_id
+            baseTableName: tool_issuance
+            constraintName: fk_tool_issuance_storage_room
+            referencedTableSchemaName: tool
+            referencedColumnNames: id
+            referencedTableName: storage_room
+            validate: false

@@ -1,0 +1,27 @@
+databaseChangeLog:
+  - changeSet:
+      id: populate-tool-issuance-table
+      author: "Alexandr_Petrovich"
+      changes:
+        - insert:
+            schemaName: tool
+            tableName: tool_issuance
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_issuance_id_seq')"
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: distributing_by_employee_id
+                  value: 1
+              - column:
+                  name: receiving_by_employee_id
+                  value: 51
+              - column:
+                  name: storage_room_id
+                  value: 1

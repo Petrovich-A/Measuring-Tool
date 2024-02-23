@@ -1,0 +1,60 @@
+databaseChangeLog:
+  - changeSet:
+      id: populate-tool-type-table
+      author: "Alexandr_Petrovich"
+      changes:
+        - insert:
+            schemaName: tool
+            tableName: tool_type
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_type_id_seq')"
+              - column:
+                  name: name
+                  value: 'dial gauge'
+
+        - insert:
+            schemaName: tool
+            tableName: tool_type
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_type_id_seq')"
+              - column:
+                  name: name
+                  value: 'micrometer'
+
+        - insert:
+            schemaName: tool
+            tableName: tool_type
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_type_id_seq')"
+              - column:
+                  name: name
+                  value: 'caliper'
+
+        - insert:
+            schemaName: tool
+            tableName: tool_type
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_type_id_seq')"
+              - column:
+                  name: name
+                  value: 'profilometer'
+
+        - insert:
+            schemaName: tool
+            tableName: tool_type
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.tool_type_id_seq')"
+              - column:
+                  name: name
+                  value: 'bore gauge'
+

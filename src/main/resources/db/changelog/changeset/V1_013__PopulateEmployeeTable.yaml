@@ -1,0 +1,355 @@
+databaseChangeLog:
+  - changeSet:
+      id: populate-employee-table
+      author: "Alexandr_Petrovich"
+      changes:
+        - insert:
+            schemaName: tool
+            tableName: employee
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.employee_id_seq')"
+              - column:
+                  name: personnel_number
+                  value: '11111'
+              - column:
+                  name: name
+                  value: 'Petr'
+              - column:
+                  name: patronymic
+                  value: 'Petrovich'
+              - column:
+                  name: surname
+                  value: 'Petrov'
+              - column:
+                  name: email
+                  value: 'petrovich@example.com'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: employee_position_id
+                  value: 1
+              - column:
+                  name: department_id
+                  value: 1
+
+        - insert:
+            schemaName: tool
+            tableName: employee
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.employee_id_seq')"
+              - column:
+                  name: personnel_number
+                  value: '22222'
+              - column:
+                  name: name
+                  value: 'Sidor'
+              - column:
+                  name: patronymic
+                  value: 'Sidorovich'
+              - column:
+                  name: surname
+                  value: 'Sidorov'
+              - column:
+                  name: email
+                  value: 'sidorov@example.com'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: employee_position_id
+                  value: 2
+              - column:
+                  name: department_id
+                  value: 2
+
+        - insert:
+            schemaName: tool
+            tableName: employee
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.employee_id_seq')"
+              - column:
+                  name: personnel_number
+                  value: '33333'
+              - column:
+                  name: name
+                  value: 'Ivan'
+              - column:
+                  name: patronymic
+                  value: 'Ivanovich'
+              - column:
+                  name: surname
+                  value: 'Ivanov'
+              - column:
+                  name: email
+                  value: 'ivanov@example.com'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: employee_position_id
+                  value: 4
+              - column:
+                  name: department_id
+                  value: 3
+
+        - insert:
+            schemaName: tool
+            tableName: employee
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.employee_id_seq')"
+              - column:
+                  name: personnel_number
+                  value: '44444'
+              - column:
+                  name: name
+                  value: 'Sergey'
+              - column:
+                  name: patronymic
+                  value: 'Sergeevich'
+              - column:
+                  name: surname
+                  value: 'Sergeev'
+              - column:
+                  name: email
+                  value: 'sergeev@example.com'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: employee_position_id
+                  value: 3
+              - column:
+                  name: department_id
+                  value: 3
+
+        - insert:
+            schemaName: tool
+            tableName: employee
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.employee_id_seq')"
+              - column:
+                  name: personnel_number
+                  value: '52413'
+              - column:
+                  name: name
+                  value: 'Anna'
+              - column:
+                  name: patronymic
+                  value: 'Pavlovna'
+              - column:
+                  name: surname
+                  value: 'Pavlova'
+              - column:
+                  name: email
+                  value: 'pavlova@example.com'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: employee_position_id
+                  value: 4
+              - column:
+                  name: department_id
+                  value: 2
+
+        - insert:
+            schemaName: tool
+            tableName: employee
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.employee_id_seq')"
+              - column:
+                  name: personnel_number
+                  value: '43210'
+              - column:
+                  name: name
+                  value: 'Maria'
+              - column:
+                  name: patronymic
+                  value: 'Sergeevna'
+              - column:
+                  name: surname
+                  value: 'Sergeeva'
+              - column:
+                  name: email
+                  value: 'sergeeva@example.com'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: employee_position_id
+                  value: 3
+              - column:
+                  name: department_id
+                  value: 1
+
+        - insert:
+            schemaName: tool
+            tableName: employee
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.employee_id_seq')"
+              - column:
+                  name: personnel_number
+                  value: '24680'
+              - column:
+                  name: name
+                  value: 'Maxim'
+              - column:
+                  name: patronymic
+                  value: 'Maximovich'
+              - column:
+                  name: surname
+                  value: 'Maximov'
+              - column:
+                  name: email
+                  value: 'maximov@example.com'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: employee_position_id
+                  value: 1
+              - column:
+                  name: department_id
+                  value: 2
+
+        - insert:
+            schemaName: tool
+            tableName: employee
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.employee_id_seq')"
+              - column:
+                  name: personnel_number
+                  value: '13579'
+              - column:
+                  name: name
+                  value: 'Olga'
+              - column:
+                  name: patronymic
+                  value: 'Ivanovna'
+              - column:
+                  name: surname
+                  value: 'Ivanova'
+              - column:
+                  name: email
+                  value: 'ivanova@example.com'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: employee_position_id
+                  value: 4
+              - column:
+                  name: department_id
+                  value: 1
+
+        - insert:
+            schemaName: tool
+            tableName: employee
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.employee_id_seq')"
+              - column:
+                  name: personnel_number
+                  value: '98765'
+              - column:
+                  name: name
+                  value: 'Dmitry'
+              - column:
+                  name: patronymic
+                  value: 'Dmitrievich'
+              - column:
+                  name: surname
+                  value: 'Dmitriev'
+              - column:
+                  name: email
+                  value: 'dmitriev@example.com'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: employee_position_id
+                  value: 1
+              - column:
+                  name: department_id
+                  value: 2
+
+        - insert:
+            schemaName: tool
+            tableName: employee
+            columns:
+              - column:
+                  name: id
+                  valueComputed: "nextval('tool.employee_id_seq')"
+              - column:
+                  name: personnel_number
+                  value: '75310'
+              - column:
+                  name: name
+                  value: 'Svetlana'
+              - column:
+                  name: patronymic
+                  value: 'Petrovna'
+              - column:
+                  name: surname
+                  value: 'Petrova'
+              - column:
+                  name: email
+                  value: 'petrova@example.com'
+              - column:
+                  name: created_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: updated_at
+                  value: '2023-12-08 11:38:49'
+              - column:
+                  name: employee_position_id
+                  value: 2
+              - column:
+                  name: department_id
+                  value: 1
+
