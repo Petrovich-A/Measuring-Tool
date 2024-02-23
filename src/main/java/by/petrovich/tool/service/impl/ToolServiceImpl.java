@@ -85,17 +85,26 @@ public class ToolServiceImpl implements ToolService {
         return toolMapper.toResponseDto(toolSaved);
     }
 
-    public List<ToolResponseDto> findBy(Long statusId){
-        List<Tool> tools = toolRepository.findByToolStatusOrderByToolStatusUpdatedAtAsc(statusId);
+    private Tool changeToolStatus(Tool tool, String statusName, LocalDateTime statusFinish) {
+        ToolStatus toolStatus = toolStatusService.findByName(statusName);
+        tool.setToolStatus(toolStatus);
+        return tool;
+    }
+
+    @Override
+    public List<ToolResponseDto> findBy(Long statusId) {
+        List<Tool> tools = toolRepository.findByToolStatusId(statusId);
         return tools.stream()
                 .map(toolMapper::toResponseDto)
                 .collect(Collectors.toList());
     }
 
-    private Tool changeToolStatus(Tool tool, String statusName, LocalDateTime statusFinish) {
-        ToolStatus toolStatus = toolStatusService.findByName(statusName);
-        tool.setToolStatus(toolStatus);
-        return tool;
+    @Override
+    public List<ToolResponseDto> findBy(Long toolTypeId, Long storageRoomId) {
+        List<Tool> tools = toolRepository.findByToolTypeIdAndStorageRoomId(toolTypeId, storageRoomId);
+        return tools.stream()
+                .map(toolMapper::toResponseDto)
+                .collect(Collectors.toList());
     }
 
 }

@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import io.swagger.v3.oas.annotations.tags.Tags;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -158,14 +159,62 @@ public interface ToolController {
             }
     )
     ResponseEntity<ToolResponseDto> submitForPrecisionCheck(@Parameter(
-                                                                    description = "ID of the tool to submit for precision check",
-                                                                    example = "1",
-                                                                    required = true
-                                                            ) Long id,
+            description = "ID of the tool to submit for precision check",
+            example = "1",
+            required = true
+    ) Long id,
                                                             @Parameter(
                                                                     description = "Finish datetime for the precision check",
                                                                     example = "2024-12-22T10:15:30",
                                                                     required = true
                                                             ) LocalDateTime finishDatetime);
 
+    @Operation(
+            summary = "Find Tools by Status ID",
+            description = "Retrieve a list of tools based on the provided status ID.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successfully retrieved list of tools",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = ToolResponseDto.class)
+                            )
+                    )
+            }
+    )
+    ResponseEntity<List<ToolResponseDto>> findBy(
+            @Parameter(
+                    description = "ID of the status to filter tools by",
+                    example = "1",
+                    required = true
+            ) @PathVariable("statusId") Long statusId
+    );
+
+    @Operation(
+            summary = "Find Tools by Tool Type ID and Storage Room ID",
+            description = "Retrieve a list of tools based on the provided tool type ID and storage room ID.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Successfully retrieved list of tools",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = ToolResponseDto.class)
+                            )
+                    )
+            }
+    )
+    ResponseEntity<List<ToolResponseDto>> findBy(
+            @Parameter(
+                    description = "ID of the tool type to filter tools by",
+                    example = "3",
+                    required = true
+            ) @PathVariable("toolTypeId") Long toolTypeId,
+            @Parameter(
+                    description = "ID of the storage room to filter tools by",
+                    example = "2",
+                    required = true
+            ) @PathVariable("storageRoomId") Long storageRoomId
+    );
 }
