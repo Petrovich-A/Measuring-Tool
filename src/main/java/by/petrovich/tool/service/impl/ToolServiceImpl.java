@@ -85,6 +85,13 @@ public class ToolServiceImpl implements ToolService {
         return toolMapper.toResponseDto(toolSaved);
     }
 
+    public List<ToolResponseDto> findBy(Long statusId){
+        List<Tool> tools = toolRepository.findByToolStatusOrderByToolStatusUpdatedAtAsc(statusId);
+        return tools.stream()
+                .map(toolMapper::toResponseDto)
+                .collect(Collectors.toList());
+    }
+
     private Tool changeToolStatus(Tool tool, String statusName, LocalDateTime statusFinish) {
         ToolStatus toolStatus = toolStatusService.findByName(statusName);
         tool.setToolStatus(toolStatus);

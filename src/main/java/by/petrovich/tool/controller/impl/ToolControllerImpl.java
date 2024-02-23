@@ -3,6 +3,7 @@ package by.petrovich.tool.controller.impl;
 import by.petrovich.tool.controller.ToolController;
 import by.petrovich.tool.dto.request.ToolRequestDto;
 import by.petrovich.tool.dto.response.ToolResponseDto;
+import by.petrovich.tool.model.ToolStatus;
 import by.petrovich.tool.service.impl.ToolServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -73,6 +74,11 @@ public class ToolControllerImpl implements ToolController {
                                                                    @DateTimeFormat(pattern = DATA_TIME_REQUEST_PATTERN)
                                                                    LocalDateTime finishDatetime) {
         return ResponseEntity.status(CREATED).body(toolService.submitForPrecisionCheck(id, finishDatetime));
+    }
+
+    @GetMapping("/find-by/{statusId}")
+    public ResponseEntity<List<ToolResponseDto>> findBy(@PathVariable("statusId") Long statusId) {
+        return ResponseEntity.status(OK).body(toolService.findBy(statusId));
     }
 
 }
