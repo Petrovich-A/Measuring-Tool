@@ -67,10 +67,34 @@ public interface ToolService {
      * After updating the Tool status, it creates a new ToolStatusDateModification entity and saves it to the database.
      * Finally, it returns the response DTO corresponding to the updated Tool.
      *
-     * @param id The ID of the Tool to submit for precision check.
-     * @param finishDatetime  The finish date and time for the precision check.
+     * @param id             The ID of the Tool to submit for precision check.
+     * @param finishDatetime The finish date and time for the precision check.
      * @return The response DTO representing the Tool after being submitted for precision check.
      * @throws ResourceNotFoundException if the Tool with the provided ID is not found.
      */
     ToolResponseDto submitForPrecisionCheck(Long id, LocalDateTime finishDatetime);
+
+    /**
+     * Retrieves a list of tool response DTOs with the specified tool status ID.
+     * <p>
+     * This method searches for tools in the database with the given tool status ID
+     * and maps the found tools to their corresponding response DTOs.
+     *
+     * @param statusId The ID of the tool status to search for.
+     * @return A list of tool response DTOs with the specified tool status ID.
+     */
+    List<ToolResponseDto> findBy(Long statusId);
+
+    /**
+     * Retrieves a list of tool response DTOs with the specified tool type ID and storage room ID.
+     * <p>
+     * This method searches for tools in the database with the given tool type ID and storage room ID
+     * and maps the found tools to their corresponding response DTOs.
+     *
+     * @param toolTypeId    The ID of the tool type to search for.
+     * @param storageRoomId The ID of the storage room to search for.
+     * @return A list of tool response DTOs with the specified tool type ID and storage room ID.
+     */
+    List<ToolResponseDto> findBy(Long toolTypeId, Long storageRoomId);
+
 }
